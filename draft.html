@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Your Squad · Politiplay</title>
+<meta name="description" content="Draft ten real political figures into your Politiplay squad. Two per position — HoS, LEG, OPP, WBR, WLD.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POLITIPLAY SHARED DESIGN SYSTEM
+   All pages import this via <style> block
+   ============================================================ */
+
+/* RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* TOKENS */
+:root{
+  --red:#b8242a;
+  --red-dim:rgba(184,36,42,0.12);
+  --red-border:rgba(184,36,42,0.3);
+  --gold:#e8a020;
+  --gold-dim:rgba(232,160,32,0.1);
+  --ink:#111318;
+  --ink-mid:#1a1d24;
+  --ivory:#ede8dc;
+  --gray1:#6e6a60;
+  --gray2:#9e9a8e;
+  --gray3:#b8b4a8;
+  --gray4:#ccc8bc;
+  --surface:rgba(237,232,220,0.06);
+  --surface-hover:rgba(237,232,220,0.09);
+  --border:rgba(237,232,220,0.1);
+  --border-strong:rgba(237,232,220,0.18);
+  --navy:#1a2744;
+  --amber-dark:#7a5200;
+}
+
+body{
+  background:var(--ink);
+  color:var(--ivory);
+  font-family:'Source Serif 4',serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* SCANLINE */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 3px,
+    rgba(0,0,0,0.05) 3px,rgba(0,0,0,0.05) 4px
+  );
+  pointer-events:none;z-index:200;
+}
+
+/* ── TICKER ── */
+.ticker-wrap{display:block;width:100%;position:relative;z-index:50;overflow:hidden}
+.ticker{
+  display:block;width:100%;
+  padding:7px 0;
+  overflow:hidden;white-space:nowrap;
+  background:#b8242a;
+  min-height:30px;
+}
+.ticker-inner{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;
+  color:#ffffff;
+  will-change:transform;
+}
+.ticker-inner.speed-normal{animation:pp-tick 40s linear infinite}
+.ticker-inner.speed-slow{animation:pp-tick 65s linear infinite}
+.ticker-inner.speed-medium{animation:pp-tick 50s linear infinite}
+.ticker-inner.clr-gold{color:#f0c060 !important}
+.ticker-inner.clr-blue{color:#c8e0f4 !important}
+.ticker-inner.clr-white{color:#ffffff !important}
+@keyframes pp-tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}100%{transform:translateX(-50%)}}100%{transform:translateX(-50%)}}100%{transform:translateX(-50%)}}
+
+/* ── NAV ── */
+.site-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  border-bottom:1px solid var(--border);
+  position:relative;z-index:40;
+  background:var(--ink);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:900;
+  color:var(--ivory);text-decoration:none;
+  flex-shrink:0;
+}
+.nav-logo em{font-style:italic;color:var(--red)}
+.nav-links{
+  display:flex;gap:6px;align-items:center;
+  flex-wrap:wrap;
+}
+.nav-link{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gray3);text-decoration:none;
+  padding:7px 12px;
+  transition:color 0.15s;
+  white-space:nowrap;
+}
+.nav-link:hover{color:var(--ivory)}
+.nav-link.active{color:var(--red)}
+.nav-cta{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--red);color:#fff;
+  padding:9px 18px;text-decoration:none;
+  transition:background 0.15s;white-space:nowrap;
+}
+.nav-cta:hover{background:#9e1e23}
+.nav-live{
+  display:flex;align-items:center;gap:5px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;
+  color:var(--red);text-transform:uppercase;
+  flex-shrink:0;
+}
+.live-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--red);
+  animation:pp-blink 1.4s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes pp-blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* ── POSITION CODE BADGES ── */
+.pos-badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:600;letter-spacing:0.1em;
+  padding:2px 7px;color:#fff;
+  flex-shrink:0;vertical-align:middle;
+}
+.pos-badge.HoS{background:rgba(184,36,42,0.85)}
+.pos-badge.LEG{background:rgba(26,82,150,0.85)}
+.pos-badge.OPP{background:rgba(60,130,60,0.85)}
+.pos-badge.WBR{background:rgba(110,70,150,0.85)}
+.pos-badge.WLD{background:rgba(200,120,20,0.85)}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--red);
+  margin-bottom:12px;padding-bottom:8px;
+  border-bottom:1px solid var(--red-border);
+}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  display:inline-block;
+  background:var(--red);color:#fff;border:none;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;
+  padding:13px 24px;cursor:pointer;text-decoration:none;
+  transition:background 0.15s;
+}
+.btn-primary:hover{background:#9e1e23}
+.btn-primary:disabled{background:var(--red-dim);color:var(--gray2);cursor:default}
+.btn-ghost{
+  display:inline-block;
+  background:transparent;color:var(--gray3);
+  border:1px solid var(--border-strong);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding:10px 16px;cursor:pointer;text-decoration:none;
+  transition:all 0.15s;
+}
+.btn-ghost:hover{color:var(--ivory);border-color:rgba(237,232,220,0.35)}
+
+/* ── SIGNUP FORM ── */
+.signup-row{display:flex;gap:0;max-width:460px}
+.signup-input{
+  flex:1;
+  background:rgba(237,232,220,0.08);
+  border:1px solid rgba(237,232,220,0.2);border-right:none;
+  color:var(--ivory);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;letter-spacing:0.03em;
+  padding:13px 16px;outline:none;
+  transition:border-color 0.15s;
+}
+.signup-input::placeholder{color:var(--gray2)}
+.signup-input:focus{border-color:rgba(184,36,42,0.6)}
+.signup-success{
+  display:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;letter-spacing:0.08em;
+  color:var(--ivory);padding:14px 0;
+}
+
+/* ── FOOTER ── */
+.site-footer{
+  border-top:2px solid var(--border);
+  padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:2;
+  flex-wrap:wrap;gap:10px;
+}
+.footer-copy{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;color:var(--gray2);
+}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;
+  color:var(--gray2);text-decoration:none;
+}
+.footer-links a:hover{color:var(--gray4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .site-nav{padding:10px 16px}
+  .nav-links .nav-link{padding:6px 8px;font-size:10px;letter-spacing:0.08em}
+  .site-footer{padding:12px 16px;flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .signup-row{flex-direction:column}
+  .signup-row .btn-primary{width:100%}
+}
+
+
+/* ── DRAFT PAGE LAYOUT ── */
+.draft-page{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  min-height:calc(100vh - 88px);
+  position:relative;z-index:2;
+}
+
+/* ── CATALOG (LEFT) ── */
+.catalog{
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+}
+.catalog-head{
+  padding:16px 22px 12px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;
+  background:var(--ink);z-index:20;
+}
+.catalog-top{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;
+}
+.catalog-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;font-weight:600;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--red);
+}
+.fig-count{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;color:var(--gray2);letter-spacing:0.06em;
+}
+
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:10px}
+.search-icon{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  color:var(--gray2);font-size:15px;pointer-events:none;
+}
+.search-input{
+  width:100%;
+  background:rgba(237,232,220,0.07);
+  border:1px solid var(--border);
+  color:var(--ivory);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;padding:10px 12px 10px 34px;
+  outline:none;letter-spacing:0.03em;
+  transition:border-color 0.15s;
+}
+.search-input::placeholder{color:var(--gray2)}
+.search-input:focus{border-color:var(--red-border)}
+
+/* FILTERS */
+.filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.filter-btn{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding:5px 10px;border:1px solid var(--border);
+  background:transparent;color:var(--gray2);cursor:pointer;
+  transition:all 0.15s;
+}
+.filter-btn:hover{border-color:var(--border-strong);color:var(--ivory)}
+.filter-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+
+/* BUCKET SELECT */
+.bucket-select{
+  width:100%;
+  background:rgba(237,232,220,0.07);
+  border:1px solid var(--border);
+  color:var(--gray3);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;padding:8px 10px;
+  outline:none;cursor:pointer;margin-bottom:8px;
+}
+.bucket-select option{background:#1a1d24;color:var(--ivory)}
+
+/* TIER LEGEND */
+.tier-legend{display:flex;gap:6px;flex-wrap:wrap}
+.tier-pip{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:0.06em;padding:2px 7px;border:1px solid;
+}
+.tier-pip.t1{color:var(--gold);border-color:rgba(232,160,32,0.35)}
+.tier-pip.t2{color:var(--red);border-color:var(--red-border)}
+.tier-pip.t3{color:var(--gray3);border-color:var(--border)}
+.tier-pip.t4{color:var(--gray2);border-color:rgba(237,232,220,0.08)}
+.tier-pip.t5{color:var(--gray1);border-color:rgba(237,232,220,0.06)}
+
+/* FIGURE LIST */
+.figure-list{
+  flex:1;overflow-y:auto;
+  max-height:calc(100vh - 260px);
+}
+.figure-list::-webkit-scrollbar{width:3px}
+.figure-list::-webkit-scrollbar-thumb{background:var(--red-border);border-radius:2px}
+
+.wld-header{
+  padding:12px 22px 8px;
+  background:rgba(232,160,32,0.06);
+  border-bottom:1px solid rgba(232,160,32,0.15);
+}
+.wld-header-title{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);
+}
+.wld-header-sub{
+  font-size:12px;color:var(--gray2);margin-top:3px;
+  font-style:italic;font-family:'Source Serif 4',serif;
+}
+
+.fig-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 22px;
+  border-bottom:1px solid rgba(237,232,220,0.05);
+  cursor:pointer;transition:background 0.1s;
+}
+.fig-item:hover{background:var(--surface-hover)}
+.fig-item.in-squad{
+  opacity:0.85;cursor:pointer;
+  border-left:2px solid var(--red-border);
+}
+.fig-item.in-squad:hover{background:rgba(184,36,42,0.1)}
+.fig-item.in-squad:hover .fig-action{
+  background:rgba(184,36,42,0.2);
+  color:var(--red);
+  border-color:var(--red);
+}
+.fig-item.wld-fig{border-left:2px solid rgba(232,160,32,0.2)}
+.fig-item.wld-fig:hover{background:rgba(232,160,32,0.04)}
+.fig-item.wld-fig.in-squad{border-left-color:rgba(232,160,32,0.5)}
+
+.fig-pos-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;
+  letter-spacing:0.1em;color:#fff;padding:2px 6px;flex-shrink:0;
+}
+.fig-pos-badge.HoS{background:rgba(184,36,42,0.8)}
+.fig-pos-badge.LEG{background:rgba(26,82,150,0.8)}
+.fig-pos-badge.OPP{background:rgba(60,130,60,0.8)}
+.fig-pos-badge.WBR{background:rgba(110,70,150,0.8)}
+.fig-pos-badge.WLD{background:rgba(200,120,20,0.8)}
+
+.fig-info{flex:1;min-width:0}
+.fig-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.03em;color:var(--ivory);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.fig-role{
+  font-size:12px;color:var(--gray2);margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.fig-tier{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:0.06em;flex-shrink:0;padding:2px 6px;border:1px solid;
+}
+.fig-tier.t1{color:var(--gold);border-color:rgba(232,160,32,0.35)}
+.fig-tier.t2{color:var(--red);border-color:var(--red-border)}
+.fig-tier.t3{color:var(--gray3);border-color:var(--border)}
+.fig-tier.t4{color:var(--gray2);border-color:rgba(237,232,220,0.08)}
+.fig-tier.t5{color:var(--gray1);border-color:rgba(237,232,220,0.06)}
+.fig-action{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  color:var(--gray2);flex-shrink:0;padding:3px 8px;
+  border:1px solid var(--border);transition:all 0.1s;
+}
+.fig-item:hover .fig-action{color:var(--red);border-color:var(--red-border)}
+.fig-item.in-squad .fig-action{
+  color:var(--red);border-color:var(--red-border);font-size:10px;
+}
+
+.no-results{
+  padding:40px 22px;text-align:center;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;
+  color:var(--gray2);letter-spacing:0.08em;
+}
+
+/* ── SQUAD PANEL (RIGHT) ── */
+.squad-panel{
+  padding:0;
+  position:sticky;top:0;
+  height:calc(100vh - 88px);
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+.squad-panel::-webkit-scrollbar{width:3px}
+.squad-panel::-webkit-scrollbar-thumb{background:var(--red-border)}
+
+.sp-head{
+  padding:14px 16px;
+  border-bottom:1px solid var(--border);
+}
+.sp-title{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+  margin-bottom:10px;
+}
+.sp-timer{
+  background:var(--red-dim);border:1px solid var(--red-border);
+  padding:9px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+.sp-timer-label{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:0.12em;color:var(--gray2);text-transform:uppercase;
+}
+.sp-timer-time{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:800;color:var(--red);letter-spacing:0.05em;
+}
+.sp-swap-note{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:0.06em;color:var(--gray2);
+}
+
+/* POSITION GROUPS */
+.pos-group{
+  border-bottom:1px solid var(--border);
+}
+.pos-group-head{
+  padding:8px 16px;
+  background:rgba(237,232,220,0.03);
+  border-bottom:1px solid rgba(237,232,220,0.05);
+  display:flex;align-items:center;gap:8px;
+}
+.pg-code{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:0.12em;color:var(--red);
+}
+.pos-group.wld-group .pg-code{color:var(--gold)}
+.pg-name{
+  font-size:12px;color:var(--gray2);flex:1;
+}
+.pg-count{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  font-weight:600;color:var(--gray2);
+}
+.pg-count.full{color:var(--red)}
+.pos-group.wld-group .pg-count.full{color:var(--gold)}
+
+/* SQUAD SLOTS */
+.squad-slot{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 16px;
+  border-left:2px solid transparent;
+  background:rgba(237,232,220,0.03);
+  cursor:pointer;transition:background 0.1s;
+  border-bottom:1px solid rgba(237,232,220,0.04);
+}
+.squad-slot:hover{background:var(--surface-hover)}
+.squad-slot.filled{
+  border-left-color:var(--red);
+  background:var(--red-dim);
+}
+.squad-slot.wld-filled{
+  border-left-color:var(--gold);
+  background:var(--gold-dim);
+}
+.squad-slot.empty{
+  border-left-color:rgba(237,232,220,0.08);
+}
+.ss-pos{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:0.1em;color:var(--red);width:26px;flex-shrink:0;
+}
+.squad-slot.wld-filled .ss-pos{color:var(--gold)}
+.squad-slot.empty .ss-pos{color:rgba(237,232,220,0.2)}
+.ss-body{flex:1;min-width:0}
+.ss-name{
+  font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.04em;color:var(--ivory);
+  line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.squad-slot.empty .ss-name{
+  color:rgba(237,232,220,0.18);font-size:12px;
+  font-weight:400;text-transform:none;letter-spacing:0;
+  font-family:'Source Serif 4',serif;font-style:italic;
+}
+.ss-role{font-size:10px;color:var(--gray2);margin-top:2px}
+.ss-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.ss-pts{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;
+  font-weight:600;color:var(--red);
+}
+.squad-slot.wld-filled .ss-pts{color:var(--gold)}
+.ss-remove{
+  font-size:16px;color:rgba(237,232,220,0.15);
+  cursor:pointer;padding:2px 4px;line-height:1;
+  transition:color 0.1s;
+}
+.ss-remove:hover{color:var(--red)}
+.mult-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;
+  letter-spacing:0.08em;background:var(--gold);color:var(--ink);
+  padding:1px 4px;
+}
+
+/* SQUAD TOTALS */
+.squad-totals{
+  padding:12px 16px;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.st-label{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:0.12em;color:var(--gray2);text-transform:uppercase;
+}
+.st-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:28px;font-weight:900;color:var(--ivory);
+}
+.slots-left{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:0.06em;color:var(--gray2);
+  text-align:center;padding:8px 16px;
+}
+
+/* SUBMIT */
+.submit-wrap{padding:12px 16px 16px;margin-top:auto}
+.submit-btn{
+  width:100%;background:var(--red);color:var(--ivory);border:none;
+  font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;
+  letter-spacing:0.18em;text-transform:uppercase;padding:14px;
+  cursor:pointer;display:block;transition:background 0.15s;
+}
+.submit-btn:hover{background:#9e1e23}
+.submit-btn:disabled{
+  background:var(--red-dim);color:var(--gray2);
+  cursor:default;
+}
+.submit-note{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:0.06em;color:var(--gray2);
+  text-align:center;margin-top:8px;line-height:1.5;
+}
+
+/* INSTRUCTIONS */
+.instructions{
+  padding:14px 16px;
+  border-top:1px solid var(--border);
+}
+.inst-label{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--gray2);
+  margin-bottom:8px;
+}
+.inst-item{
+  display:flex;gap:8px;margin-bottom:6px;
+  font-size:12px;color:var(--gray2);line-height:1.5;
+}
+.inst-bullet{color:var(--red);font-weight:600;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+
+/* MOBILE */
+@media(max-width:700px){
+  .draft-page{grid-template-columns:1fr}
+  .squad-panel{
+    position:fixed;bottom:0;left:0;right:0;
+    height:auto;max-height:45vh;
+    border-top:2px solid var(--red-border);
+    background:var(--ink);z-index:50;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .catalog{padding-bottom:50vh}
+  .figure-list{max-height:none}
+  .instructions{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap" aria-label="Live scoring feed and game rules">
+  <div class="ticker mode-news" id="ticker-display">
+    <span class="ticker-inner speed-normal" id="ticker-content">
+      &nbsp;&nbsp;&nbsp;&nbsp;WEEK 1 SWEEP OPEN &nbsp;·&nbsp; TRUMP EXECUTIVE ORDER · HoS +14 PTS &nbsp;·&nbsp; JEFFRIES FLOOR ADDRESS · LEG +9 PTS &nbsp;·&nbsp; STARMER NO-CONFIDENCE · OPP +12 PTS &nbsp;·&nbsp; UN SECURITY COUNCIL · WBR +11 PTS &nbsp;·&nbsp; SWEEP CLOSES SUNDAY 23:59 &nbsp;&nbsp;|&nbsp;&nbsp; WEEK 1 SWEEP OPEN &nbsp;·&nbsp; TRUMP EXECUTIVE ORDER · HoS +14 PTS &nbsp;·&nbsp; JEFFRIES FLOOR ADDRESS · LEG +9 PTS &nbsp;·&nbsp; STARMER NO-CONFIDENCE · OPP +12 PTS &nbsp;·&nbsp; UN SECURITY COUNCIL · WBR +11 PTS &nbsp;·&nbsp; SWEEP CLOSES SUNDAY 23:59 &nbsp;&nbsp;
+    </span>
+  </div>
+</div>
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">Politi<em>Play</em></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="draft.html" class="nav-link active">Draft</a>
+    <a href="sweep.html" class="nav-link">Live Sweep</a>
+    <a href="how-to-play.html" class="nav-link">How To Play</a>
+    <a href="rules.html" class="nav-link">Rules</a>
+    <a href="index.html#signup" class="nav-cta">Sign Up →</a>
+  </div>
+  <div class="nav-live"><div class="live-dot"></div><span>Sweep Live</span></div>
+</nav>
+
+<div class="draft-page">
+
+  <!-- ── CATALOG ── -->
+  <div class="catalog">
+    <div class="catalog-head">
+      <div class="catalog-top">
+        <div class="catalog-title">Figure Catalog</div>
+        <div class="fig-count">
+          <span id="vis-count">—</span> figures
+          &nbsp;·&nbsp;
+          <span id="wld-count" style="color:var(--gold)">513 kibitzers</span>
+        </div>
+      </div>
+
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input class="search-input" type="text" id="search"
+          placeholder="Search by name or role..." autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="filter-row" id="pos-filters">
+        <button class="filter-btn active" data-pos="ALL">All Positions</button>
+        <button class="filter-btn" data-pos="HoS">HoS</button>
+        <button class="filter-btn" data-pos="LEG">LEG</button>
+        <button class="filter-btn" data-pos="OPP">OPP</button>
+        <button class="filter-btn" data-pos="WBR">WBR</button>
+      </div>
+
+      <!-- WLD separate tab -->
+      <div style="margin-top:6px">
+        <button class="filter-btn" id="wld-btn" data-pos="WLD"
+          style="width:100%;text-align:left;padding:9px 12px;border-color:rgba(232,160,32,0.3)">
+          <span style="color:var(--gold);font-weight:700;letter-spacing:0.1em">WLD · KIBITZERS &amp; CRIERS</span>
+          <span style="color:var(--gray2);font-size:10px;margin-left:8px;text-transform:none;letter-spacing:0;font-family:'Source Serif 4',serif;font-style:italic">— sidelined, volatile, dangerous · 1.5×</span>
+        </button>
+      </div>
+
+      <select class="bucket-select" id="bucket-filter">
+        <option value="ALL">All Buckets</option>
+        <option>Activist / Advocate</option><option>Americas</option>
+        <option>Business / Donor</option><option>EU Institutions</option>
+        <option>Independent Media</option><option>Indo-Pacific</option>
+        <option>Legacy Media</option><option>Legal / Operative</option>
+        <option>Middle East</option><option>Military / Security</option>
+        <option>NATO / G7</option><option>Political Commentator</option>
+        <option>Think Tank / Expert</option><option>Third Party / Outsider</option>
+        <option>UK Politics</option><option>UN / Multilateral</option>
+        <option>US Agencies</option><option>US Campaign</option>
+        <option>US Executive</option><option>US Governor</option>
+        <option>US Judiciary</option><option>US Legislature</option>
+        <option>US Municipal</option><option>Wildcard Editorial</option>
+      </select>
+
+      <div class="tier-legend">
+        <span class="tier-pip t1">T1 · V.High</span>
+        <span class="tier-pip t2">T2 · High</span>
+        <span class="tier-pip t3">T3 · Med</span>
+        <span class="tier-pip t4">T4 · Low</span>
+        <span class="tier-pip t5">T5 · V.Low</span>
+      </div>
+    </div>
+
+    <div class="figure-list" id="figure-list"></div>
+  </div>
+
+  <!-- ── SQUAD PANEL ── -->
+  <aside class="squad-panel">
+
+    <div class="sp-head">
+      <div class="sp-title">Your Squad · Week 1</div>
+      <div class="sp-timer">
+        <div class="sp-timer-label">Swap closes</div>
+        <div class="sp-timer-time" id="swap-countdown">—</div>
+      </div>
+      <div class="sp-swap-note" id="swap-status">1 swap available this Sweep</div>
+    </div>
+
+    <!-- POSITION GROUPS -->
+    <div id="squad-slots"></div>
+
+    <div class="squad-totals">
+      <div class="st-label">Squad total</div>
+      <div class="st-num" id="squad-total">0 pts</div>
+    </div>
+    <div class="slots-left" id="slots-left">10 slots to fill</div>
+
+    <div class="submit-wrap">
+      <button class="submit-btn" id="submit-btn" disabled onclick="submitSquad()">
+        Lock Your Squad →
+      </button>
+      <div class="submit-note">
+        Squad locks Friday midnight.<br>
+        <a href="sweep.html" style="color:var(--red)">Watch live Sweep</a> after drafting.
+      </div>
+    </div>
+
+    <div class="instructions">
+      <div class="inst-label">How to draft</div>
+      <div class="inst-item"><span class="inst-bullet">·</span><span>Click any figure to add them to a matching position slot.</span></div>
+      <div class="inst-item"><span class="inst-bullet">·</span><span>Each position has two slots — fill both for full coverage.</span></div>
+      <div class="inst-item"><span class="inst-bullet">·</span><span>Click a filled figure in the catalog to remove them from your squad.</span></div>
+      <div class="inst-item"><span class="inst-bullet">·</span><span>WLD Kibitzers &amp; Criers earn 1.5× on all points scored.</span></div>
+      <div class="inst-item"><span class="inst-bullet">·</span><span>One swap allowed. Closes Friday midnight.</span></div>
+    </div>
+
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-copy">© 2026 Politiplay LLC · Fantasy league on real political figures · politiplay.net</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="draft.html">Draft</a>
+    <a href="sweep.html">Live Sweep</a>
+    <a href="how-to-play.html">How To Play</a>
+    <a href="rules.html">Rules</a>
+    <a href="mailto:hello@politiplay.net">Contact</a>
+  </div>
+</footer>
+
+<script>
+const FIGURES = [{"name":"Veronica Abad","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Ecuador VP under Noboa controversial conflict with Noboa over governance","role":"Vice President \u00b7 Ecuador"},{"name":"Mahmoud Abbas","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Palestinian Authority move from Business","role":"President \u00b7 Palestinian Authority"},{"name":"Greg Abbott","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Texas"},{"name":"King Abdullah II","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Jordan","role":"King \u00b7 Jordan"},{"name":"JJ Abrams","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - director producer major Democratic donor Bad Robot","role":"Director & Producer \u00b7 Bad Robot"},{"name":"Stacey Abrams","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Founder \u00b7 Fair Fight Action","fourth_estate":false},{"name":"Daron Acemoglu","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Nobel economist MIT AI critic","role":"Economist \u00b7 MIT"},{"name":"Bill Ackman","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - Pershing Square hedge fund billionaire Harvard antisemitism crusade Trump-adjacent vocal Substack public feuds very politically active","role":"CEO \u00b7 Pershing Square Capital"},{"name":"Eric Adams","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 5 - federal charges Trump bargaining chip","role":"Mayor \u00b7 New York City"},{"name":"Miriam Adelson","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - largest Republican donor","role":"Chairman \u00b7 Las Vegas Sands"},{"name":"Pete Aguilar","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - House Dem Caucus chair","role":"House Democratic Caucus Chair \u00b7 California"},{"name":"Yunior Garcia Aguilera","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Cuban dissident playwright leader of November 2021 protests now in exile Spain vocal opposition voice","role":"Playwright & Dissident \u00b7 Cuba"},{"name":"Abiy Ahmed","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Ethiopia PM Nobel Peace Prize winner turned civil war leader Tigray conflict controversial trajectory","role":"Prime Minister \u00b7 Ethiopia"},{"name":"Jimmie Akesson","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Sweden Democrats far right leader propped up Kristersson government","role":"SD Leader \u00b7 Sweden"},{"name":"Abdel Fattah al-Burhan","bucket":"Middle East","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3 - Sudan military leader","role":"President \u00b7 Sudan Transitional Council"},{"name":"Khalil al-Hayya","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Hamas political chief","role":"Hamas Political Leader \u00b7 Gaza"},{"name":"Ahmed al-Sharaa","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 5 - new Syrian power","role":"President \u00b7 Syria"},{"name":"Mohammed Al-Sudani","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Iraqi PM","role":"Prime Minister \u00b7 Iraq"},{"name":"Anthony Albanese","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Australian PM AUKUS","role":"Prime Minister \u00b7 Australia"},{"name":"Robert Allbritton","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Politico owner publisher shadow media power","role":"Publisher \u00b7 Politico"},{"name":"Colin Allred","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - TX congressman who ran against Cruz 2024 lost but rising Dem star","role":"Former Congressman \u00b7 Texas"},{"name":"Angela Alsobrooks","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - new MD senator","role":"Senator \u00b7 Maryland"},{"name":"Sam Altman","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"CEO \u00b7 OpenAI"},{"name":"Christiane Amanpour","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Chief International Anchor \u00b7 CNN","fourth_estate":true},{"name":"American Enterprise Institute","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - institution center-right think tank scores when economic or foreign policy debates surface","role":"Think Tank \u00b7 Washington DC"},{"name":"Dario Amodei","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Anthropic CEO testified Congress meets heads of state central to AI safety policy debate","role":"CEO \u00b7 Anthropic"},{"name":"Lee Anderson","bucket":"UK Politics","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Reform UK defector from Tories","role":"Reform UK Deputy Chairman \u00b7 UK"},{"name":"Magdalena Andersson","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Sweden Social Democrat leader former PM","role":"Former PM / S Leader \u00b7 Sweden"},{"name":"Marc Andreessen","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-founder \u00b7 Andreessen Horowitz"},{"name":"Anne Applebaum","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Atlantic authoritarianism expert","role":"Staff Writer \u00b7 The Atlantic","fourth_estate":false},{"name":"Andres Arauz","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Ecuador left opposition","role":"Opposition Leader \u00b7 Ecuador"},{"name":"Luis Arce","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Bolivian president","role":"President \u00b7 Bolivia"},{"name":"Bernardo Arevalo","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Guatemalan president move from Business","role":"President \u00b7 Guatemala"},{"name":"Julian Assange","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - free now back in news","role":"Founder \u00b7 WikiLeaks"},{"name":"Paul Atkins","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"SEC Chair Vol 3","role":"Chair \u00b7 SEC"},{"name":"Gabriel Attal","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - France former PM youngest ever","role":"Former Prime Minister \u00b7 France"},{"name":"Kelly Ayotte","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - NH governor former senator now defending Shaheen open seat for Republicans","role":"Governor \u00b7 New Hampshire"},{"name":"Andrej Babis","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Czech former PM oligarch Trump-adjacent populist billionaire","role":"Former Prime Minister \u00b7 Czech Republic"},{"name":"Lanon Baccam","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - IA Democratic Senate candidate vs Joni Ernst","role":"Democratic Candidate \u00b7 Iowa"},{"name":"Michelle Bachelet","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Chile president former UN HR chief","role":"Former UN High Commissioner \u00b7 Human Rights"},{"name":"Don Bacon","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - moderate Republican","role":"Congressman \u00b7 Nebraska"},{"name":"Kemi Badenoch","bucket":"UK Politics","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - new Conservative leader","role":"Conservative Leader \u00b7 UK"},{"name":"Annalena Baerbock","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - former German FM now EU foreign policy adjacent vocal on China Russia","role":"Former Foreign Minister \u00b7 Germany"},{"name":"Ajay Banga","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - World Bank move from Business","role":"President \u00b7 World Bank"},{"name":"Jim Banks","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - new MAGA senator IN","role":"Senator \u00b7 Indiana"},{"name":"Steve Bannon","bucket":"Legal / Operative","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 5 - out of prison back in action","role":"Podcast Host & Former Strategist \u00b7 US","fourth_estate":false},{"name":"Ras Baraka","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Newark mayor Vol 3","role":"Mayor \u00b7 Newark, New Jersey"},{"name":"Alicia Barcena","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Mexican Foreign Minister under Sheinbaum former ECLAC executive director US-Mexico relations frontline","role":"Foreign Minister \u00b7 Mexico"},{"name":"Jordan Bardella","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"RN President \u00b7 France"},{"name":"Marwan Barghouti","bucket":"Middle East","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Palestinian political prisoner","role":"Imprisoned Fatah Leader \u00b7 Palestine"},{"name":"Esteban Moctezuma Barragan","bucket":"Americas","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - Mexico Ambassador to United States face of bilateral relationship in Washington","role":"Ambassador to US \u00b7 Mexico","fourth_estate":false},{"name":"John Barrasso","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - Senate Majority Whip","role":"Senate Majority Whip \u00b7 Wyoming"},{"name":"Karen Bass","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 4 - LA fires","role":"Mayor \u00b7 Los Angeles"},{"name":"Francois Bayrou","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - current French PM Macron centrist ally","role":"Prime Minister \u00b7 France"},{"name":"Xavier Becerra","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor race Vol 4","role":"Former AG \u00b7 California / Former HHS Secretary"},{"name":"Alexander Van der Bellen","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Austrian president move from Academic/Expert","role":"President \u00b7 Austria"},{"name":"Marc Benioff","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Salesforce CEO owns Time magazine progressive causes SF homelessness AI ethics feuded with Musk major Democratic donor","role":"CEO \u00b7 Salesforce"},{"name":"Medea Benjamin","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - CODEPINK antiwar activist","role":"Co-founder \u00b7 Code Pink","fourth_estate":false},{"name":"Michael Bennet","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Colorado"},{"name":"Naftali Bennett","bucket":"Middle East","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Israeli PM opposition voice","role":"Former Prime Minister \u00b7 Israel"},{"name":"Nabih Berri","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Lebanese parliament speaker","role":"Speaker \u00b7 Lebanese Parliament"},{"name":"Andy Beshear","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Kentucky"},{"name":"Scott Bessent","bucket":"US Agencies","position":"HoS","tier":1,"action":"ACTIVE","notes":"Treasury Vol 4","role":"Secretary of Treasury \u00b7 US"},{"name":"Jeff Bezos","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Founder \u00b7 Amazon / Blue Origin"},{"name":"Hsiao Bi-khim","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Taiwan Vice President former representative to US architect of modern Taiwan-US relations most recognizable Taiwan diplomat in Washington significant omission","role":"Vice President \u00b7 Taiwan"},{"name":"Chad Bianco","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor Republican Vol 4","role":"Riverside County Sheriff \u00b7 California"},{"name":"Justin Bibb","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Cleveland mayor Vol 2","role":"Mayor \u00b7 Cleveland, Ohio"},{"name":"Joe Biden","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former President \u00b7 United States"},{"name":"Andy Biggs","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congressman \u00b7 Arizona"},{"name":"Mohammed bin Salman","bucket":"Middle East","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5","role":"Crown Prince & PM \u00b7 Saudi Arabia"},{"name":"Leon Black","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - Apollo Global Management co-founder paid 170M to Epstein largest known payment resigned from Apollo JPMorgan SAR flagged 1B in transactions Senate Finance investigation ongoing","role":"Founder \u00b7 Apollo Global Management"},{"name":"Rod Blagojevich","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former IL governor convicted felon pardoned by Trump Feb 2025 Trumpocrat Celebrity Apprentice alum possible Senate seat seller","role":"Former Governor \u00b7 Illinois","fourth_estate":false},{"name":"Tony Blair","bucket":"UK Politics","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Former Prime Minister \u00b7 UK","fourth_estate":false},{"name":"Todd Blanche","bucket":"US Agencies","position":"HoS","tier":1,"action":"ACTIVE","notes":"Acting AG Vol 4","role":"Former Trump Defense Lawyer \u00b7 US"},{"name":"Michael Bloomberg","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - move from Municipal","role":"Founder \u00b7 Bloomberg LP / Former Mayor NYC"},{"name":"Lauren Boebert","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Congresswoman \u00b7 Colorado"},{"name":"Jair Bolsonaro","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - coup charges","role":"Former President \u00b7 Brazil"},{"name":"Dina Boluarte","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Peru president","role":"President \u00b7 Peru"},{"name":"Pam Bondi","bucket":"Legal / Operative","position":"HoS","tier":3,"action":"ACTIVE","notes":"FIRED April 2 2026 - SLEEPER Vol 3","role":"Attorney General \u00b7 US"},{"name":"Dan Bongino","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 The Dan Bongino Show","fourth_estate":false},{"name":"Rob Bonta","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - CA AG running for governor race bump from Legal/Ops","role":"Attorney General \u00b7 California"},{"name":"Cory Booker","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4 DEDUP bumped up","role":"Senator \u00b7 New Jersey"},{"name":"John Boozman","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - AR senior senator low profile but incumbent","role":"Senator \u00b7 Arkansas"},{"name":"Gabriel Boric","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Chile","role":"President \u00b7 Chile"},{"name":"Georges-Louis Bouchez","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Belgian MR party president provocateur rising EU conservative voice","role":"MR President \u00b7 Belgium"},{"name":"Muriel Bowser","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Mayor \u00b7 Washington DC"},{"name":"Alvin Bragg","bucket":"Legal / Operative","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"District Attorney \u00b7 Manhattan","fourth_estate":false},{"name":"Russell Brand","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - UK comedian turned conspiracy podcaster sexual assault allegations","role":"Comedian & Commentator \u00b7 UK","fourth_estate":false},{"name":"Mike Braun","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Indiana"},{"name":"Ian Bremmer","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Eurasia Group","role":"Founder \u00b7 Eurasia Group"},{"name":"John Brennan","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former CIA director under DOJ investigation","role":"Former Director \u00b7 CIA","fourth_estate":false},{"name":"Katie Britt","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - SOTU response","role":"Senator \u00b7 Alabama"},{"name":"Brookings Institution","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - institution center-left think tank scores when policy papers land in news cycle","role":"Think Tank \u00b7 Washington DC"},{"name":"David Brooks","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Columnist \u00b7 New York Times","fourth_estate":true},{"name":"Patrick Brown","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Ontario Conservative leader","role":"Conservative Leadership Candidate \u00b7 Canada"},{"name":"Sherrod Brown","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - former OH senator lost 2024 now running again against Husted special election comeback story","role":"Former Senator \u00b7 Ohio"},{"name":"Mika Brzezinski","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Co-host \u00b7 MSNBC Morning Joe","fourth_estate":true},{"name":"Nayib Bukele","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - El Salvador anti-crime model","role":"President \u00b7 El Salvador"},{"name":"Patricia Bullrich","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Argentine Security Minister right-wing former presidential candidate Milei coalition partner","role":"Security Minister \u00b7 Argentina"},{"name":"Doug Burgum","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Interior Vol 2","role":"Secretary of Interior \u00b7 US"},{"name":"Erin Burnett","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - CNN OutFront host serious financial journalist background Goldman Sachs CNBC institutional prime time","role":"Anchor \u00b7 CNN OutFront","fourth_estate":true},{"name":"George W. Bush","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former President \u00b7 United States"},{"name":"Diosdado Cabello","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Venezuelan Interior Minister co-ruler of Venezuela effectively Maduro enforcer most feared figure in Caracas","role":"Interior Minister \u00b7 Venezuela"},{"name":"Felipe Calderon","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Mexican president 2006-2012 war on drugs architect still relevant commentary figure","role":"Former President \u00b7 Mexico"},{"name":"David Cameron","bucket":"UK Politics","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - returned as Foreign Secretary","role":"Former Prime Minister \u00b7 UK"},{"name":"Sister Simone Campbell","bucket":"Activist / Advocate","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - progressive Catholic activist","role":"Executive Director \u00b7 Network Lobby","fourth_estate":false},{"name":"Maria Cantwell","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Washington"},{"name":"Zuzana Caputova","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Slovak former president","role":"Former President \u00b7 Slovakia"},{"name":"Mark Carney","bucket":"Americas","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - new Canadian PM trade war","role":"Prime Minister \u00b7 Canada"},{"name":"Brendan Carr","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"FCC Chair Vol 3","role":"Chair \u00b7 FCC"},{"name":"Buddy Carter","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - GA Republican congressman running for Senate","role":"Congressman \u00b7 Georgia"},{"name":"James Carville","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - move from Legal/Ops","role":"Democratic Strategist \u00b7 CNN","fourth_estate":false},{"name":"Greg Casar","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - TX progressive congressman Austin","role":"Congressman \u00b7 Texas"},{"name":"Pedro Castillo","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Peruvian president imprisoned attempted self-coup extraordinary story rural teacher to president to prison","role":"Former President \u00b7 Peru"},{"name":"Raul Castro","bucket":"Americas","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - Cuba still alive at 92 shadow power","role":"Former President \u00b7 Cuba","fourth_estate":false},{"name":"Xiomara Castro","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Honduras president","role":"President \u00b7 Honduras"},{"name":"CATO Institute","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - institution libertarian think tank scores on free trade immigration civil liberties debates","role":"Libertarian Think Tank \u00b7 Washington DC"},{"name":"Lori Chavez-DeRemer","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Labor Vol 2","role":"Secretary of Labor \u00b7 US"},{"name":"Jimmy Cherizier (Barbecue)","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Haitian gang leader controls Port-au-Prince former police officer G9 alliance de facto power in Haiti extraordinary story","role":"Gang Leader \u00b7 Haiti","fourth_estate":false},{"name":"Lin Chia-lung","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Taiwan Foreign Minister replaced Joseph Wu current Taiwan Strait tensions","role":"Foreign Minister \u00b7 Taiwan"},{"name":"Tino Chrupalla","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - AfD co-leader","role":"AfD Co-leader \u00b7 Germany"},{"name":"Eric Chu","bucket":"Indo-Pacific","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Taiwan KMT leader","role":"KMT Chairman \u00b7 Taiwan"},{"name":"James Clapper","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former DNI under DOJ investigation","role":"Former Director \u00b7 National Intelligence","fourth_estate":false},{"name":"Katherine Clark","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - House Minority Whip","role":"House Minority Whip \u00b7 Massachusetts"},{"name":"Hillary Clinton","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Former Secretary of State / Senator \u00b7 US"},{"name":"James Clyburn","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - still active","role":"Congressman \u00b7 South Carolina"},{"name":"Michael Cohen","bucket":"Legal / Operative","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Former Trump Attorney \u00b7 US","fourth_estate":false},{"name":"Steve Cohen","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Point72 NY Mets owner Democratic donor","role":"Founder \u00b7 Point72 / Mets Owner"},{"name":"Stephen Colbert","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 CBS Late Show","fourth_estate":true},{"name":"Tom Cole","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - Appropriations chair","role":"House Appropriations Chair \u00b7 Oklahoma"},{"name":"Doug Collins","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"VA Secretary Vol 2","role":"Secretary of Veterans Affairs \u00b7 US"},{"name":"Kaitlan Collins","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Anchor \u00b7 CNN The Source","fourth_estate":true},{"name":"Mike Collins","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - GA Republican congressman running for Senate","role":"Congressman \u00b7 Georgia"},{"name":"Susan Collins","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Maine"},{"name":"Patrick Collison","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"CEO \u00b7 Stripe"},{"name":"James Comey","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - under DOJ investigation very current","role":"Former Director \u00b7 FBI","fourth_estate":false},{"name":"Kellyanne Conway","bucket":"Legal / Operative","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - strategist","role":"Former Counselor to President \u00b7 White House","fourth_estate":false},{"name":"Ryan Coogler","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Black Panther director culturally significant political voice","role":"Filmmaker \u00b7 US"},{"name":"Chris Coons","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Delaware"},{"name":"Anderson Cooper","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Anchor \u00b7 CNN","fourth_estate":true},{"name":"Roy Cooper","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former NC governor running for Senate Democratic primary Tillis seat","role":"Former Governor \u00b7 North Carolina"},{"name":"Yvette Cooper","bucket":"UK Politics","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - UK Home Secretary","role":"Home Secretary \u00b7 UK"},{"name":"Rafael Correa","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former President \u00b7 Ecuador"},{"name":"Antonio Costa","bucket":"EU Institutions","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - EU Council President","role":"President \u00b7 European Council"},{"name":"Tom Cotton","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Arkansas"},{"name":"Christi Craddick","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Texas Railroad Commission chair ran for comptroller lost to Huffines energy regulation figure","role":"Texas Railroad Commissioner"},{"name":"Angie Craig","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - MN congresswoman running for Senate Democratic primary moderate bipartisan appeal","role":"Former Congresswoman \u00b7 Minnesota"},{"name":"Dan Crenshaw","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congressman \u00b7 Texas"},{"name":"Jasmine Crockett","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 4 - sharp Democratic voice","role":"Congresswoman \u00b7 Texas"},{"name":"Alexander De Croo","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Belgian PM liberal centrist","role":"Former Prime Minister \u00b7 Belgium"},{"name":"Harlan Crow","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Thomas benefactor ethics controversy","role":"Real Estate Developer & Donor \u00b7 Texas"},{"name":"Claudia De la Cruz","bucket":"Third Party / Outsider","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - PSL 2024","role":"Candidate \u00b7 Party for Socialism and Liberation"},{"name":"Ted Cruz","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 Texas"},{"name":"Mark Cuban","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Entrepreneur & Investor \u00b7 US"},{"name":"Henry Cuellar","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - indicted moderate Democrat","role":"Congressman \u00b7 Texas"},{"name":"Patrisse Cullors","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - BLM co-founder","role":"Co-founder \u00b7 Black Lives Matter","fourth_estate":false},{"name":"Andrew Cuomo","bucket":"US Municipal","position":"OPP","tier":3,"action":"ACTIVE","notes":"Running for NYC mayor Vol 4","role":"Former Governor \u00b7 New York"},{"name":"Chris Cuomo","sort_name":"Cuomo, Chris","position":"WLD","bucket":"Independent Media","tier":3,"role":"Host \u00b7 NewsNation","fourth_estate":true,"notes":"Former CNN anchor now NewsNation host fired from CNN reinvented himself centrist voice","action":"ACTIVE"},{"name":"John Curtis","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - new UT senator","role":"Senator \u00b7 Utah"},{"name":"Steve Daines","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"NRSC Chair \u00b7 Montana"},{"name":"Ray Dalio","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Founder \u00b7 Bridgewater Associates"},{"name":"Nicusor Dan","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Romanian president elected May 2025 pro-EU mathematician former anti-corruption activist defeated ultranationalist Simion dramatic underdog story","role":"Mayor \u00b7 Bucharest, Romania"},{"name":"Ed Davey","bucket":"UK Politics","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Liberal Democrat leader","role":"Liberal Democrat Leader \u00b7 UK"},{"name":"Angela Davis","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Activist & Scholar \u00b7 UC Santa Cruz","fourth_estate":false},{"name":"Rosa DeLauro","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - CT senior congresswoman Appropriations ranking member longest serving CT Democrat","role":"House Appropriations Ranking Member \u00b7 Connecticut"},{"name":"Mario Delgado","bucket":"Americas","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - Morena party leader political machinery boss","role":"Party President \u00b7 Morena, Mexico","fourth_estate":false},{"name":"Ron DeSantis","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Governor \u00b7 Florida"},{"name":"Mike DeWine","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - OH outgoing governor moderate Republican","role":"Governor \u00b7 Ohio"},{"name":"Harmeet Dhillon","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"DOJ Civil Rights Vol 3","role":"Assistant AG \u00b7 Civil Rights Division"},{"name":"Yolanda Diaz","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Spanish Sumar party leader deputy PM left wing","role":"Sumar Leader \u00b7 Spain"},{"name":"Mario Diaz-Balart","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - FL Republican congressman Cuban-American elder statesman Appropriations Cuba policy architect","role":"Congressman \u00b7 Florida"},{"name":"Miguel Diaz-Canel","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Cuba president first US network interview April 2026","role":"President \u00b7 Cuba"},{"name":"Jamie Dimon","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"CEO \u00b7 JPMorgan Chase"},{"name":"Debbie Dingell","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - MI congresswoman widow of John Dingell vocal progressive voice auto industry","role":"Congresswoman \u00b7 Michigan"},{"name":"Kirill Dmitriev","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - Russia Direct Investment Fund CEO suddenly prominent Trump-Russia negotiations Harvard MBA Goldman McKinsey background unusual Kremlin figure","role":"CEO \u00b7 Russian Direct Investment Fund"},{"name":"Lloyd Doggett","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 Texas"},{"name":"Byron Donalds","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - rising MAGA star","role":"Congressman \u00b7 Florida"},{"name":"Derek Dooley","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former UT football coach Kemp endorsed GA Senate Republican","role":"Republican Candidate \u00b7 Tennessee"},{"name":"Jimmy Dore","bucket":"Independent Media","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Host \u00b7 The Jimmy Dore Show","fourth_estate":true},{"name":"Maureen Dowd","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Columnist \u00b7 New York Times","fourth_estate":true},{"name":"Stanley Druckenmiller","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - legendary macro investor political commentary fiscal hawk","role":"Founder \u00b7 Duquesne Family Office"},{"name":"Matt Drudge","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Drudge Report still sets right wing news agenda mysterious semi-retirement shadow media power","role":"Founder \u00b7 Drudge Report","fourth_estate":false},{"name":"Glenn Dubin","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - Highbridge Capital co-founder Giuffre named him in sworn testimony JPMorgan SAR flagged husband of Epsteins former girlfriend Eva Andersson-Dubin MoMA board trustee","role":"Co-founder \u00b7 Highbridge Capital"},{"name":"Mike Duggan","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Running for MI governor Vol 3","role":"Former Mayor \u00b7 Detroit, Michigan"},{"name":"Peter Dutton","bucket":"Indo-Pacific","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Australian opposition","role":"Liberal Leader \u00b7 Australia"},{"name":"Marcelo Ebrard","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Mexican Secretary of Economy former FM former Mexico City mayor handles US trade relationship directly second most powerful in Sheinbaum govt","role":"Economy Minister \u00b7 Mexico"},{"name":"Sarah Eckhardt","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - TX Comptroller Democratic nominee vs Don Huffines daughter of Congressman Bob Eckhardt first woman Travis County Judge Austin progressive sharp voice TX 2026","role":"Former Travis County Judge \u00b7 Texas"},{"name":"Norm Eisen","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 2","role":"Senior Fellow \u00b7 Brookings Institution"},{"name":"Daniel Ek","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Spotify CEO political content decisions Joe Rogan deal largest podcast platform","role":"CEO \u00b7 Spotify"},{"name":"Abdel Fattah el-Sisi","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Egypt","role":"President \u00b7 Egypt"},{"name":"Larry Ellison","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-founder & CTO \u00b7 Oracle"},{"name":"Ari Emanuel","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - WME Endeavor CEO sold for 13B owns UFC Miss Universe brother of Rahm 30 years Democratic presidential orbit biggest LA omission","role":"CEO \u00b7 Endeavor Group"},{"name":"Ezekiel Emanuel","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - healthcare policy UPenn","role":"Bioethicist \u00b7 University of Pennsylvania"},{"name":"Tom Emmer","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"House Majority Whip \u00b7 Minnesota"},{"name":"Recep Tayyip Erdogan","bucket":"NATO / G7","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Turkey NATO","role":"President \u00b7 Turkey"},{"name":"Joni Ernst","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Iowa"},{"name":"Veronica Escobar","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - TX El Paso congresswoman Beto ally immigration voice","role":"Congresswoman \u00b7 Texas"},{"name":"Adriano Espaillat","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 New York"},{"name":"Tony Evers","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Wisconsin"},{"name":"Sergio Fajardo","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Medellin mayor Colombian centrist presidential candidate intellectual progressive","role":"Opposition Leader \u00b7 Colombia"},{"name":"Alfonso Fanjul","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 1 - Cuban exile sugar dynasty Florida Crystals Domino Sugar legendary bipartisan lobbying operation interrupted Clinton during Lewinsky call institutional presence wonk recognition","role":"Sugar Magnate & Donor \u00b7 US"},{"name":"Nigel Farage","bucket":"UK Politics","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 5 - dual list Wildcard Editorial","role":"Reform UK Leader \u00b7 UK","fourth_estate":false},{"name":"Jon Favreau","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Pod Save America host former Obama chief speechwriter","role":"Co-host \u00b7 Pod Save America","fourth_estate":true},{"name":"Alberto Nunez Feijoo","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Spanish PP opposition leader lost 2023 election","role":"PP Leader \u00b7 Spain"},{"name":"Andrew Ferguson","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"FTC Chair Vol 3","role":"Chair \u00b7 FTC"},{"name":"Bob Ferguson","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Washington"},{"name":"Niall Ferguson","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Senior Fellow \u00b7 Hoover Institution","fourth_estate":false},{"name":"John Fetterman","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 Pennsylvania"},{"name":"Petr Fiala","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Czech PM","role":"Prime Minister \u00b7 Czech Republic"},{"name":"Robert Fico","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - move from UK bucket","role":"Prime Minister \u00b7 Slovakia"},{"name":"Christiana Figueres","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2","role":"Former Exec. Secretary \u00b7 UN Climate","fourth_estate":false},{"name":"Alix Didier Fils-Aime","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Haitian Prime Minister governing amid gang control collapse extraordinary failed state story","role":"Prime Minister \u00b7 Haiti"},{"name":"Larry Fink","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - BlackRock CEO ESG flashpoint","role":"CEO \u00b7 BlackRock"},{"name":"Deb Fischer","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - NE Republican senator retiring 2026 Dan Osborn running against her seat","role":"Senator \u00b7 Nebraska"},{"name":"Peggy Flanagan","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - MN Lt Governor running for Senate Democratic primary progressive","role":"Former Lt. Governor \u00b7 Minnesota"},{"name":"Michael Flynn","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - pardoned former NSA still active MAGA circuit","role":"Former National Security Adviser \u00b7 US","fourth_estate":false},{"name":"Jane Fraser","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Citigroup CEO first woman to lead major Wall Street bank institutional voice","role":"CEO \u00b7 Citigroup"},{"name":"Mette Frederiksen","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Denmark Greenland/Trump spotlight","role":"Prime Minister \u00b7 Denmark"},{"name":"Chrystia Freeland","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Canadian deputy PM ran for Liberal leadership","role":"Liberal Party Leader \u00b7 Canada"},{"name":"Tarcisio de Freitas","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4 - Sao Paulo governor Bolsonaro heir likely 2026 presidential candidate most important figure in Brazilian right","role":"Governor \u00b7 Sao Paulo, Brazil"},{"name":"Lex Fridman","bucket":"Independent Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Host \u00b7 Lex Fridman Podcast","fourth_estate":true},{"name":"Thomas Friedman","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Columnist \u00b7 New York Times","fourth_estate":true},{"name":"Maxwell Frost","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - youngest member progressive","role":"Congressman \u00b7 Florida"},{"name":"Nick Fuentes","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"White Nationalist Commentator \u00b7 US","fourth_estate":false},{"name":"Keiko Fujimori","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - perennial Peruvian presidential candidate daughter of Alberto Fujimori powerful right-wing figure","role":"Opposition Leader \u00b7 Peru"},{"name":"Francis Fukuyama","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Hoover Institution","role":"Senior Fellow \u00b7 Stanford / Hoover"},{"name":"Jason Furman","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - former CEA chair Harvard","role":"Former Chair \u00b7 Council of Economic Advisers"},{"name":"Tulsi Gabbard","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"DNI Vol 4","role":"Director of National Intelligence \u00b7 US"},{"name":"Matt Gaetz","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 5","role":"Former Congressman \u00b7 Florida"},{"name":"Ruben Gallego","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 Arizona"},{"name":"Scott Galloway","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Prof \u00b7 NYU Stern / No Mercy No Malice","fourth_estate":true},{"name":"Xochitl Galvez","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - Mexican opposition","role":"Opposition Leader \u00b7 Mexico"},{"name":"Rahul Gandhi","bucket":"Indo-Pacific","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - Indian opposition leader","role":"Congress Party Leader \u00b7 India"},{"name":"Benny Gantz","bucket":"Middle East","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - move from UK bucket","role":"Opposition Leader \u00b7 Israel"},{"name":"Robert Garcia","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - MSNBC contributor/congressman","role":"Congressman \u00b7 California"},{"name":"Alicia Garza","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-founder \u00b7 Black Lives Matter","fourth_estate":false},{"name":"Bill Gates","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-founder \u00b7 Bill & Melinda Gates Foundation"},{"name":"David Geffen","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - music film mogul Democratic mega-donor superyacht UCLA medical school original Hollywood power broker 50 years Democratic politics","role":"Music & Film Mogul \u00b7 US"},{"name":"Calin Georgescu","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 5 - Romanian far right outsider whose 2024 election win was annulled over Russian interference found with 10M buried charged with founding fascist group extraordinary story","role":"Far-Right Politician \u00b7 Romania","fourth_estate":false},{"name":"Kristalina Georgieva","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - IMF","role":"Managing Director \u00b7 IMF"},{"name":"Tedros Adhanom Ghebreyesus","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - WHO","role":"Director-General \u00b7 WHO"},{"name":"Greg Gianforte","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Montana"},{"name":"Carlos Gimenez","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - FL Republican congressman former Miami-Dade mayor Cuban-American institutional voice","role":"Congressman \u00b7 Florida"},{"name":"Newt Gingrich","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Former Speaker \u00b7 US House","fourth_estate":false},{"name":"Rudy Giuliani","bucket":"Legal / Operative","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - cautionary tale","role":"Former Mayor \u00b7 New York City","fourth_estate":false},{"name":"Raphael Glucksmann","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - French MEP socialist rising star vocal on Ukraine Russia","role":"MEP \u00b7 Place Publique"},{"name":"Jeffrey Goldberg","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4 - The Atlantic editor-in-chief broke suckers and losers story accidentally added to Trump Signal chat Yemen strikes classified plans explosive passive news generator","role":"Editor-in-Chief \u00b7 The Atlantic","fourth_estate":true},{"name":"Jared Golden","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - ME moderate Democrat","role":"Congressman \u00b7 Maine"},{"name":"Tony Gonzales","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 Texas"},{"name":"Edmundo Gonzalez","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - Venezuelan opposition in exile","role":"Opposition Leader \u00b7 Venezuela"},{"name":"Luisa Gonzalez","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Ecuador left opposition Correist","role":"Opposition Leader \u00b7 Ecuador"},{"name":"Vicente Gonzalez","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 Texas"},{"name":"Bob Good","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congressman \u00b7 Virginia"},{"name":"Sebastian Gorka","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - MAGA commentator White House adjacent","role":"Host \u00b7 America First / Former NSC","fourth_estate":false},{"name":"Paul Gosar","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congressman \u00b7 Arizona"},{"name":"Lindsey Graham","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 5 DEDUP","role":"Senator \u00b7 South Carolina"},{"name":"Filippo Grandi","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - UNHCR chief refugee crisis","role":"High Commissioner \u00b7 UNHCR"},{"name":"Sam Graves","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - Transportation chair","role":"Congressman \u00b7 Missouri"},{"name":"Al Green","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - tried to impeach Trump","role":"Congressman \u00b7 Texas"},{"name":"Josh Green","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Hawaii"},{"name":"Leah Greenberg","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Indivisible co-founder","role":"Co-founder \u00b7 Indivisible","fourth_estate":false},{"name":"Marjorie Taylor Greene","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 5","role":"Former Congresswoman \u00b7 Georgia"},{"name":"Glenn Greenwald","bucket":"Independent Media","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - move from Legacy Media","role":"Co-founder \u00b7 The Intercept","fourth_estate":true},{"name":"Alyssa Farah Griffin","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - The View former Trump comms director","role":"CNN Political Commentator \u00b7 US","fourth_estate":false},{"name":"Ken Griffin","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Founder \u00b7 Citadel"},{"name":"Michelle Lujan Grisham","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - NM","role":"Governor \u00b7 New Mexico"},{"name":"Antonio Guterres","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 4 - UN SG","role":"Secretary-General \u00b7 United Nations"},{"name":"Greg Gutfeld","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 Fox News Gutfeld!","fourth_estate":true},{"name":"Federico Gutierrez","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - Fico former Medellin mayor lost to Petro 2022 likely 2026 Colombian presidential candidate","role":"Opposition Leader \u00b7 Colombia"},{"name":"Itamar Ben Gvir","bucket":"Middle East","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 4 - Israeli far right finance minister very controversial","role":"National Security Minister \u00b7 Israel"},{"name":"Richard Haass","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - former CFR president foreign policy","role":"Former President \u00b7 Council on Foreign Relations"},{"name":"Robert Habeck","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Green Party Leader \u00b7 Germany"},{"name":"Fernando Haddad","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Brazilian Finance Minister Lulas economic point man tariff negotiations key policy figure","role":"Finance Minister \u00b7 Brazil"},{"name":"Harriet Hageman","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - beat Liz Cheney","role":"Congresswoman \u00b7 Wyoming"},{"name":"Bill Hagerty","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - MAGA aligned","role":"Senator \u00b7 Tennessee"},{"name":"Nikki Haley","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Former UN Ambassador \u00b7 US"},{"name":"Sheikh Tamim bin Hamad","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Qatar Gaza mediator","role":"Emir \u00b7 Qatar"},{"name":"Sean Hannity","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Host \u00b7 Fox News Hannity","fourth_estate":true},{"name":"Victor Davis Hanson","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Hoover MAGA intellectual","role":"Senior Fellow \u00b7 Hoover Institution","fourth_estate":false},{"name":"Yuval Noah Harari","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Author & Historian \u00b7 Hebrew University","fourth_estate":false},{"name":"Kamala Harris","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Former Vice President \u00b7 United States"},{"name":"Mehdi Hasan","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - left MSNBC now Zeteo","role":"Founder \u00b7 Zeteo Media","fourth_estate":true},{"name":"Samia Suluhu Hassan","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Tanzania president first female African head of state","role":"President \u00b7 Tanzania"},{"name":"Reed Hastings","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Netflix founder stepped back major Democratic donor education reform philanthropist","role":"Co-founder \u00b7 Netflix"},{"name":"Josh Hawley","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 Missouri"},{"name":"Chris Hayes","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Host \u00b7 MSNBC All In","fourth_estate":true},{"name":"Maura Healey","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Massachusetts"},{"name":"Pete Hegseth","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Secretary of Defense \u00b7 US"},{"name":"Martin Heinrich","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 New Mexico"},{"name":"John Henry","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Boston Red Sox owner Boston Globe owner Democratic donor","role":"Owner \u00b7 Boston Red Sox / Liverpool FC"},{"name":"Heritage Foundation","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 4 - institution not individual Project 2025 blueprint for Trump second term scores when executive orders trace to Heritage policy documents which is constantly","role":"Conservative Think Tank \u00b7 Washington DC"},{"name":"Anne Hidalgo","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Paris mayor Gaza/Trump vocal ran for president 2022","role":"Mayor \u00b7 Paris, France"},{"name":"Fiona Hill","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former NSC Russia expert testified at impeachment","role":"Senior Fellow \u00b7 Brookings Institution","fourth_estate":false},{"name":"French Hill","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - AR Financial Services chair confirm not duplicate","role":"Chairman \u00b7 House Financial Services"},{"name":"Steve Hilton","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor Republican Vol 4","role":"Former Conservative Strategist \u00b7 UK/US"},{"name":"Gina Hinojosa","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Democratic frontrunner TX Governor 2026 vs Abbott public schools champion","role":"Texas State Representative"},{"name":"Mazie Hirono","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Hawaii"},{"name":"Kathy Hochul","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 New York"},{"name":"Reid Hoffman","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-founder \u00b7 LinkedIn"},{"name":"Larry Hogan","bucket":"Third Party / Outsider","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - lost Senate race as moderate","role":"Former Governor \u00b7 Maryland"},{"name":"David Hogg","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - DNC vice chair gun control","role":"Co-founder \u00b7 March for Our Lives","fourth_estate":false},{"name":"Chris Van Hollen","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Maryland"},{"name":"Tom Homan","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Border Czar Vol 4","role":"Border Czar \u00b7 White House"},{"name":"Ben Horowitz","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-founder \u00b7 Andreessen Horowitz"},{"name":"Glenn Hubbard","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - former CEA chair Columbia","role":"Former Chair \u00b7 Council of Economic Advisers"},{"name":"Mike Huckabee","bucket":"US Executive","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3 - US Ambassador to Israel Sarah Sanders father very current given Gaza","role":"US Ambassador \u00b7 Israel"},{"name":"Dolores Huerta","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2 - labor/immigration icon","role":"Co-founder \u00b7 United Farm Workers","fourth_estate":false},{"name":"Don Huffines","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - GOP nominee TX Comptroller 2026 owns Epstein Zorro Ranch NM","role":"Republican Activist \u00b7 Texas"},{"name":"Don Huffines","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Epstein Zorro Ranch ownership NM ticking news story dual list Campaign","role":"Republican Activist \u00b7 Texas","fourth_estate":false},{"name":"Wesley Hunt","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - rising GOP star","role":"Congressman \u00b7 Texas"},{"name":"Jon Husted","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - appointed OH senator former Lt Governor running for full term Vance seat","role":"Lieutenant Governor \u00b7 Ohio"},{"name":"Anwar Ibrahim","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Malaysian PM","role":"Prime Minister \u00b7 Malaysia"},{"name":"Carl Icahn","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - activist investor icon Trump ally still making news Icahn Enterprises","role":"Activist Investor \u00b7 Icahn Enterprises"},{"name":"Bob Iger","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Disney CEO returned culture war flashpoint ABC News owner","role":"CEO \u00b7 Walt Disney Company"},{"name":"Laura Ingraham","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 Fox News Ingraham Angle","fourth_estate":true},{"name":"Shigeru Ishiba","bucket":"Indo-Pacific","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - current Japanese PM","role":"Prime Minister \u00b7 Japan"},{"name":"Jeff Jackson","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - NC AG running for Senate confirm not duplicate","role":"Attorney General \u00b7 North Carolina"},{"name":"Lee Jae-myung","bucket":"Indo-Pacific","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 4 - likely next SK president","role":"DP Leader \u00b7 South Korea"},{"name":"Pramila Jayapal","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - Progressive Caucus chair","role":"Congresswoman \u00b7 Washington"},{"name":"Ben Jealous","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Former President \u00b7 NAACP","fourth_estate":false},{"name":"Hakeem Jeffries","bucket":"US Legislature","position":"LEG","tier":1,"action":"ACTIVE","notes":"Vol 3-4 DEDUP","role":"House Minority Leader \u00b7 New York"},{"name":"Laurene Powell Jobs","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - owns Atlantic majority stake major Democratic donor education reform funder Emerson Collective significant omission","role":"Founder \u00b7 Emerson Collective"},{"name":"Boris Johnson","bucket":"UK Politics","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Former Prime Minister \u00b7 UK"},{"name":"Brandon Johnson","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Mayor \u00b7 Chicago"},{"name":"Bryan Johnson","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Founder \u00b7 Kernel / OS Fund"},{"name":"Mike Johnson","bucket":"US Legislature","position":"LEG","tier":1,"action":"ACTIVE","notes":"Vol 4 - House Speaker","role":"Speaker \u00b7 US House of Representatives"},{"name":"Ron Johnson","bucket":"Americas","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - US Ambassador to Mexico since May 2025 retired Army officer former CIA Science and Technology Liaison Special Operations Command counter-narcotics","role":"US Ambassador \u00b7 Canada","fourth_estate":false},{"name":"Woody Johnson","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - former US Ambassador to UK NY Jets owner old money Republican Mar-a-Lago regular","role":"US Ambassador \u00b7 UK / Jets Owner"},{"name":"Mike Johnston","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"Denver mayor Vol 3","role":"Mayor \u00b7 Denver, Colorado"},{"name":"Alex Jones","bucket":"Wildcard Editorial","position":"WLD","tier":5,"action":"ACTIVE","notes":"Vol 5","role":"Host \u00b7 InfoWars","fourth_estate":false},{"name":"Justin Jones","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - TN state rep expelled then reinstated after gun protest floor nationally covered Tennessee Three","role":"Tennessee State Representative","fourth_estate":false},{"name":"Mondaire Jones","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 New York"},{"name":"Owen Jones","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - UK left commentator","role":"Columnist \u00b7 The Guardian","fourth_estate":false},{"name":"Van Jones","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"CNN Commentator & Activist \u00b7 US","fourth_estate":false},{"name":"Kim Jong-un","bucket":"Indo-Pacific","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5 - North Korea supreme leader generates more US foreign policy news than almost any world leader nuclear weapons missiles Trump relationship biggest single omission in catalog","role":"Supreme Leader \u00b7 North Korea"},{"name":"Jim Jordan","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Congressman \u00b7 Ohio"},{"name":"Li Ka-shing","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - Hong Kong billionaire Hutchison Ports controls both ends Panama Canal under audit Chinese connection at center of Trump canal demands","role":"Founder \u00b7 CK Hutchison Holdings"},{"name":"Sigrid Kaag","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Dutch FM UN special coordinator Gaza","role":"Former FM / D66 Leader \u00b7 Netherlands"},{"name":"Jaroslaw Kaczynski","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - PiS leader former Polish PM populist nationalist","role":"PiS Leader \u00b7 Poland"},{"name":"Paul Kagame","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Rwanda president most influential African leader 30 years authoritarian but effective DRC conflict US relationship complex","role":"President \u00b7 Rwanda"},{"name":"Robert Kagan","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Brookings neocon resigned from State","role":"Senior Fellow \u00b7 Brookings Institution"},{"name":"Tim Kaine","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Virginia"},{"name":"Kaja Kallas","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - EU foreign policy chief","role":"High Representative \u00b7 EU Foreign Policy"},{"name":"Marcy Kaptur","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - OH longest serving woman in Congress dean of OH delegation","role":"Congresswoman \u00b7 Ohio"},{"name":"Alex Karp","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Palantir CEO","role":"CEO \u00b7 Palantir Technologies"},{"name":"Gary Kasparov","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Russian opposition","role":"Chess Champion & Democracy Activist \u00b7 Russia","fourth_estate":false},{"name":"Neal Katyal","bucket":"US Judiciary","position":"WLD","tier":3,"action":"ACTIVE","notes":"Liberal legal voice Vol 3","role":"Former Acting Solicitor General \u00b7 US","fourth_estate":false},{"name":"Jeffrey Katzenberg","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - DreamWorks founder major Biden bundler ran Quibi disaster","role":"Co-founder \u00b7 DreamWorks"},{"name":"Arvind Kejriwal","bucket":"Indo-Pacific","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - move from Activist","role":"AAP Leader / Former CM \u00b7 Delhi"},{"name":"Mark Kelly","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 DEDUP also in Campaign","role":"Senator \u00b7 Arizona"},{"name":"Stephanie Kelton","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - MMT economist Stony Brook","role":"Economist \u00b7 Stony Brook University"},{"name":"Brian Kemp","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Georgia"},{"name":"RFK Jr.","bucket":"US Executive","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Secretary of HHS \u00b7 US","fourth_estate":false},{"name":"Ali Khamenei","bucket":"Middle East","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5","role":"Supreme Leader \u00b7 Iran"},{"name":"Imran Khan","bucket":"Indo-Pacific","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 4 - Pakistan imprisoned former PM still dominant","role":"Former Prime Minister \u00b7 Pakistan"},{"name":"Sadiq Khan","bucket":"UK Politics","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3 - London Mayor","role":"Mayor \u00b7 London"},{"name":"Ro Khanna","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - CA progressive possible Senate run","role":"Congressman \u00b7 California"},{"name":"Ro Khanna","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congressman \u00b7 California"},{"name":"Mikhail Khodorkovsky","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4 - Russian opposition exile","role":"Former Yukos CEO / Dissident \u00b7 Russia","fourth_estate":false},{"name":"Herbert Kickl","bucket":"EU Institutions","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 4 - Austria FPO far right leader","role":"FPO Leader \u00b7 Austria"},{"name":"Kim Yo-jong","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Kim Jong-un sister effectively runs North Korea foreign policy messaging most powerful woman in Asia arguably","role":"Director \u00b7 Propaganda Dept \u00b7 North Korea"},{"name":"Cristina Fernandez de Kirchner","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Former President \u00b7 Argentina"},{"name":"Amy Klobuchar","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Minnesota"},{"name":"Charles Koch","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Chairman \u00b7 Koch Industries"},{"name":"Tina Kotek","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Oregon"},{"name":"Ulf Kristersson","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Sweden PM","role":"Prime Minister \u00b7 Sweden"},{"name":"Bill Kristol","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - The Bulwark confirm not in Commentator","role":"Editor \u00b7 The Bulwark","fourth_estate":true},{"name":"Paul Krugman","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Nobel Economist \u00b7 CUNY Graduate Center","fourth_estate":true},{"name":"Cho Kuk","bucket":"Indo-Pacific","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - South Korean opposition","role":"Reform Party Leader \u00b7 South Korea"},{"name":"Aung San Suu Kyi","bucket":"Indo-Pacific","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Myanmar imprisoned Nobel laureate","role":"Detained Leader \u00b7 Myanmar"},{"name":"Lai Ching-te","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Taiwan president","role":"President \u00b7 Taiwan"},{"name":"Kari Lake","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - AZ MAGA commentator/politician","role":"Arizona Senate Candidate \u00b7 US","fourth_estate":false},{"name":"To Lam","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Vietnamese General Secretary","role":"General Secretary \u00b7 Vietnam"},{"name":"David Lammy","bucket":"UK Politics","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - UK Foreign Secretary","role":"Foreign Secretary \u00b7 UK"},{"name":"Ned Lamont","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Connecticut"},{"name":"Brad Lander","bucket":"US Municipal","position":"OPP","tier":3,"action":"ACTIVE","notes":"NYC Comptroller running for mayor Vol 3","role":"NYC Comptroller \u00b7 New York"},{"name":"Jeff Landry","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Louisiana Vol 3","role":"Governor \u00b7 Louisiana"},{"name":"Donna Langley","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - NBCUniversal content chair runs Universal Pictures most powerful woman in Hollywood studios","role":"Chair \u00b7 Universal Filmed Entertainment"},{"name":"James Lankford","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Oklahoma"},{"name":"Yair Lapid","bucket":"Middle East","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - move from UK bucket","role":"Opposition Leader \u00b7 Israel"},{"name":"Sergei Lavrov","bucket":"NATO / G7","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Russian Foreign Minister led Russia-US Saudi Arabia talks still very active 20 years in post","role":"Foreign Minister \u00b7 Russia"},{"name":"Nathan Law","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4 - HK democracy exile","role":"Pro-Democracy Activist \u00b7 Hong Kong","fourth_estate":false},{"name":"Karoline Leavitt","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - White House Press Secretary youngest ever 27 years old combative style daily briefings central to Trump media operation","role":"White House Press Secretary \u00b7 US"},{"name":"Barbara Lee","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former Congresswoman \u00b7 California"},{"name":"Mike Lee","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - constitutional conservative","role":"Senator \u00b7 Utah"},{"name":"Summer Lee","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - PA progressive congresswoman rising squad adjacent","role":"Congresswoman \u00b7 Pennsylvania"},{"name":"Leonard Leo","bucket":"Business / Donor","position":"WBR","tier":4,"action":"ACTIVE","notes":"Vol 4 - Federalist Society SCOTUS kingmaker","role":"Co-chair \u00b7 Federalist Society"},{"name":"Ezra Levin","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2 - Indivisible co-founder","role":"Co-founder \u00b7 Indivisible","fourth_estate":false},{"name":"Bernard-Henri Levy","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Philosopher & Public Intellectual \u00b7 France"},{"name":"Ursula von der Leyen","bucket":"EU Institutions","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 3","role":"President \u00b7 European Commission"},{"name":"Li Qiang","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Chinese PM","role":"Premier \u00b7 China"},{"name":"Christian Lindner","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former FDP finance minister fiscally hawkish coalition breaker","role":"FDP Leader \u00b7 Germany"},{"name":"Arthur Lira","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Brazilian House speaker powerful kingmaker congressional deal maker","role":"Former Speaker \u00b7 Brazilian Chamber"},{"name":"Ryan Lizza","bucket":"Independent Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - Politico Playbook co-author insider political journalism","role":"Chief Washington Correspondent \u00b7 Politico","fourth_estate":true},{"name":"Dan Loeb","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Third Point hedge fund vocal on corporate governance and politics","role":"Founder \u00b7 Third Point LLC"},{"name":"Laura Loomer","bucket":"Wildcard Editorial","position":"WLD","tier":5,"action":"ACTIVE","notes":"Vol 5","role":"Right-Wing Journalist \u00b7 US","fourth_estate":false},{"name":"Claudia Lopez","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Bogota mayor Colombia leading progressive female voice 2026 presidential potential","role":"Former Mayor \u00b7 Bogota, Colombia"},{"name":"Joaquin Guzman Lopez","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - El Chapo son allegedly helped lure El Mayo to US cooperating with US authorities extraordinary story","role":"Sinaloa Cartel Leader \u00b7 Mexico","fourth_estate":false},{"name":"Bryan Lourd","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - CAA co-chairman manages major political talent major Democratic donor partner of Bruce Bozzi","role":"Managing Partner \u00b7 CAA"},{"name":"Ben Ray Lujan","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 New Mexico"},{"name":"Luiz Inacio Lula da Silva","bucket":"Americas","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4","role":"President \u00b7 Brazil"},{"name":"Cynthia Lummis","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - crypto advocate","role":"Senator \u00b7 Wyoming"},{"name":"Anna Paulina Luna","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Congresswoman \u00b7 Florida"},{"name":"Daniel Lurie","bucket":"US Municipal","position":"HoS","tier":3,"action":"ACTIVE","notes":"New SF mayor Vol 3","role":"Mayor \u00b7 San Francisco"},{"name":"Howard Lutnick","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Commerce Vol 3","role":"Secretary of Commerce \u00b7 US"},{"name":"Christopher Luxon","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - New Zealand PM Five Eyes AUKUS adjacent Pacific security","role":"Prime Minister \u00b7 New Zealand"},{"name":"Jack Ma","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Co-founder \u00b7 Alibaba Group"},{"name":"Douglas Macgregor","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - retired colonel MAGA commentator","role":"Retired Army Colonel \u00b7 US","fourth_estate":false},{"name":"Maria Corina Machado","bucket":"Americas","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 5 - move from Activist","role":"Opposition Leader \u00b7 Venezuela"},{"name":"Mauricio Macri","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - former Argentine president still influential PRO coalition Milei predecessor","role":"Former President \u00b7 Argentina"},{"name":"Emmanuel Macron","bucket":"EU Institutions","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - France critical NATO voice","role":"President \u00b7 France"},{"name":"Rachel Maddow","bucket":"Legacy Media","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Host \u00b7 MSNBC","fourth_estate":true},{"name":"Nicolas Maduro","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 5 - still in power","role":"President \u00b7 Venezuela"},{"name":"Peter Magyar","bucket":"EU Institutions","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 4 - Hungary opposition leader emerged dramatically 2024 married to Orbans former justice minister leading protests genuine threat to Orban significant omission","role":"TISZA Leader \u00b7 Hungary"},{"name":"Matt Mahan","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor race Vol 2","role":"Mayor \u00b7 San Jose, California"},{"name":"Bill Maher","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 HBO Real Time","fourth_estate":true},{"name":"Martin Makary","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"FDA Commissioner Vol 3","role":"FDA Commissioner \u00b7 US"},{"name":"Julius Malema","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - South African EFF leader","role":"EFF Leader \u00b7 South Africa","fourth_estate":false},{"name":"Mark Malloch-Brown","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Soros Open Society former UN","role":"Former UN Deputy Secretary-General"},{"name":"Zohran Mamdani","bucket":"US Municipal","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 5 - NYC Mayor since Jan 2026 first Muslim Asian American mayor democratic socialist Trump antagonist free buses rent freeze","role":"New York State Assemblyman"},{"name":"Joe Manchin","bucket":"Third Party / Outsider","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - No Labels","role":"Former Senator \u00b7 West Virginia"},{"name":"Sanna Marin","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Finnish PM youngest ever led NATO application now Tony Blair Institute global progressive icon Zelensky honored her Jan 2026","role":"Former Prime Minister \u00b7 Finland"},{"name":"Francia Marquez","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Colombian VP","role":"Vice President \u00b7 Colombia"},{"name":"Ken Martin","bucket":"US Campaign","position":"WLD","tier":2,"action":"ACTIVE","notes":"DNC Chair Vol 2","role":"DNC Chair \u00b7 US","fourth_estate":false},{"name":"Micheal Martin","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Irish Taoiseach EU Council presidency July 2026 Trump White House St Patricks Day Gaza vocal active","role":"Taoiseach \u00b7 Ireland"},{"name":"Ricardo Martinelli","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Panamanian president convicted corruption disqualified 2024 now in exile in Nicaragua under Ortega protection extraordinary story","role":"Former President \u00b7 Panama","fourth_estate":false},{"name":"Thomas Massie","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congressman \u00b7 Kentucky"},{"name":"James Mattis","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former SecDef Trump critic","role":"Former Secretary of Defense \u00b7 US","fourth_estate":false},{"name":"Ghislaine Maxwell","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 3 - imprisoned center of Epstein story passive but generates constant ink","role":"Convicted Trafficker \u00b7 UK/US","fourth_estate":false},{"name":"Michael McCaul","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - Foreign Affairs","role":"Congressman \u00b7 Texas"},{"name":"Jennifer McClellan","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - VA congresswoman first Black woman to represent VA in Congress","role":"Congresswoman \u00b7 Virginia"},{"name":"Mitch McConnell","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former Senate Majority Leader \u00b7 Kentucky"},{"name":"Dave McCormick","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - new PA senator","role":"Senator \u00b7 Pennsylvania"},{"name":"Mary Lou McDonald","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - Sinn Fein leader most significant Irish opposition Gaza Palestinian rights reunification agenda","role":"Sinn Fein Leader \u00b7 Ireland"},{"name":"Helen McEntee","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Irish Minister for Foreign Affairs rising profile leads global diplomatic push","role":"Fine Gael Leader \u00b7 Ireland"},{"name":"Michael McFaul","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Russia ambassador Stanford","role":"Former US Ambassador \u00b7 Russia"},{"name":"Gavin McInnes","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Proud Boys founder","role":"Co-founder \u00b7 Proud Boys","fourth_estate":false},{"name":"DeRay Mckesson","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Civil Rights Activist \u00b7 US","fourth_estate":false},{"name":"Linda McMahon","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Education Vol 2","role":"Secretary of Education \u00b7 US"},{"name":"John Mearsheimer","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - U Chicago offensive realism WONK CITY SIGNATURE FIGURE sleeper pick","role":"Professor \u00b7 University of Chicago"},{"name":"Dmitry Medvedev","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Russian Security Council","role":"Deputy Chair \u00b7 Russian Security Council"},{"name":"Gregory Meeks","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - Foreign Affairs ranking","role":"Congressman \u00b7 New York"},{"name":"Ari Melber","sort_name":"Melber, Ari","position":"WLD","bucket":"Legacy Media","tier":3,"role":"Anchor \u00b7 MSNBC The Beat","fourth_estate":true,"notes":"MSNBC anchor host The Beat legal analyst Cornell law degree hip hop references","action":"ACTIVE"},{"name":"Jean-Luc Melenchon","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"LFI Leader \u00b7 France"},{"name":"Timothy Mellon","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - reclusive billionaire funded much of Trump legal defense shadow figure","role":"Conservative Megadonor \u00b7 US"},{"name":"Giorgia Meloni","bucket":"NATO / G7","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5 - dual list EU G7","role":"Prime Minister \u00b7 Italy"},{"name":"El Mencho","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - CJNG cartel boss Nemesio Oseguera Cervantes most wanted man in Mexico 10M US bounty drives cartel designation debates","role":"Leader \u00b7 CJNG Cartel \u00b7 Mexico","fourth_estate":false},{"name":"Grace Meng","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congresswoman \u00b7 New York"},{"name":"Jeff Merkley","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Oregon"},{"name":"Friedrich Merz","bucket":"EU Institutions","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - German Chancellor","role":"Chancellor \u00b7 Germany"},{"name":"Roberta Metsola","bucket":"EU Institutions","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - EU Parliament","role":"President \u00b7 European Parliament"},{"name":"Charles Michel","bucket":"EU Institutions","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - move from UK bucket","role":"Former President \u00b7 European Council"},{"name":"Javier Milei","bucket":"Americas","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5","role":"President \u00b7 Argentina"},{"name":"David Miliband","bucket":"UN / Multilateral","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - IRC president former UK FM","role":"CEO \u00b7 International Rescue Committee"},{"name":"Stephen Miller","bucket":"US Executive","position":"WLD","tier":2,"action":"ACTIVE","notes":"Policy architect Vol 5","role":"Deputy Chief of Staff \u00b7 White House","fourth_estate":false},{"name":"Mark Milley","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - retired CJCS Trump critic","role":"Former Chairman \u00b7 Joint Chiefs","fourth_estate":false},{"name":"Janet Mills","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Maine"},{"name":"Stephen Miran","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Trump CEA chair author Mar-a-Lago Accord paper intellectual framework for Trump tariff strategy one of most important names nobody knows","role":"Chair \u00b7 Council of Economic Advisers"},{"name":"Mikhail Mishustin","bucket":"NATO / G7","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Russian PM constitutionally second in line to Putin technocrat navigating sanctions war economy","role":"Prime Minister \u00b7 Russia"},{"name":"Kyriakos Mitsotakis","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Greek PM center-right migration Turkey tensions EU fiscal hawk","role":"Prime Minister \u00b7 Greece"},{"name":"Narendra Modi","bucket":"Indo-Pacific","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - move from UK bucket","role":"Prime Minister \u00b7 India"},{"name":"Ashley Moody","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - new FL senator","role":"Senator \u00b7 Florida"},{"name":"Michael Moore","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Documentary Filmmaker \u00b7 US","fourth_estate":false},{"name":"Wes Moore","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Maryland"},{"name":"Alexandre de Moraes","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 5 - Brazilian Supreme Court justice most powerful controversial figure in Brazil after Lula ordered Bolsonaro investigated blocked Elon Musk X platform extraordinary power accumulation","role":"Justice \u00b7 Brazilian Supreme Court"},{"name":"Evo Morales","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - move from Activist","role":"Former President \u00b7 Bolivia"},{"name":"Bernie Moreno","bucket":"US Campaign","position":"LEG","tier":3,"action":"ACTIVE","notes":"OH Senate Vol 3","role":"Senator \u00b7 Ohio"},{"name":"Piers Morgan","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - UK media personality","role":"Host \u00b7 Piers Morgan Uncensored","fourth_estate":false},{"name":"Jared Moskowitz","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - FL Democrat very vocal on Trump investigations social media presence","role":"Congressman \u00b7 Florida"},{"name":"Mia Mottley","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Barbados PM leading voice for Caribbean climate justice Small Island States reparations advocate internationally respected","role":"Prime Minister \u00b7 Barbados"},{"name":"Seth Moulton","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - MA moderate veteran","role":"Congressman \u00b7 Massachusetts"},{"name":"Jose Raul Mulino","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Panamanian president defending canal sovereignty against Trump told Rubio sovereignty not in question center of most geopolitically significant bilateral dispute in hemisphere","role":"President \u00b7 Panama"},{"name":"Markwayne Mullin","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Oklahoma"},{"name":"Mira Murati","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - former OpenAI CTO left to found Thinking Machines AI power figure sleeper","role":"Former CTO \u00b7 OpenAI"},{"name":"Lachlan Murdoch","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"CEO \u00b7 Fox Corporation"},{"name":"Rupert Murdoch","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Fox News patriarch 93 years old stepped down 2023 still shadow presence divorce succession drama generated enormous news","role":"Chairman Emeritus \u00b7 News Corp"},{"name":"Rosario Murillo","bucket":"Americas","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5 - Nicaragua Co-President since Feb 2025 real power behind throne Ortega increasingly ceremonial she controls everything new age aesthetics iron fist extraordinary figure","role":"Co-President \u00b7 Nicaragua"},{"name":"Lisa Murkowski","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Alaska"},{"name":"Chris Murphy","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 DEDUP","role":"Senator \u00b7 Connecticut"},{"name":"Patty Murray","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Washington"},{"name":"Elon Musk","bucket":"Business / Donor","position":"WBR","tier":1,"action":"ACTIVE","notes":"Vol 5","role":"Head \u00b7 DOGE / CEO Tesla & SpaceX"},{"name":"Elvira Nabiullina","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Russian Central Bank governor most powerful woman in Russia navigated western sanctions extraordinary technocrat","role":"Governor \u00b7 Bank of Russia"},{"name":"Jerry Nadler","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 New York"},{"name":"Yulia Navalnaya","bucket":"Activist / Advocate","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Opposition Leader \u00b7 Russia"},{"name":"Peter Navarro","bucket":"Think Tank / Expert","position":"WBR","tier":4,"action":"ACTIVE","notes":"Vol 4 - Trump trade advisor imprisoned released - very current","role":"Former Trade Adviser \u00b7 White House"},{"name":"Karol Nawrocki","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Polish presidential candidate backed by PiS met Trump this week nationalist international aligned very current","role":"Presidential Candidate \u00b7 Poland"},{"name":"Karl Nehammer","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Austria \u00d6VP outgoing chancellor","role":"Former Chancellor \u00b7 Austria"},{"name":"Troy Nehls","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 Texas"},{"name":"Benjamin Netanyahu","bucket":"Middle East","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5 - move from UK bucket","role":"Prime Minister \u00b7 Israel"},{"name":"Gavin Newsom","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Governor \u00b7 California"},{"name":"Bree Newsome","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - took down Confederate flag SC","role":"Activist & Filmmaker \u00b7 US","fourth_estate":false},{"name":"Angie Nixon","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 2 - FL state rep running for Senate Democratic primary","role":"Florida State Representative"},{"name":"Daniel Noboa","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Ecuador drug war","role":"President \u00b7 Ecuador"},{"name":"Olivia Nuzzi","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - New York Magazine political reporter landed controversial RFK Jr interview generated news herself Vol 3","role":"Contributing Editor \u00b7 New York Magazine","fourth_estate":true},{"name":"Barack Obama","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Former President \u00b7 United States"},{"name":"Alexandria Ocasio-Cortez","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 5 DEDUP","role":"Congresswoman \u00b7 New York"},{"name":"Roberto Morales Ojeda","bucket":"Americas","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - Cuba SLEEPER conventional successor","role":"Party First Secretary \u00b7 Cuba","fourth_estate":false},{"name":"Ngozi Okonjo-Iweala","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - WTO","role":"Director-General \u00b7 WTO"},{"name":"John Oliver","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 HBO Last Week Tonight","fourth_estate":true},{"name":"Ilhan Omar","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congresswoman \u00b7 Minnesota"},{"name":"Viktor Orban","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 5 - move from UK bucket","role":"Prime Minister \u00b7 Hungary"},{"name":"Petteri Orpo","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Finnish PM since 2023 NATO frontier state Russia border austerity program","role":"Prime Minister \u00b7 Finland"},{"name":"Yamandu Orsi","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Uruguayan president","role":"President \u00b7 Uruguay"},{"name":"Daniel Ortega","bucket":"Americas","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3 - Nicaraguan president move from Legacy Media","role":"President \u00b7 Nicaragua"},{"name":"Claudia Ortiz","bucket":"Americas","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - El Salvador opposition legislator most prominent voice against Bukele one of only 3 opposition members financial watchdog 69000 votes in capital lonely democracy voice","role":"Opposition MP \u00b7 El Salvador"},{"name":"Dan Osborn","bucket":"Third Party / Outsider","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4 - NE independent Senate candidate former union leader almost beat Deb Fischer 2024 now running again serious insurgent","role":"Independent Candidate \u00b7 Nebraska"},{"name":"Jon Ossoff","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 DEDUP also in Campaign","role":"Senator \u00b7 Georgia"},{"name":"Candace Owens","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Conservative Commentator \u00b7 US","fourth_estate":false},{"name":"Alex Padilla","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 California"},{"name":"Chris Pappas","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - NH congressman running for Shaheen open Senate seat Democratic primary","role":"Former Congressman \u00b7 New Hampshire"},{"name":"Bruno Rodriguez Parrilla","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Cuban Foreign Minister government voice on bilateral relations","role":"Foreign Minister \u00b7 Cuba"},{"name":"Kash Patel","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"FBI Director Vol 4","role":"Director \u00b7 FBI"},{"name":"Nikolai Patrushev","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Aide \u00b7 Russian Presidency"},{"name":"Rand Paul","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 Kentucky"},{"name":"John Paulson","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - hedge fund billionaire Palm Beach neighbor major Trump donor Treasury Secretary consideration","role":"Founder \u00b7 Paulson & Co"},{"name":"Petr Pavel","bucket":"NATO / G7","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Czech president NATO hawk","role":"President \u00b7 Czech Republic"},{"name":"Justin Pearson","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - TN state rep expelled then reinstated after gun protest floor Tennessee Three","role":"Tennessee State Representative","fourth_estate":false},{"name":"David Pecker","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2 - National Enquirer catch and kill architect testified against Trump NY criminal trial 2024 historically significant tabloid political corruption","role":"Former Publisher \u00b7 National Enquirer","fourth_estate":false},{"name":"Nancy Pelosi","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Former Speaker \u00b7 US House"},{"name":"Mary Peltola","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - AK Democrat former House member running for Senate first Alaska Native woman elected to Congress","role":"Former Congresswoman \u00b7 Alaska"},{"name":"Nelson Peltz","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - activist investor Palm Beach Trump social friend Disney board battle political donor","role":"Founder \u00b7 Trian Fund Management"},{"name":"Marine Le Pen","bucket":"EU Institutions","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 5 - France far right National Rally leader","role":"Opposition Leader \u00b7 France"},{"name":"Santiago Pena","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Paraguayan president move from Academic/Expert","role":"President \u00b7 Paraguay"},{"name":"Mike Pence","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Former Vice President \u00b7 United States"},{"name":"Ike Perlmutter","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Marvel Entertainment chairman Mar-a-Lago member major Trump donor VA healthcare policy controversy","role":"Former Chair \u00b7 Marvel Entertainment"},{"name":"Jordan Peterson","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Author & Psychologist \u00b7 Canada","fourth_estate":false},{"name":"David Petraeus","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former CIA director still public","role":"Former CIA Director & General \u00b7 US","fourth_estate":false},{"name":"Gustavo Petro","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"President \u00b7 Colombia"},{"name":"Masoud Pezeshkian","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - Iranian president","role":"President \u00b7 Iran"},{"name":"Dan Pfeiffer","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Pod Save America host former Obama senior advisor","role":"Co-host \u00b7 Pod Save America","fourth_estate":true},{"name":"Edouard Philippe","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - France former PM running for president 2027 Le Havre mayor","role":"Former PM / Horizons Leader \u00b7 France"},{"name":"Dean Phillips","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - ran against Biden","role":"Congressman \u00b7 Minnesota"},{"name":"Hasan Piker","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2 - Hasan Abi Twitch political streamer Cenk Uygurs nephew enormous reach among young progressives Bernie AOC interviews mainstream pickup sleeper pick","role":"Twitch Streamer & Commentator \u00b7 US","fourth_estate":true},{"name":"Graham Platner","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 5 - Maine Senate candidate vs Susan Collins Marine veteran oyster farmer viral launch 2.5M views Bernie endorsed survived Nazi tattoo Reddit controversy probable Democratic nominee most volatile Senate race 2026","role":"Political Operative \u00b7 US"},{"name":"David Plouffe","bucket":"US Campaign","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2","role":"Democratic Strategist \u00b7 US","fourth_estate":false},{"name":"John Podesta","bucket":"Legal / Operative","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Biden climate czar Podesta Group Democratic power broker","role":"Former White House Chief of Staff \u00b7 US","fourth_estate":false},{"name":"Pierre Poilievre","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - Canadian Conservative leader","role":"Conservative Leader \u00b7 Canada"},{"name":"Jared Polis","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - DEDUP","role":"Governor \u00b7 Colorado"},{"name":"Tim Pool","bucket":"Independent Media","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Host \u00b7 Timcast IRL","fourth_estate":true},{"name":"Pope Leo XIV","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - first American pope elected May 2025","role":"Pope \u00b7 Catholic Church"},{"name":"Katie Porter","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor race Vol 4","role":"Former Congresswoman \u00b7 California"},{"name":"Jerome Powell","bucket":"US Agencies","position":"HoS","tier":1,"action":"ACTIVE","notes":"Fed Chair Vol 4 - DOJ investigating","role":"Chair \u00b7 Federal Reserve"},{"name":"Samantha Power","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - former USAID director now Harvard","role":"Former Administrator \u00b7 USAID"},{"name":"Dennis Prager","bucket":"Political Commentator","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - move from Business","role":"Founder \u00b7 PragerU","fourth_estate":false},{"name":"Anthony Pratt","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Australian packaging billionaire pledged 40B US investment to Trump constantly at Mar-a-Lago","role":"Chairman \u00b7 Visy Industries"},{"name":"Ayanna Pressley","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congresswoman \u00b7 Massachusetts"},{"name":"JB Pritzker","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Illinois"},{"name":"Jen Psaki","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - revisit quarterly","role":"Former White House Press Secretary \u00b7 US","fourth_estate":false},{"name":"Riikka Purra","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Finns Party leader far right nationalist immigration hardliner coalition partner of Orpo","role":"PS Leader \u00b7 Finland"},{"name":"Vladimir Putin","bucket":"NATO / G7","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5 - adversary context","role":"President \u00b7 Russia"},{"name":"Naim Qassem","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - new Hezbollah chief","role":"Secretary-General \u00b7 Hezbollah"},{"name":"Cyril Ramaphosa","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - South Africa president BRICS G20 chair International Court genocide case against Israel ANC leader major continental voice","role":"President \u00b7 South Africa"},{"name":"Vivek Ramaswamy","bucket":"US Executive","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Co-head \u00b7 DOGE"},{"name":"Jamie Raskin","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 4 - MD congressman January 6 committee lead impeachment manager vocal Trump antagonist","role":"Congressman \u00b7 Maryland"},{"name":"John Ratcliffe","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Director \u00b7 CIA"},{"name":"Shari Redstone","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Paramount CBS controlling shareholder completed Skydance sale very current shaped future of CBS News","role":"Chair \u00b7 National Amusements"},{"name":"Jack Reed","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - Armed Services chair","role":"Senator \u00b7 Rhode Island"},{"name":"Rachel Reeves","bucket":"UK Politics","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - UK Chancellor of the Exchequer","role":"Chancellor of the Exchequer \u00b7 UK"},{"name":"David Remnick","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - New Yorker editor genuine media power newsworthy when magazine lands consequential piece","role":"Editor \u00b7 The New Yorker"},{"name":"Michael Render (Killer Mike)","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - rapper turned political activist arrested at Grammys","role":"Rapper & Activist \u00b7 US","fourth_estate":false},{"name":"Kim Reynolds","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Iowa"},{"name":"Shonda Rhimes","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Netflix showrunner political donor cultural force Bridgerton Grey's Anatomy","role":"Producer & Showrunner \u00b7 Netflix"},{"name":"Pete Ricketts","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - NE Republican incumbent senator running for full term","role":"Senator \u00b7 Nebraska"},{"name":"Chris Ripley","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Sinclair Broadcast Group CEO most politically influential local TV company in America right wing must-run segments hundreds of markets","role":"CEO \u00b7 Sinclair Broadcast Group"},{"name":"Kevin Roberts","bucket":"Think Tank / Expert","position":"WBR","tier":4,"action":"ACTIVE","notes":"Vol 4 - Heritage Foundation Project 2025 author","role":"President \u00b7 Heritage Foundation"},{"name":"Tommy Robinson","bucket":"Activist / Advocate","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - UK far right","role":"Far-Right Activist \u00b7 UK","fourth_estate":false},{"name":"Jorge Rodriguez","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Venezuelan National Assembly president Maduro loyalist key regime figure","role":"National Assembly President \u00b7 Venezuela"},{"name":"Joe Rogan","bucket":"Independent Media","position":"WLD","tier":5,"action":"ACTIVE","notes":"Vol 5 - dual list Commentator","role":"Host \u00b7 Joe Rogan Experience","fourth_estate":true},{"name":"Mike Rogers","bucket":"US Campaign","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 3 - MI Republican Senate candidate former House Intelligence chair","role":"Former Congressman \u00b7 Michigan"},{"name":"Brooke Rollins","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Agriculture Vol 2","role":"Secretary of Agriculture \u00b7 US"},{"name":"Matt Rosendale","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former Congressman \u00b7 Montana"},{"name":"Mike Rounds","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 South Dakota"},{"name":"Chip Roy","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 4 - Freedom Caucus","role":"Congressman \u00b7 Texas"},{"name":"David Rubenstein","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Carlyle Group","role":"Co-founder \u00b7 Carlyle Group"},{"name":"Marco Rubio","bucket":"US Executive","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4","role":"Secretary of State \u00b7 US"},{"name":"Chris Ruddy","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Newsmax CEO Trump Palm Beach neighbor extraordinary direct access second most watched cable news network","role":"CEO \u00b7 Newsmax Media"},{"name":"Leslie Rutledge","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - AR Lt Governor under Sanders former AG MAGA loyalist","role":"Lt. Governor \u00b7 Arkansas"},{"name":"William Ruto","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Kenya president East African leader BRICS adjacent US relationship important regional hub","role":"President \u00b7 Kenya"},{"name":"Mark Rutte","bucket":"NATO / G7","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - current NATO SG","role":"Secretary General \u00b7 NATO"},{"name":"Gideon Sa'ar","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Israeli Foreign Minister","role":"Foreign Minister \u00b7 Israel"},{"name":"Jeffrey Sachs","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Columbia economist former UN Special Adviser anti-NATO pro-engagement Ukraine COVID controversialist prolific","role":"Director \u00b7 Columbia Center for Sustainable Development","fourth_estate":false},{"name":"David Sacks","bucket":"US Agencies","position":"WLD","tier":2,"action":"ACTIVE","notes":"AI/Crypto czar Vol 3","role":"AI & Crypto Czar \u00b7 White House","fourth_estate":false},{"name":"Kais Saied","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Tunisia move from Academic/Expert","role":"President \u00b7 Tunisia"},{"name":"Maria Elvira Salazar","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - FL Republican congresswoman Cuban-American vocal on Cuba Venezuela Latin American human rights media savvy","role":"Congresswoman \u00b7 Florida"},{"name":"King Salman","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - figurehead","role":"King \u00b7 Saudi Arabia"},{"name":"Matteo Salvini","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Deputy PM \u00b7 Italy"},{"name":"Pedro Sanchez","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Spain","role":"Prime Minister \u00b7 Spain"},{"name":"Bernie Sanders","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 Vermont"},{"name":"Sarah Huckabee Sanders","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Arkansas"},{"name":"Maia Sandu","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Moldovan president pro-EU resisting Russian pressure extraordinary frontline democracy story","role":"President \u00b7 Moldova"},{"name":"George Santos","bucket":"US Legislature","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - expelled but ongoing fraud case","role":"Former Congressman \u00b7 New York","fourth_estate":false},{"name":"Jorge Mas Santos","bucket":"Americas","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - CANF chairman Cuban exile voice drives US Cuba policy","role":"Chairman \u00b7 MasTec / CANF","fourth_estate":false},{"name":"Ted Sarandos","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Netflix co-CEO most powerful streaming executive wife is US Ambassador to Spain major Democratic donor","role":"Co-CEO \u00b7 Netflix"},{"name":"Linda Sarsour","bucket":"Activist / Advocate","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Co-organizer \u00b7 Women's March","fourth_estate":false},{"name":"Steve Scalise","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"House Majority Leader \u00b7 Louisiana"},{"name":"Anthony Scaramucci","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Trump comms director 11 days now anti-Trump CNN contributor SkyBridge Capital SALT conference host Vol 3","role":"Founder \u00b7 SkyBridge Capital","fourth_estate":false},{"name":"Joe Scarborough","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Co-host \u00b7 MSNBC Morning Joe","fourth_estate":true},{"name":"Alexander Schallenberg","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Austrian Foreign Minister diplomatic voice","role":"Foreign Minister \u00b7 Austria"},{"name":"Brian Schatz","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Hawaii"},{"name":"Adam Schiff","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 4","role":"Senator \u00b7 California"},{"name":"Elly Schlein","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"PD Leader \u00b7 Italy"},{"name":"Eric Schmitt","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 Missouri"},{"name":"Dick Schoof","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Netherlands PM","role":"Prime Minister \u00b7 Netherlands"},{"name":"Debbie Wasserman Schultz","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congresswoman \u00b7 Florida"},{"name":"Howard Schultz","bucket":"Third Party / Outsider","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former CEO \u00b7 Starbucks"},{"name":"Chuck Schumer","bucket":"US Legislature","position":"LEG","tier":1,"action":"ACTIVE","notes":"Vol 4","role":"Senate Minority Leader \u00b7 New York"},{"name":"Stephen Schwarzman","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Blackstone Trump adjacent - confirm not duplicate","role":"CEO \u00b7 Blackstone Group"},{"name":"Phil Scott","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Vermont"},{"name":"Rick Scott","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Florida"},{"name":"Tim Scott","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Senator \u00b7 South Carolina"},{"name":"Barre Seid","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - donated 1.65B to Leonard Leo network largest known political donation in US history shadow figure","role":"Conservative Megadonor \u00b7 US"},{"name":"Pete Sessions","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 Texas"},{"name":"Ben Shapiro","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Editor \u00b7 The Daily Wire","fourth_estate":false},{"name":"Josh Shapiro","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Pennsylvania"},{"name":"Shehbaz Sharif","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Pakistani PM","role":"Prime Minister \u00b7 Pakistan"},{"name":"Al Sharpton","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Civil Rights Leader \u00b7 National Action Network","fourth_estate":false},{"name":"Claudia Sheinbaum","bucket":"Americas","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - current Mexican president","role":"President \u00b7 Mexico"},{"name":"Mikie Sherrill","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - NJ congresswoman Navy pilot running for governor very current 2026 race moderate Democrat Vol 3","role":"Governor \u00b7 New Jersey"},{"name":"Paetongtarn Shinawatra","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Thai PM","role":"Prime Minister \u00b7 Thailand"},{"name":"Radoslaw Sikorski","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Polish Foreign Minister vocal on Russia NATO married to Anne Applebaum","role":"Foreign Minister \u00b7 Poland"},{"name":"George Simion","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4 - Romanian AUR far right leader Trump-aligned nearly won presidency 46.4% opposes Ukraine aid EU critic volatile","role":"AUR Leader \u00b7 Romania"},{"name":"Paul Singer","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Elliott Management Republican mega-donor major political player anti-Trump then pragmatist","role":"Founder \u00b7 Elliott Management"},{"name":"Jagmeet Singh","bucket":"Americas","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - NDP leader Canada","role":"NDP Leader \u00b7 Canada"},{"name":"Mohammed Sinwar","bucket":"Middle East","position":"HoS","tier":3,"action":"ACTIVE","notes":"Vol 3 - Hamas military chief replacement for Yahya","role":"Hamas Military Commander \u00b7 Gaza"},{"name":"Elissa Slotkin","bucket":"US Campaign","position":"LEG","tier":3,"action":"ACTIVE","notes":"MI Senate Vol 3","role":"Senator \u00b7 Michigan"},{"name":"Adam Smith","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - Armed Services ranking","role":"Congressman \u00b7 Washington"},{"name":"Jack Smith","bucket":"US Judiciary","position":"WLD","tier":3,"action":"ACTIVE","notes":"SLEEPER - will resurface Vol 3","role":"Former Special Counsel \u00b7 DOJ","fourth_estate":false},{"name":"Bezalel Smotrich","bucket":"Middle East","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 4 - Israeli far right religious Zionist","role":"Finance Minister \u00b7 Israel"},{"name":"Edward Snowden","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4","role":"Whistleblower \u00b7 Russia","fourth_estate":false},{"name":"Timothy Snyder","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Yale authoritarianism expert","role":"Professor \u00b7 Yale University","fourth_estate":false},{"name":"Markus Soder","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Bavarian CSU leader perennial German conservative powerbroker","role":"CSU Leader / Bavarian PM \u00b7 Germany"},{"name":"Erna Solberg","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Norwegian PM 2013-2021 stepping down as Conservative leader 2026 institutional voice","role":"Conservative Leader \u00b7 Norway"},{"name":"David Solomon","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Goldman Sachs CEO more politically active than predecessors G7 Davos fixture","role":"CEO \u00b7 Goldman Sachs"},{"name":"Perry Sook","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Nexstar CEO largest local TV station owner bought The Hill","role":"Founder \u00b7 Nexstar Media Group"},{"name":"Patrick Soon-Shiong","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - LA Times owner California billionaire bought from Tribune","role":"Owner \u00b7 Los Angeles Times"},{"name":"George Soros","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Founder \u00b7 Open Society Foundations"},{"name":"Thomas Sowell","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Hoover Institution economist influential on right","role":"Senior Fellow \u00b7 Hoover Institution"},{"name":"Abigail Spanberger","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Virginia"},{"name":"Steven Spielberg","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - film director major Democratic donor cultural voice Shoah Foundation","role":"Director & Producer \u00b7 Amblin Entertainment"},{"name":"Balaji Srinivasan","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Investor & Tech Commentator \u00b7 US"},{"name":"Jes Staley","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - former Barclays CEO Epstein estate trustee received lifetime FCA ban over Epstein relationship named as estate executor alongside Larry Summers","role":"Former CEO \u00b7 Barclays"},{"name":"Keir Starmer","bucket":"UK Politics","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4 - current PM","role":"Prime Minister \u00b7 UK"},{"name":"Elise Stefanik","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 3 - US Ambassador to UN","role":"US Ambassador \u00b7 United Nations"},{"name":"Jill Stein","bucket":"Third Party / Outsider","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Presidential Candidate \u00b7 Green Party"},{"name":"Jon Stewart","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 Comedy Central Daily Show","fourth_estate":true},{"name":"Tom Steyer","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor race Vol 3","role":"Founder \u00b7 Farallon Capital / Activist"},{"name":"Roger Stone","bucket":"Legal / Operative","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 5","role":"Political Consultant \u00b7 US","fourth_estate":false},{"name":"Jonas Gahr Store","bucket":"NATO / G7","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Norwegian PM re-elected 2025 NATO frontier Russia border oil wealth redistribution","role":"Prime Minister \u00b7 Norway"},{"name":"Wes Streeting","bucket":"UK Politics","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - UK Health Secretary rising Labour star","role":"Health Secretary \u00b7 UK"},{"name":"Alexander Stubb","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Finland president","role":"President \u00b7 Finland"},{"name":"Prabowo Subianto","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Indonesian President","role":"President \u00b7 Indonesia"},{"name":"Yoon Suk-yeol","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - impeached dramatic story","role":"President (Impeached) \u00b7 South Korea"},{"name":"A.G. Sulzberger","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - NYT publisher press freedom fights with Trump increasingly public figure","role":"Publisher \u00b7 New York Times","fourth_estate":true},{"name":"Larry Summers","bucket":"Think Tank / Expert","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Treasury Secretary Harvard","role":"Former Treasury Secretary \u00b7 US","fourth_estate":false},{"name":"Rishi Sunak","bucket":"UK Politics","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Former Prime Minister \u00b7 UK"},{"name":"Tom Suozzi","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Congressman \u00b7 New York"},{"name":"Eric Swalwell","bucket":"US Campaign","position":"OPP","tier":4,"action":"ACTIVE","notes":"CA governor Vol 5 - scandal","role":"Congressman \u00b7 California"},{"name":"John Swinney","bucket":"UK Politics","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Scottish First Minister","role":"First Minister \u00b7 Scotland"},{"name":"Charlie Sykes","bucket":"Independent Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - The Bulwark - confirm not in Legacy Media","role":"Editor \u00b7 The Bulwark","fourth_estate":true},{"name":"Charlie Sykes","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Editor \u00b7 The Bulwark","fourth_estate":true},{"name":"Michele Tafoya","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former NFL sideline reporter turned conservative commentator considering MN Senate Republican run","role":"Conservative Commentator / Candidate \u00b7 US"},{"name":"Matt Taibbi","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - move from Legacy Media","role":"Journalist \u00b7 Racket News","fourth_estate":true},{"name":"Antonio Tajani","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Italian Foreign Minister","role":"Foreign Minister \u00b7 Italy"},{"name":"James Talarico","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 5 - TX Democratic Senate nominee vs Cornyn or Paxton raised 27M Q1 2026 largest ever Senate haul any state beat Crockett in primary progressive Christian cowboy boots Medicare for Y'all Rogan appearance Joe told him to run for president real shot at flipping Texas","role":"Texas State Representative"},{"name":"Neera Tanden","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - former CAP president former Biden OMB director back in think tank world","role":"Former Director \u00b7 National Economic Council"},{"name":"Jake Tapper","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Anchor \u00b7 CNN","fourth_estate":true},{"name":"Andrew Tate","bucket":"Wildcard Editorial","position":"WLD","tier":5,"action":"ACTIVE","notes":"Vol 5 - legal jeopardy","role":"Influencer & Kickboxer \u00b7 UK/Romania","fourth_estate":false},{"name":"Peter Thiel","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Co-founder \u00b7 PayPal / Palantir"},{"name":"Greta Thunberg","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Climate Activist \u00b7 Sweden","fourth_estate":false},{"name":"John Thune","bucket":"US Legislature","position":"LEG","tier":1,"action":"ACTIVE","notes":"Vol 4 - Senate Majority Leader","role":"Senate Majority Leader \u00b7 South Dakota"},{"name":"Richard Tice","bucket":"UK Politics","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Reform UK deputy","role":"Reform UK Chairman \u00b7 UK"},{"name":"Frans Timmermans","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former EU climate chief Labour leader Netherlands","role":"Former EU VP \u00b7 Green Deal"},{"name":"Bola Tinubu","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Nigeria president largest African economy ECOWAS chair corruption allegations complex US relationship","role":"President \u00b7 Nigeria"},{"name":"Rashida Tlaib","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Congresswoman \u00b7 Michigan"},{"name":"Ritchie Torres","bucket":"US Legislature","position":"LEG","tier":3,"action":"ACTIVE","notes":"Vol 3 - outspoken progressive","role":"Congressman \u00b7 New York"},{"name":"Lawrence Tribe","bucket":"Think Tank / Expert","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Constitutional Scholar \u00b7 Harvard Law"},{"name":"Donald Trump","bucket":"US Executive","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5","role":"President \u00b7 United States"},{"name":"Eric Trump","bucket":"Political Commentator","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Executive VP \u00b7 Trump Organization","fourth_estate":false},{"name":"Lara Trump","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - dual list Campaign","role":"Co-chair \u00b7 Republican National Committee","fourth_estate":false},{"name":"Melania Trump","bucket":"Wildcard Editorial","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - strategic unpredictable","role":"First Lady \u00b7 United States","fourth_estate":false},{"name":"Rafal Trzaskowski","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Warsaw mayor Polish presidential candidate liberal pro-EU Tusk ally","role":"Mayor \u00b7 Warsaw / Presidential Candidate"},{"name":"Felix Tshisekedi","bucket":"UN / Multilateral","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - DRC president Congo critical minerals supply chain US China competition over cobalt coltan","role":"President \u00b7 DR Congo"},{"name":"Alexis Tsipras","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Greek PM Syriza recognizable from debt crisis era","role":"Syriza Leader \u00b7 Greece"},{"name":"Tommy Tuberville","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Alabama"},{"name":"Volker Turk","bucket":"UN / Multilateral","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - UN Human Rights Commissioner","role":"High Commissioner \u00b7 UN Human Rights"},{"name":"Mike Turner","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 - Intelligence chair","role":"Congressman \u00b7 Ohio"},{"name":"Nina Turner","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 2","role":"Former State Senator \u00b7 Ohio","fourth_estate":false},{"name":"Donald Tusk","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - confirm no duplicate","role":"Prime Minister \u00b7 Poland"},{"name":"Richard Uihlein","bucket":"Business / Donor","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Uline founder massive MAGA donor rarely visible sleeper","role":"Co-founder \u00b7 Uline / Conservative Donor"},{"name":"Cenk Uygur","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - TYT","role":"Host \u00b7 The Young Turks","fourth_estate":true},{"name":"JD Vance","bucket":"US Executive","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 4","role":"Vice President \u00b7 United States"},{"name":"Leo Varadkar","bucket":"EU Institutions","position":"OPP","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Irish Taoiseach resigned 2024 Fine Gael first openly gay Irish PM global profile","role":"Former Taoiseach \u00b7 Ireland"},{"name":"Yanis Varoufakis","bucket":"Political Commentator","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Greek economist provocateur","role":"Former Finance Minister \u00b7 Greece","fourth_estate":false},{"name":"Tommy Vietor","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Pod Save America host former Obama NSC spokesman","role":"Co-host \u00b7 Pod Save America","fourth_estate":true},{"name":"Antonio Villaraigosa","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"CA governor race Vol 3","role":"Former Mayor \u00b7 Los Angeles"},{"name":"Victoria Villarruel","bucket":"Americas","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Argentine VP","role":"Vice President \u00b7 Argentina"},{"name":"Alexander Vindman","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4 - Ukraine whistleblower triggered Trump first impeachment running for FL Senate Democratic primary enormous name recognition","role":"Former NSC Director / Impeachment Witness"},{"name":"Vyacheslav Volodin","bucket":"NATO / G7","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - State Duma chairman said no Putin no Russia key Kremlin loyalist","role":"Speaker \u00b7 Russian State Duma"},{"name":"Russell Vought","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"OMB Vol 4","role":"Director \u00b7 OMB"},{"name":"Aleksandar Vucic","bucket":"EU Institutions","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Serbian president autocratic EU-Russia balancing act protests against him ongoing","role":"President \u00b7 Serbia"},{"name":"Sahra Wagenknecht","bucket":"EU Institutions","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"BSW Leader \u00b7 Germany"},{"name":"Zach Wahls","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 2 - IA state senator raised by two moms national profile","role":"Iowa State Senator"},{"name":"Nicolle Wallace","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 MSNBC Deadline White House","fourth_estate":true},{"name":"Matt Walsh","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Daily Wire","role":"Commentator \u00b7 The Daily Wire","fourth_estate":false},{"name":"Stephen Walt","bucket":"Think Tank / Expert","position":"WBR","tier":2,"action":"ACTIVE","notes":"Vol 2 - Harvard Kennedy School","role":"Professor \u00b7 Harvard Kennedy School"},{"name":"Mike Waltz","bucket":"US Executive","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"National Security Adviser \u00b7 US"},{"name":"Tim Walz","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 4 - DEDUP - was VP candidate","role":"Governor \u00b7 Minnesota"},{"name":"Wang Yi","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Chinese Foreign Minister most active Chinese diplomat in Latin America overseeing BRI expansion Nicaragua Panama Ecuador","role":"Foreign Minister \u00b7 China"},{"name":"Mark Warner","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Virginia"},{"name":"Raphael Warnock","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3 DEDUP also in Campaign","role":"Senator \u00b7 Georgia"},{"name":"Elizabeth Warren","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Massachusetts"},{"name":"Maxine Waters","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Congresswoman \u00b7 California"},{"name":"Jesse Watters","bucket":"Legacy Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3","role":"Host \u00b7 Fox News Jesse Watters Primetime","fourth_estate":true},{"name":"Alice Weidel","bucket":"EU Institutions","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 5 - AfD","role":"AfD Leader \u00b7 Germany"},{"name":"Bari Weiss","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - The Free Press","role":"Founder \u00b7 The Free Press","fourth_estate":true},{"name":"Ai Weiwei","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Artist & Dissident \u00b7 China","fourth_estate":false},{"name":"Dave Weldon","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"CDC Director Vol 3","role":"Former CDC Director Nominee \u00b7 US"},{"name":"Ko Wen-je","bucket":"Indo-Pacific","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Taiwan TPP imprisoned","role":"TPP Leader \u00b7 Taiwan"},{"name":"Cornel West","bucket":"Third Party / Outsider","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 4 - move from Indie Media","role":"Presidential Candidate \u00b7 Justice for All Party"},{"name":"Kanye West","bucket":"Wildcard Editorial","position":"WLD","tier":5,"action":"ACTIVE","notes":"Vol 5","role":"Rapper & Designer \u00b7 US","fourth_estate":false},{"name":"Les Wexner","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4 - Bath Body Works L Brands founder Epstein primary client 20 years gave Epstein sweeping powers over finances FBI listed as potential co-conspirator Feb 2026 Khanna revelation deposed by Congress","role":"Founder \u00b7 L Brands"},{"name":"Michael Whatley","bucket":"US Campaign","position":"WLD","tier":2,"action":"ACTIVE","notes":"RNC Chair Vol 2","role":"RNC Chair \u00b7 US","fourth_estate":false},{"name":"Royce White","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - former NBA player running Republican MN Senate","role":"Republican Candidate \u00b7 Minnesota"},{"name":"Sheldon Whitehouse","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Rhode Island"},{"name":"Gretchen Whitmer","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Governor \u00b7 Michigan"},{"name":"Ben Wikler","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Wisconsin Dem chair pivotal state","role":"Chair \u00b7 Wisconsin Democratic Party","fourth_estate":false},{"name":"Geert Wilders","bucket":"EU Institutions","position":"OPP","tier":4,"action":"ACTIVE","notes":"Vol 4 - Netherlands far right won 2023 election","role":"PVV Leader \u00b7 Netherlands"},{"name":"Susie Wiles","bucket":"US Executive","position":"HoS","tier":1,"action":"ACTIVE","notes":"Chief of Staff Vol 3","role":"White House Chief of Staff \u00b7 US"},{"name":"George Will","bucket":"Legacy Media","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Columnist \u00b7 Washington Post","fourth_estate":true},{"name":"Marianne Williamson","bucket":"US Campaign","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - ran for president still active","role":"Author & Activist \u00b7 US"},{"name":"Rick Wilson","sort_name":"Wilson, Rick","position":"WLD","bucket":"Political Commentator","tier":3,"role":"Co-founder \u00b7 The Lincoln Project","fourth_estate":false,"notes":"Lincoln Project co-founder Never-Trump Republican strategist author Everything Trump Touches Dies vocal anti-MAGA blogger","action":"ACTIVE"},{"name":"Joshua Wong","bucket":"Activist / Advocate","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"Pro-Democracy Activist \u00b7 Hong Kong","fourth_estate":false},{"name":"Penny Wong","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - Australian Foreign Minister","role":"Foreign Minister \u00b7 Australia"},{"name":"Chris Wright","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"Energy Vol 2","role":"Secretary of Energy \u00b7 US"},{"name":"Joseph Wu","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - former Taiwan Foreign Minister now Secretary-General of National Security Council still relevant","role":"Former Foreign Minister \u00b7 Taiwan"},{"name":"Ron Wyden","bucket":"US Legislature","position":"LEG","tier":2,"action":"ACTIVE","notes":"Vol 3","role":"Senator \u00b7 Oregon"},{"name":"Xi Jinping","bucket":"Indo-Pacific","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5","role":"President & General Secretary \u00b7 China"},{"name":"Andrew Yang","bucket":"Third Party / Outsider","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Forward Party","role":"Founder \u00b7 Forward Party"},{"name":"Andriy Yermak","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - Ukrainian presidential chief of staff Zelenskys right hand most powerful figure in Ukraine after Zelensky","role":"Chief of Staff \u00b7 Ukrainian Presidency","fourth_estate":false},{"name":"Glenn Youngkin","bucket":"US Governor","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2","role":"Governor \u00b7 Virginia"},{"name":"Alexander Yui","bucket":"Indo-Pacific","position":"WLD","tier":2,"action":"ACTIVE","notes":"Vol 2 - Taiwan representative to the US replaced Hsiao Bi-khim","role":"Minister of Foreign Affairs \u00b7 Taiwan","fourth_estate":false},{"name":"Valery Zaluzhny","bucket":"Military / Security","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - former Ukrainian commander now UK ambassador","role":"Ukrainian Ambassador \u00b7 UK","fourth_estate":false},{"name":"El Mayo Zambada","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - Sinaloa cartel co-founder dramatically captured lured to US July 2024 historic story in US custody awaiting trial","role":"Co-founder \u00b7 Sinaloa Cartel","fourth_estate":false},{"name":"Bilawal Bhutto Zardari","bucket":"Indo-Pacific","position":"OPP","tier":3,"action":"ACTIVE","notes":"Vol 3 - Pakistani opposition","role":"PPP Chairman \u00b7 Pakistan"},{"name":"David Zaslav","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 3 - Warner Bros Discovery CEO gutting CNN media consolidation power","role":"CEO \u00b7 Warner Bros. Discovery"},{"name":"Mohamed bin Zayed","bucket":"Middle East","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 3 - UAE","role":"President \u00b7 UAE"},{"name":"Peter Zeihan","bucket":"Independent Media","position":"WLD","tier":3,"action":"ACTIVE","notes":"Vol 3 - geopolitical analyst author massive YouTube audience","role":"Geopolitical Analyst \u00b7 Zeihan on Geopolitics","fourth_estate":true},{"name":"Lee Zeldin","bucket":"US Agencies","position":"HoS","tier":2,"action":"ACTIVE","notes":"EPA - likely next AG Vol 4","role":"EPA Administrator \u00b7 US"},{"name":"Volodymyr Zelensky","bucket":"NATO / G7","position":"HoS","tier":1,"action":"ACTIVE","notes":"Vol 5 - war NATO aspirant","role":"President \u00b7 Ukraine"},{"name":"Zooey Zephyr","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 4 - MT trans state rep removed from House floor nationally viral landmark civil rights moment","role":"Montana State Representative","fourth_estate":false},{"name":"Zhao Leji","bucket":"Indo-Pacific","position":"HoS","tier":2,"action":"ACTIVE","notes":"Vol 2 - Chinese NPC chair","role":"NPC Chairman \u00b7 China"},{"name":"Mark Zuckerberg","bucket":"Business / Donor","position":"WBR","tier":3,"action":"ACTIVE","notes":"Vol 4","role":"CEO \u00b7 Meta"},{"name":"Juan Jose Zuniga","bucket":"Wildcard Editorial","position":"WLD","tier":4,"action":"ACTIVE","notes":"Vol 3 - Bolivian general led failed coup attempt against Arce 2024 now imprisoned extraordinary story tanks in plaza","role":"Former Army Commander \u00b7 Bolivia","fourth_estate":false}];
+
+const POSITIONS = ['HoS','LEG','OPP','WBR','WLD'];
+const POS_LABELS = {
+  HoS:'Head of State', LEG:'Legislator',
+  OPP:'Opposition', WBR:'World Body',
+  WLD:'Kibitzers & Criers'
+};
+const TIER_VOL = {1:'V.High',2:'High',3:'Med',4:'Low',5:'V.Low'};
+
+// Squad state — 2 slots per position
+let squad = {
+  HoS:[null,null], LEG:[null,null], OPP:[null,null],
+  WBR:[null,null], WLD:[null,null]
+};
+
+let activePos = 'ALL';
+let activeBucket = 'ALL';
+let searchQ = '';
+
+// ── RENDER FIGURE LIST ──
+function renderList() {
+  const list = document.getElementById('figure-list');
+  const q = searchQ.toLowerCase();
+  const inSquad = new Set(
+    Object.values(squad).flat().filter(Boolean).map(f=>f.name)
+  );
+
+  const filtered = FIGURES.filter(f => {
+    if (activePos === 'ALL' && f.position === 'WLD') return false;
+    if (activePos !== 'ALL' && f.position !== activePos) return false;
+    if (activeBucket !== 'ALL' && f.bucket !== activeBucket) return false;
+    if (q && !f.name.toLowerCase().includes(q) &&
+        !f.bucket.toLowerCase().includes(q) &&
+        !(f.role && f.role.toLowerCase().includes(q))) return false;
+    return true;
+  });
+
+  document.getElementById('vis-count').textContent = filtered.length;
+  const wldEl = document.getElementById('wld-count');
+  if (wldEl) {
+    const wt = FIGURES.filter(f=>f.position==='WLD').length;
+    const fe = FIGURES.filter(f=>f.position==='WLD'&&f.fourth_estate).length;
+    wldEl.textContent = wt + ' kibitzers · ' + fe + ' fourth estate';
+  }
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="no-results">No figures match your filters</div>';
+    return;
+  }
+
+  const feCount = filtered.filter(f=>f.fourth_estate).length;
+  const kCount  = filtered.filter(f=>!f.fourth_estate).length;
+  const header  = activePos === 'WLD'
+    ? `<div class="wld-header">
+        <div class="wld-header-title">Kibitzers &amp; Criers &amp; Fourth Estate · ${filtered.length} figures</div>
+        <div class="wld-header-sub">Sidelined, volatile, dangerous. Press, bloggers, and personalities who move narratives.</div>
+        <div style="display:flex;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;margin-top:4px">
+          <span style="color:var(--gold)">${feCount} Fourth Estate · 2×</span>
+          <span style="color:rgba(237,232,220,0.5)">${kCount} Kibitzers &amp; Criers · 1.5×</span>
+        </div>
+       </div>` : '';
+
+  list.innerHTML = header + filtered.map(f => {
+    const isIn = inSquad.has(f.name);
+    const isWld = f.position === 'WLD';
+    const cls = ['fig-item', isIn?'in-squad':'', isWld?'wld-fig':''].filter(Boolean).join(' ');
+    // Store name safely as data attribute — NO index, NO escaping issues
+    const safeName = f.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    const multBadge = f.fourth_estate
+      ? `<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.08em;color:var(--gold);border:1px solid rgba(232,160,32,0.35);padding:1px 5px;flex-shrink:0">2×</span>`
+      : isWld
+        ? `<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.08em;color:rgba(232,160,32,0.6);border:1px solid rgba(232,160,32,0.2);padding:1px 5px;flex-shrink:0">1.5×</span>`
+        : '';
+    const action = isIn
+      ? '<div class="fig-action" style="color:var(--red);border-color:rgba(184,36,42,0.5)">✕ remove</div>'
+      : '<div class="fig-action">+ add</div>';
+    return `<div class="${cls}" data-fig-name="${safeName}" data-fig-pos="${f.position}" onclick="toggleFig(this)">
+      <div class="fig-pos-badge ${f.position}">${f.position}</div>
+      <div class="fig-info">
+        <div class="fig-name">${f.name}</div>
+        <div class="fig-role">${f.role||f.bucket}</div>
+      </div>
+      ${multBadge}
+      <div class="fig-tier t${f.tier}">T${f.tier}</div>
+      ${action}
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER SQUAD PANEL ──
+function renderSquad() {
+  const el = document.getElementById('squad-slots');
+  const inSquad = Object.values(squad).flat().filter(Boolean);
+  const filled = inSquad.length;
+  const remaining = 10 - filled;
+
+  let html = '';
+  for (const pos of POSITIONS) {
+    const isWld = pos === 'WLD';
+    const slots = squad[pos];
+    const filledCount = slots.filter(Boolean).length;
+    const groupCls = isWld ? 'pos-group wld-group' : 'pos-group';
+    const countCls = filledCount === 2 ? 'pg-count full' : 'pg-count';
+
+    html += `<div class="${groupCls}">
+      <div class="pos-group-head">
+        <div class="pg-code">${pos}</div>
+        <div class="pg-name">${POS_LABELS[pos]}${isWld?' · 1.5×':''}</div>
+        <div class="${countCls}">${filledCount}/2</div>
+      </div>`;
+
+    for (let i = 0; i < 2; i++) {
+      const fig = slots[i];
+      if (fig) {
+        const slotCls = isWld ? 'squad-slot wld-filled' : 'squad-slot filled';
+        const multNote = fig.fourth_estate
+          ? '<span class="mult-tag" style="background:var(--gold)">2×</span>'
+          : isWld ? '<span class="mult-tag">1.5×</span>' : '';
+        // Encode name for data attribute
+        const safeName = fig.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+        html += `<div class="${slotCls}">
+          <div class="ss-pos">${pos}</div>
+          <div class="ss-body">
+            <div class="ss-name">${fig.name} ${multNote}</div>
+            <div class="ss-role">${fig.role||fig.bucket} · ${TIER_VOL[fig.tier]}</div>
+          </div>
+          <div class="ss-right">
+            <div class="ss-pts">—</div>
+            <div class="ss-remove" title="Remove ${fig.name}" onclick="removeFig(event,'${pos}',${i})">×</div>
+          </div>
+        </div>`;
+      } else {
+        html += `<div class="squad-slot empty" onclick="setFilter('${pos}')">
+          <div class="ss-pos">${pos}</div>
+          <div class="ss-body">
+            <div class="ss-name">— pick a ${POS_LABELS[pos].toLowerCase()} —</div>
+          </div>
+          <div class="ss-right"><div class="ss-pts">—</div></div>
+        </div>`;
+      }
+    }
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+  document.getElementById('squad-total').textContent = '0 pts';
+  document.getElementById('slots-left').textContent =
+    remaining === 0 ? 'Squad complete — lock it in' :
+    `${remaining} slot${remaining===1?'':'s'} to fill`;
+  document.getElementById('submit-btn').disabled = filled < 10;
+  renderList();
+}
+
+// ── TOGGLE FIGURE — click in catalog to add or remove ──
+function toggleFig(el) {
+  const name = el.getAttribute('data-fig-name');
+  const pos  = el.getAttribute('data-fig-pos');
+  if (!name || !pos) return;
+
+  // Check if already in squad anywhere — remove it
+  for (const p of POSITIONS) {
+    for (let i = 0; i < squad[p].length; i++) {
+      if (squad[p][i] && squad[p][i].name === name) {
+        squad[p][i] = null;
+        renderSquad();
+        return;
+      }
+    }
+  }
+
+  // Not in squad — find the figure and add it
+  const fig = FIGURES.find(f => f.name === name);
+  if (!fig) return;
+
+  const slots = squad[pos];
+
+  // Find empty slot
+  const emptyIdx = slots.findIndex(s => s === null);
+  if (emptyIdx !== -1) {
+    slots[emptyIdx] = fig;
+    renderSquad();
+    return;
+  }
+
+  // Both slots full — replace slot 0 silently
+  // (clicking the displaced figure re-adds it)
+  slots[0] = fig;
+  renderSquad();
+}
+
+// ── REMOVE FROM SQUAD PANEL × BUTTON ──
+function removeFig(e, pos, slotIdx) {
+  e.stopPropagation();
+  squad[pos][slotIdx] = null;
+  renderSquad();
+}
+
+// ── SET POSITION FILTER ──
+function setFilter(pos) {
+  activePos = pos;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active',
+      b.dataset.pos === pos ||
+      (pos === 'WLD' && b.id === 'wld-btn') ||
+      (pos === 'ALL' && b.dataset.pos === 'ALL')
+    );
+  });
+  renderList();
+}
+
+// ── SUBMIT SQUAD ──
+function submitSquad() {
+  const filled = Object.values(squad).flat().filter(Boolean);
+  if (filled.length < 10) return;
+  const save = {};
+  for (const pos of POSITIONS) save[pos] = squad[pos];
+  save.savedAt = new Date().toISOString();
+  localStorage.setItem('pp_squad', JSON.stringify(save));
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = '✓ Squad Locked';
+  btn.style.background = '#1a6e45';
+  btn.disabled = true;
+  document.getElementById('slots-left').textContent =
+    'Squad locked — view your score on the Sweep page';
+  setTimeout(() => {
+    if (confirm('Squad saved! View your live score on the Sweep page?'))
+      window.location.href = 'sweep.html';
+  }, 300);
+}
+
+// ── EVENT LISTENERS ──
+document.getElementById('search').addEventListener('input', e => {
+  searchQ = e.target.value; renderList();
+});
+document.getElementById('pos-filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  setFilter(btn.dataset.pos);
+});
+document.getElementById('wld-btn').addEventListener('click', () => setFilter('WLD'));
+document.getElementById('bucket-filter').addEventListener('change', e => {
+  activeBucket = e.target.value; renderList();
+});
+
+// ── INIT ──
+renderSquad();
+
+
+
+// ── POLITIPLAY TICKER ENGINE ──
+// Red background always. Text color via CSS class:
+//   clr-white = news events (default)
+//   clr-gold  = rules
+//   clr-blue  = status
+const PP_TICKER = [
+  { cls:'clr-white', speed:'normal',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;BREAKING: TRUMP SIGNS TRADE EXECUTIVE ORDER &nbsp;·&nbsp; HoS +14 PTS &nbsp;&nbsp;|&nbsp;&nbsp; JEFFRIES FLOOR RESPONSE &nbsp;·&nbsp; LEG +9 PTS &nbsp;&nbsp;|&nbsp;&nbsp; UN SECURITY COUNCIL EMERGENCY SESSION &nbsp;·&nbsp; WBR +11 PTS &nbsp;&nbsp;|&nbsp;&nbsp; STARMER FILES NO-CONFIDENCE MOTION &nbsp;·&nbsp; OPP +12 PTS &nbsp;&nbsp;|&nbsp;&nbsp; POWELL WARNS ON TARIFF INFLATION &nbsp;·&nbsp; WLD +10 PTS &nbsp;&nbsp;|&nbsp;&nbsp; WEEK 1 · 847 PLAYERS · CLOSES SUNDAY 23:59 &nbsp;&nbsp;' },
+  { cls:'clr-blue', speed:'medium',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· WEEK 1 SWEEP NOW OPEN · 847 PLAYERS ACTIVE · TOP SCORE: 214 PTS · SWAP CLOSES FRIDAY MIDNIGHT · 750+ PUBLIC FIGURES IN THE CATALOG · DRAFT OPTIONAL · WATCHING ALWAYS WELCOME · &nbsp;&nbsp;' },
+  { cls:'clr-gold', speed:'slow',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE I · Every week a Sweep opens. It closes Sunday at midnight. Your squad scores points. The highest score at your table wins. &nbsp;&nbsp;&nbsp;&nbsp;· RULE II · Draft ten public figures into five positions — HoS, LEG, OPP, WBR, WLD. Two per slot. No repeats. &nbsp;&nbsp;&nbsp;&nbsp;· RULE III · When your figures drive headlines, you score. Every point sourced, verified, and linked. &nbsp;&nbsp;' },
+  { cls:'clr-white', speed:'normal',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;SHEINBAUM COUNTER-TARIFF MEASURES &nbsp;·&nbsp; HoS +8 PTS &nbsp;&nbsp;|&nbsp;&nbsp; LE PEN CONVICTION UPHELD &nbsp;·&nbsp; OPP +13 PTS &nbsp;&nbsp;|&nbsp;&nbsp; FEDERAL RESERVE HOLDS RATES &nbsp;·&nbsp; WBR +10 PTS &nbsp;&nbsp;|&nbsp;&nbsp; BANNON RESURFACES IN SENATE HEARING &nbsp;·&nbsp; WLD +9 PTS &nbsp;&nbsp;|&nbsp;&nbsp; XI RETALIATORY TARIFF &nbsp;·&nbsp; HoS +15 PTS &nbsp;&nbsp;' },
+  { cls:'clr-gold', speed:'slow',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE IV · Kibitzers are the formerly powerful whose opinions still carry weight. Criers carry unpredictable consequence. Fourth Estate earns 2×. All WLD earns at least 1.5×. &nbsp;&nbsp;&nbsp;&nbsp;· RULE V · The more players at your table who draft the same figure, the less that figure scores. The game is won in the picks others missed. &nbsp;&nbsp;' },
+  { cls:'clr-blue', speed:'medium',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· YOUR POLITICAL INSTINCTS · TESTED WEEKLY · RANKED AGAINST THE ROOM · FREE TO PLAY · 750+ PUBLIC FIGURES · WORLD LEADERS · POWER BROKERS · KIBITZERS · CRIERS · FOURTH ESTATE · &nbsp;&nbsp;' },
+  { cls:'clr-white', speed:'normal',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;MODI BILATERAL TRADE DEAL SIGNED &nbsp;·&nbsp; HoS +11 PTS &nbsp;&nbsp;|&nbsp;&nbsp; AOC FLOOR SPEECH GOES VIRAL &nbsp;·&nbsp; LEG +8 PTS &nbsp;&nbsp;|&nbsp;&nbsp; GHISLAINE MAXWELL NAMES NAMES IN COURT FILING &nbsp;·&nbsp; WLD +18 PTS &nbsp;&nbsp;|&nbsp;&nbsp; MILEI PESO DEVALUATION &nbsp;·&nbsp; HoS +14 PTS &nbsp;&nbsp;|&nbsp;&nbsp; NATO EMERGENCY SUMMIT &nbsp;·&nbsp; WBR +13 PTS &nbsp;&nbsp;' },
+  { cls:'clr-gold', speed:'slow',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE VII · One swap per Sweep. Closes Friday midnight. After that your roster is locked until Sunday. The biggest news usually breaks when you can no longer do anything about it. &nbsp;&nbsp;&nbsp;&nbsp;· RULE X · The score is the truth. Learn to read the room better than the nine people at your table. &nbsp;&nbsp;' },
+];
+let _ppIdx=0,_ppTimer=null;
+function ppRunTicker(idx){
+  const seg=PP_TICKER[idx];
+  const inner=document.getElementById('ticker-content');
+  if(!inner)return;
+  // Clear classes, set new content, restart animation
+  inner.className='ticker-inner speed-'+seg.speed+' '+seg.cls;
+  inner.innerHTML=seg.text+'&nbsp;&nbsp;&nbsp;&nbsp;'+seg.text;
+  // Force animation restart
+  inner.style.animation='none';
+  void inner.offsetWidth;
+  inner.style.animation='';
+  const dur={normal:40000,medium:50000,slow:65000}[seg.speed]||45000;
+  clearTimeout(_ppTimer);
+  _ppTimer=setTimeout(function(){
+    _ppIdx=(_ppIdx+1)%PP_TICKER.length;
+    ppRunTicker(_ppIdx);
+  },dur);
+}
+document.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){ppRunTicker(0);},150);
+});
+
+
+function ppSignup(e, successId) {
+  e.preventDefault();
+  const form = e.target;
+  fetch('/', {
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).finally(function(){
+    form.style.display = 'none';
+    const el = document.getElementById(successId);
+    if (el) el.style.display = 'block';
+  });
+}
+
+// ── COUNTDOWN ──
+function ppCountdown(elementId, targetDate) {
+  function update() {
+    const diff = targetDate - new Date();
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    if (diff <= 0) { el.textContent = 'Closed'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const pad = n => String(n).padStart(2,'0');
+    el.textContent = d > 0
+      ? d+'d '+pad(h)+':'+pad(m)+':'+pad(s)
+      : pad(h)+':'+pad(m)+':'+pad(s);
+  }
+  update();
+  setInterval(update, 1000);
+}
+function ppNextSunday() {
+  const now = new Date(), day = now.getDay();
+  const next = new Date(now);
+  next.setDate(now.getDate() + (day === 0 ? 7 : 7 - day));
+  next.setHours(23,59,0,0);
+  return next;
+}
+function ppNextFriday() {
+  const now = new Date(), day = now.getDay();
+  const daysUntil = day <= 5 ? 5 - day : 7 - (day - 5);
+  const next = new Date(now);
+  next.setDate(now.getDate() + (daysUntil === 0 ? 7 : daysUntil));
+  next.setHours(23,59,0,0);
+  return next;
+}
+
+// ── COUNTDOWN ──
+function ppCountdown(elementId, targetDate) {
+  function update() {
+    const diff = targetDate - new Date();
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    if (diff <= 0) { el.textContent = 'Closed'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const pad = n => String(n).padStart(2,'0');
+    el.textContent = d > 0 ? d+'d '+pad(h)+':'+pad(m)+':'+pad(s) : pad(h)+':'+pad(m)+':'+pad(s);
+  }
+  update();
+  setInterval(update, 1000);
+}
+function ppNextSunday() {
+  const now = new Date(), day = now.getDay();
+  const next = new Date(now);
+  next.setDate(now.getDate() + (day === 0 ? 7 : 7 - day));
+  next.setHours(23,59,0,0);
+  return next;
+}
+function ppNextFriday() {
+  const now = new Date(), day = now.getDay();
+  const daysUntil = day <= 5 ? 5 - day : 7 - (day - 5);
+  const next = new Date(now);
+  next.setDate(now.getDate() + (daysUntil === 0 ? 7 : daysUntil));
+  next.setHours(23,59,0,0);
+  return next;
+}
+
+ppCountdown('swap-countdown', ppNextFriday());
+</script>
+</body>
+</html>

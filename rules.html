@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rules · Politiplay</title>
+<meta name="description" content="The ten rules of Politiplay. Read them once. You'll know the game.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POLITIPLAY SHARED DESIGN SYSTEM
+   All pages import this via <style> block
+   ============================================================ */
+
+/* RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* TOKENS */
+:root{
+  --red:#b8242a;
+  --red-dim:rgba(184,36,42,0.12);
+  --red-border:rgba(184,36,42,0.3);
+  --gold:#e8a020;
+  --gold-dim:rgba(232,160,32,0.1);
+  --ink:#111318;
+  --ink-mid:#1a1d24;
+  --ivory:#ede8dc;
+  --gray1:#6e6a60;
+  --gray2:#9e9a8e;
+  --gray3:#b8b4a8;
+  --gray4:#ccc8bc;
+  --surface:rgba(237,232,220,0.06);
+  --surface-hover:rgba(237,232,220,0.09);
+  --border:rgba(237,232,220,0.1);
+  --border-strong:rgba(237,232,220,0.18);
+  --navy:#1a2744;
+  --amber-dark:#7a5200;
+}
+
+body{
+  background:var(--ink);
+  color:var(--ivory);
+  font-family:'Source Serif 4',serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* SCANLINE */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 3px,
+    rgba(0,0,0,0.05) 3px,rgba(0,0,0,0.05) 4px
+  );
+  pointer-events:none;z-index:200;
+}
+
+/* ── TICKER ── */
+.ticker-wrap{display:block;width:100%;position:relative;z-index:50;overflow:hidden}
+.ticker{
+  display:block;width:100%;
+  padding:7px 0;
+  overflow:hidden;white-space:nowrap;
+  background:#b8242a;
+  min-height:30px;
+}
+.ticker-inner{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;
+  color:#ffffff;
+  will-change:transform;
+}
+.ticker-inner.speed-normal{animation:pp-tick 40s linear infinite}
+.ticker-inner.speed-slow{animation:pp-tick 65s linear infinite}
+.ticker-inner.speed-medium{animation:pp-tick 50s linear infinite}
+.ticker-inner.clr-gold{color:#f0c060 !important}
+.ticker-inner.clr-blue{color:#c8e0f4 !important}
+.ticker-inner.clr-white{color:#ffffff !important}
+@keyframes pp-tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}100%{transform:translateX(-50%)}}100%{transform:translateX(-50%)}}100%{transform:translateX(-50%)}}
+
+/* ── NAV ── */
+.site-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  border-bottom:1px solid var(--border);
+  position:relative;z-index:40;
+  background:var(--ink);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:900;
+  color:var(--ivory);text-decoration:none;
+  flex-shrink:0;
+}
+.nav-logo em{font-style:italic;color:var(--red)}
+.nav-links{
+  display:flex;gap:6px;align-items:center;
+  flex-wrap:wrap;
+}
+.nav-link{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gray3);text-decoration:none;
+  padding:7px 12px;
+  transition:color 0.15s;
+  white-space:nowrap;
+}
+.nav-link:hover{color:var(--ivory)}
+.nav-link.active{color:var(--red)}
+.nav-cta{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--red);color:#fff;
+  padding:9px 18px;text-decoration:none;
+  transition:background 0.15s;white-space:nowrap;
+}
+.nav-cta:hover{background:#9e1e23}
+.nav-live{
+  display:flex;align-items:center;gap:5px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;
+  color:var(--red);text-transform:uppercase;
+  flex-shrink:0;
+}
+.live-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--red);
+  animation:pp-blink 1.4s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes pp-blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* ── POSITION CODE BADGES ── */
+.pos-badge{
+  display:inline-block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:600;letter-spacing:0.1em;
+  padding:2px 7px;color:#fff;
+  flex-shrink:0;vertical-align:middle;
+}
+.pos-badge.HoS{background:rgba(184,36,42,0.85)}
+.pos-badge.LEG{background:rgba(26,82,150,0.85)}
+.pos-badge.OPP{background:rgba(60,130,60,0.85)}
+.pos-badge.WBR{background:rgba(110,70,150,0.85)}
+.pos-badge.WLD{background:rgba(200,120,20,0.85)}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--red);
+  margin-bottom:12px;padding-bottom:8px;
+  border-bottom:1px solid var(--red-border);
+}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  display:inline-block;
+  background:var(--red);color:#fff;border:none;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;
+  padding:13px 24px;cursor:pointer;text-decoration:none;
+  transition:background 0.15s;
+}
+.btn-primary:hover{background:#9e1e23}
+.btn-primary:disabled{background:var(--red-dim);color:var(--gray2);cursor:default}
+.btn-ghost{
+  display:inline-block;
+  background:transparent;color:var(--gray3);
+  border:1px solid var(--border-strong);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding:10px 16px;cursor:pointer;text-decoration:none;
+  transition:all 0.15s;
+}
+.btn-ghost:hover{color:var(--ivory);border-color:rgba(237,232,220,0.35)}
+
+/* ── SIGNUP FORM ── */
+.signup-row{display:flex;gap:0;max-width:460px}
+.signup-input{
+  flex:1;
+  background:rgba(237,232,220,0.08);
+  border:1px solid rgba(237,232,220,0.2);border-right:none;
+  color:var(--ivory);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;letter-spacing:0.03em;
+  padding:13px 16px;outline:none;
+  transition:border-color 0.15s;
+}
+.signup-input::placeholder{color:var(--gray2)}
+.signup-input:focus{border-color:rgba(184,36,42,0.6)}
+.signup-success{
+  display:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;letter-spacing:0.08em;
+  color:var(--ivory);padding:14px 0;
+}
+
+/* ── FOOTER ── */
+.site-footer{
+  border-top:2px solid var(--border);
+  padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:2;
+  flex-wrap:wrap;gap:10px;
+}
+.footer-copy{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;color:var(--gray2);
+}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;
+  color:var(--gray2);text-decoration:none;
+}
+.footer-links a:hover{color:var(--gray4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .site-nav{padding:10px 16px}
+  .nav-links .nav-link{padding:6px 8px;font-size:10px;letter-spacing:0.08em}
+  .site-footer{padding:12px 16px;flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .signup-row{flex-direction:column}
+  .signup-row .btn-primary{width:100%}
+}
+
+
+.rules-page{
+  max-width:780px;margin:0 auto;
+  padding:64px 40px 80px;
+  position:relative;z-index:2;
+}
+.rules-masthead{
+  text-align:center;
+  padding-bottom:40px;
+  border-bottom:3px solid var(--ivory);
+  margin-bottom:48px;
+}
+.rules-vol{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:600;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--red);
+  margin-bottom:14px;
+}
+.rules-title{
+  font-family:'Playfair Display',serif;
+  font-size:64px;font-weight:900;line-height:1;
+  color:var(--ivory);letter-spacing:-0.02em;
+  margin-bottom:8px;
+}
+.rules-sub{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-style:italic;
+  color:var(--gray3);
+}
+.rules-rule-double{
+  border-top:3px solid var(--ivory);
+  border-bottom:1px solid var(--ivory);
+  height:5px;margin:16px 0 0;
+}
+
+.commandment{
+  padding:32px 0;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:56px 1fr;
+  gap:0 24px;
+  align-items:start;
+}
+.commandment:last-child{border-bottom:none}
+.cmd-num{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:900;font-style:italic;
+  color:rgba(184,36,42,0.25);
+  line-height:1;
+  padding-top:4px;
+}
+.cmd-body{}
+.cmd-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--red);
+  margin-bottom:8px;
+}
+.cmd-text{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;
+  line-height:1.4;color:var(--ivory);
+  margin-bottom:10px;
+}
+.cmd-note{
+  font-size:14px;color:var(--gray3);
+  line-height:1.7;
+  border-left:2px solid var(--red-border);
+  padding-left:14px;
+}
+.cmd-note strong{color:var(--ivory);font-weight:600}
+.cmd-note em{color:var(--gold);font-style:italic}
+
+.rules-cta{
+  text-align:center;
+  padding:48px 0 0;
+  border-top:3px solid var(--ivory);
+  margin-top:48px;
+}
+.rules-cta-hed{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;
+  color:var(--ivory);margin-bottom:10px;
+}
+.rules-cta-hed em{font-style:italic;color:var(--red)}
+.rules-cta-sub{
+  font-size:15px;color:var(--gray3);
+  margin-bottom:24px;line-height:1.6;
+}
+.rules-links{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+}
+
+@media(max-width:600px){
+  .rules-page{padding:40px 20px 60px}
+  .rules-title{font-size:44px}
+  .commandment{grid-template-columns:42px 1fr;gap:0 16px}
+  .cmd-num{font-size:36px}
+  .cmd-text{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap" aria-label="Live scoring feed and game rules">
+  <div class="ticker mode-news" id="ticker-display">
+    <span class="ticker-inner speed-normal" id="ticker-content">
+      &nbsp;&nbsp;&nbsp;&nbsp;WEEK 1 SWEEP OPEN &nbsp;·&nbsp; TRUMP EXECUTIVE ORDER · HoS +14 PTS &nbsp;·&nbsp; JEFFRIES FLOOR ADDRESS · LEG +9 PTS &nbsp;·&nbsp; STARMER NO-CONFIDENCE · OPP +12 PTS &nbsp;·&nbsp; UN SECURITY COUNCIL · WBR +11 PTS &nbsp;·&nbsp; SWEEP CLOSES SUNDAY 23:59 &nbsp;&nbsp;|&nbsp;&nbsp; WEEK 1 SWEEP OPEN &nbsp;·&nbsp; TRUMP EXECUTIVE ORDER · HoS +14 PTS &nbsp;·&nbsp; JEFFRIES FLOOR ADDRESS · LEG +9 PTS &nbsp;·&nbsp; STARMER NO-CONFIDENCE · OPP +12 PTS &nbsp;·&nbsp; UN SECURITY COUNCIL · WBR +11 PTS &nbsp;·&nbsp; SWEEP CLOSES SUNDAY 23:59 &nbsp;&nbsp;
+    </span>
+  </div>
+</div>
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">Politi<em>Play</em></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="draft.html" class="nav-link">Draft</a>
+    <a href="sweep.html" class="nav-link">Live Sweep</a>
+    <a href="how-to-play.html" class="nav-link">How To Play</a>
+    <a href="rules.html" class="nav-link active">Rules</a>
+    <a href="index.html#signup" class="nav-cta">Sign Up →</a>
+  </div>
+  <div class="nav-live"><div class="live-dot"></div><span>Sweep Live</span></div>
+</nav>
+
+<div class="rules-page">
+
+  <div class="rules-masthead">
+    <div class="rules-vol">// Official Rules · Version 1.0</div>
+    <div class="rules-title">Politi<span style="font-style:italic;color:var(--red)">Play</span></div>
+    <div class="rules-sub">Read them once. You'll know the game.</div>
+    <div class="rules-rule-double"></div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">I</div>
+    <div class="cmd-body">
+      <div class="cmd-label">The Sweep</div>
+      <div class="cmd-text">Every week a Sweep opens. It closes Sunday at midnight. Your squad scores points. The highest score at your table wins.</div>
+      <div class="cmd-note">A new draft opens while the current Sweep is still scoring. Build next week's squad any time before Friday midnight — or just watch this week's board move. <strong>Wednesday through Sunday is scoring time. Wednesday through Friday is draft and swap time.</strong></div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">II</div>
+    <div class="cmd-body">
+      <div class="cmd-label">The Squad</div>
+      <div class="cmd-text">Draft ten real political figures. Two from each position — HoS, LEG, OPP, WBR, WLD. One figure per slot. No repeats.</div>
+      <div class="cmd-note"><strong>HoS</strong> = Head of State · <strong>LEG</strong> = Legislator · <strong>OPP</strong> = Opposition · <strong>WBR</strong> = World Body · <strong>WLD</strong> = Kibitzers &amp; Criers. See <a href="how-to-play.html" style="color:var(--red)">How To Play</a> for the full position guide.</div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">III</div>
+    <div class="cmd-body">
+      <div class="cmd-label">Scoring</div>
+      <div class="cmd-text">When your figures drive headlines, you score. Bigger headlines, more points. Every score is sourced, verified, and linked. Click any event to see the evidence.</div>
+      <div class="cmd-note">Points are awarded based on news cycle impact — volume, velocity, and reach. A figure scores on <strong>every event that touches them</strong> during the Sweep, regardless of which role they acted in. A head of state who also moves markets scores twice.</div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">IV</div>
+    <div class="cmd-body">
+      <div class="cmd-label">Kibitzers &amp; Criers</div>
+      <div class="cmd-text">Your two Wildcard slots belong to the Kibitzers and Criers. Both earn 1.5× on every point scored. The news decides which one matters this week.</div>
+      <div class="cmd-note"><em>Kibitzers</em> are the formerly powerful whose opinions still carry weight — the exiled, the sidelined, the influential who move rooms from outside them. <em>Criers</em> carry less institutional weight but unpredictable consequence — they can go from irrelevant to unavoidable overnight. Both are volatile. Both are dangerous.</div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">V</div>
+    <div class="cmd-body">
+      <div class="cmd-label">The Ownership Rule</div>
+      <div class="cmd-text">The more players at your table who draft the same figure, the less that figure scores for all of them. The game is won in the picks others missed.</div>
+      <div class="cmd-note">Ownership dilution applies <strong>per table</strong>, not globally. A figure owned by 80% of your table scores at 68% of base value for those players. A figure only you drafted scores at full value. <strong>Consensus is taxed. Contrarian insight is rewarded.</strong></div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">VI</div>
+    <div class="cmd-body">
+      <div class="cmd-label">Your Table</div>
+      <div class="cmd-text">You compete at a table of ten. Not against the world — against nine people who think they read the room just as well as you do.</div>
+      <div class="cmd-note">Your squad is <strong>private until the Sweep opens</strong>. Once scoring begins, all ten squads at your table are fully visible to everyone. Watch what your opponents drafted. Watch who's scoring. The table chat is open. That's the game.</div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">VII</div>
+    <div class="cmd-body">
+      <div class="cmd-label">The Swap</div>
+      <div class="cmd-text">You get one swap per Sweep. The swap window closes Friday at midnight — 48 hours before the Sweep ends. After that your roster is locked until Sunday.</div>
+      <div class="cmd-note">The biggest news usually breaks when you can no longer do anything about it. <strong>That's the game.</strong> The swap is your one correction — use it on knowledge you had but didn't fully act on at draft time, not as a reaction to events already in motion.</div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">VIII</div>
+    <div class="cmd-body">
+      <div class="cmd-label">Multi-Register Scoring</div>
+      <div class="cmd-text">A figure scores on every event that touches them during the Sweep. Draft the figures who have more than one way to make news.</div>
+      <div class="cmd-note">A head of state who also controls a sovereign wealth fund scores on both governmental actions and financial moves. A Kibitzer who appears in a document leak <strong>and</strong> gives a viral interview in the same week scores on both. Power operates in multiple registers simultaneously.</div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">IX</div>
+    <div class="cmd-body">
+      <div class="cmd-label">The Court of Public Opinion</div>
+      <div class="cmd-text">After each Sweep, the most consequential events go to the Court of Public Opinion. Your table votes on their true weight — positive or negative. The Court runs a separate ledger.</div>
+      <div class="cmd-note">The Court measures something the score alone cannot: whether you understand not just <em>what happened</em>, but <em>what it meant</em>. Your Court record accumulates across the season and is part of your permanent player profile. <strong>Opening Week 4.</strong></div>
+    </div>
+  </div>
+
+  <div class="commandment">
+    <div class="cmd-num">X</div>
+    <div class="cmd-body">
+      <div class="cmd-label">The Truth</div>
+      <div class="cmd-text">The score is the truth. Your ranking is honest. The news decides — not your opinion of the news, not your politics, not your preferences.</div>
+      <div class="cmd-note">You don't argue with the score. You don't argue with the news. <strong>You learn to read the room better than the nine people sitting at your table.</strong> That's the only game being played here.</div>
+    </div>
+  </div>
+
+  <div class="rules-cta">
+    <div class="rules-cta-hed">Ready to <em>prove it?</em></div>
+    <div class="rules-cta-sub">You know the rules. Now build your squad.</div>
+    <div class="rules-links">
+      <a href="draft.html" class="btn-primary">Draft Your Squad →</a>
+      <a href="how-to-play.html" class="btn-ghost">How To Play First</a>
+      <a href="sweep.html" class="btn-ghost">Watch Live Sweep</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-copy">© 2026 Politiplay LLC · Fantasy league on real political figures · politiplay.net</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="draft.html">Draft</a>
+    <a href="sweep.html">Live Sweep</a>
+    <a href="how-to-play.html">How To Play</a>
+    <a href="rules.html">Rules</a>
+    <a href="mailto:hello@politiplay.net">Contact</a>
+  </div>
+</footer>
+
+<script>
+
+
+// ── POLITIPLAY TICKER ENGINE ──
+// Red background always. Text color via CSS class:
+//   clr-white = news events (default)
+//   clr-gold  = rules
+//   clr-blue  = status
+const PP_TICKER = [
+  { cls:'clr-white', speed:'normal',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;BREAKING: TRUMP SIGNS TRADE EXECUTIVE ORDER &nbsp;·&nbsp; HoS +14 PTS &nbsp;&nbsp;|&nbsp;&nbsp; JEFFRIES FLOOR RESPONSE &nbsp;·&nbsp; LEG +9 PTS &nbsp;&nbsp;|&nbsp;&nbsp; UN SECURITY COUNCIL EMERGENCY SESSION &nbsp;·&nbsp; WBR +11 PTS &nbsp;&nbsp;|&nbsp;&nbsp; STARMER FILES NO-CONFIDENCE MOTION &nbsp;·&nbsp; OPP +12 PTS &nbsp;&nbsp;|&nbsp;&nbsp; POWELL WARNS ON TARIFF INFLATION &nbsp;·&nbsp; WLD +10 PTS &nbsp;&nbsp;|&nbsp;&nbsp; WEEK 1 · 847 PLAYERS · CLOSES SUNDAY 23:59 &nbsp;&nbsp;' },
+  { cls:'clr-blue', speed:'medium',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· WEEK 1 SWEEP NOW OPEN · 847 PLAYERS ACTIVE · TOP SCORE: 214 PTS · SWAP CLOSES FRIDAY MIDNIGHT · 750+ PUBLIC FIGURES IN THE CATALOG · DRAFT OPTIONAL · WATCHING ALWAYS WELCOME · &nbsp;&nbsp;' },
+  { cls:'clr-gold', speed:'slow',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE I · Every week a Sweep opens. It closes Sunday at midnight. Your squad scores points. The highest score at your table wins. &nbsp;&nbsp;&nbsp;&nbsp;· RULE II · Draft ten public figures into five positions — HoS, LEG, OPP, WBR, WLD. Two per slot. No repeats. &nbsp;&nbsp;&nbsp;&nbsp;· RULE III · When your figures drive headlines, you score. Every point sourced, verified, and linked. &nbsp;&nbsp;' },
+  { cls:'clr-white', speed:'normal',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;SHEINBAUM COUNTER-TARIFF MEASURES &nbsp;·&nbsp; HoS +8 PTS &nbsp;&nbsp;|&nbsp;&nbsp; LE PEN CONVICTION UPHELD &nbsp;·&nbsp; OPP +13 PTS &nbsp;&nbsp;|&nbsp;&nbsp; FEDERAL RESERVE HOLDS RATES &nbsp;·&nbsp; WBR +10 PTS &nbsp;&nbsp;|&nbsp;&nbsp; BANNON RESURFACES IN SENATE HEARING &nbsp;·&nbsp; WLD +9 PTS &nbsp;&nbsp;|&nbsp;&nbsp; XI RETALIATORY TARIFF &nbsp;·&nbsp; HoS +15 PTS &nbsp;&nbsp;' },
+  { cls:'clr-gold', speed:'slow',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE IV · Kibitzers are the formerly powerful whose opinions still carry weight. Criers carry unpredictable consequence. Fourth Estate earns 2×. All WLD earns at least 1.5×. &nbsp;&nbsp;&nbsp;&nbsp;· RULE V · The more players at your table who draft the same figure, the less that figure scores. The game is won in the picks others missed. &nbsp;&nbsp;' },
+  { cls:'clr-blue', speed:'medium',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· YOUR POLITICAL INSTINCTS · TESTED WEEKLY · RANKED AGAINST THE ROOM · FREE TO PLAY · 750+ PUBLIC FIGURES · WORLD LEADERS · POWER BROKERS · KIBITZERS · CRIERS · FOURTH ESTATE · &nbsp;&nbsp;' },
+  { cls:'clr-white', speed:'normal',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;MODI BILATERAL TRADE DEAL SIGNED &nbsp;·&nbsp; HoS +11 PTS &nbsp;&nbsp;|&nbsp;&nbsp; AOC FLOOR SPEECH GOES VIRAL &nbsp;·&nbsp; LEG +8 PTS &nbsp;&nbsp;|&nbsp;&nbsp; GHISLAINE MAXWELL NAMES NAMES IN COURT FILING &nbsp;·&nbsp; WLD +18 PTS &nbsp;&nbsp;|&nbsp;&nbsp; MILEI PESO DEVALUATION &nbsp;·&nbsp; HoS +14 PTS &nbsp;&nbsp;|&nbsp;&nbsp; NATO EMERGENCY SUMMIT &nbsp;·&nbsp; WBR +13 PTS &nbsp;&nbsp;' },
+  { cls:'clr-gold', speed:'slow',
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE VII · One swap per Sweep. Closes Friday midnight. After that your roster is locked until Sunday. The biggest news usually breaks when you can no longer do anything about it. &nbsp;&nbsp;&nbsp;&nbsp;· RULE X · The score is the truth. Learn to read the room better than the nine people at your table. &nbsp;&nbsp;' },
+];
+let _ppIdx=0,_ppTimer=null;
+function ppRunTicker(idx){
+  const seg=PP_TICKER[idx];
+  const inner=document.getElementById('ticker-content');
+  if(!inner)return;
+  // Clear classes, set new content, restart animation
+  inner.className='ticker-inner speed-'+seg.speed+' '+seg.cls;
+  inner.innerHTML=seg.text+'&nbsp;&nbsp;&nbsp;&nbsp;'+seg.text;
+  // Force animation restart
+  inner.style.animation='none';
+  void inner.offsetWidth;
+  inner.style.animation='';
+  const dur={normal:40000,medium:50000,slow:65000}[seg.speed]||45000;
+  clearTimeout(_ppTimer);
+  _ppTimer=setTimeout(function(){
+    _ppIdx=(_ppIdx+1)%PP_TICKER.length;
+    ppRunTicker(_ppIdx);
+  },dur);
+}
+document.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){ppRunTicker(0);},150);
+});
+
+
+function ppSignup(e, successId) {
+  e.preventDefault();
+  const form = e.target;
+  fetch('/', {
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).finally(function(){
+    form.style.display = 'none';
+    const el = document.getElementById(successId);
+    if (el) el.style.display = 'block';
+  });
+}
+
+// ── COUNTDOWN ──
+function ppCountdown(elementId, targetDate) {
+  function update() {
+    const diff = targetDate - new Date();
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    if (diff <= 0) { el.textContent = 'Closed'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const pad = n => String(n).padStart(2,'0');
+    el.textContent = d > 0
+      ? d+'d '+pad(h)+':'+pad(m)+':'+pad(s)
+      : pad(h)+':'+pad(m)+':'+pad(s);
+  }
+  update();
+  setInterval(update, 1000);
+}
+function ppNextSunday() {
+  const now = new Date(), day = now.getDay();
+  const next = new Date(now);
+  next.setDate(now.getDate() + (day === 0 ? 7 : 7 - day));
+  next.setHours(23,59,0,0);
+  return next;
+}
+function ppNextFriday() {
+  const now = new Date(), day = now.getDay();
+  const daysUntil = day <= 5 ? 5 - day : 7 - (day - 5);
+  const next = new Date(now);
+  next.setDate(now.getDate() + (daysUntil === 0 ? 7 : daysUntil));
+  next.setHours(23,59,0,0);
+  return next;
+}
+
+// ── COUNTDOWN ──
+function ppCountdown(elementId, targetDate) {
+  function update() {
+    const diff = targetDate - new Date();
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    if (diff <= 0) { el.textContent = 'Closed'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const pad = n => String(n).padStart(2,'0');
+    el.textContent = d > 0 ? d+'d '+pad(h)+':'+pad(m)+':'+pad(s) : pad(h)+':'+pad(m)+':'+pad(s);
+  }
+  update();
+  setInterval(update, 1000);
+}
+function ppNextSunday() {
+  const now = new Date(), day = now.getDay();
+  const next = new Date(now);
+  next.setDate(now.getDate() + (day === 0 ? 7 : 7 - day));
+  next.setHours(23,59,0,0);
+  return next;
+}
+function ppNextFriday() {
+  const now = new Date(), day = now.getDay();
+  const daysUntil = day <= 5 ? 5 - day : 7 - (day - 5);
+  const next = new Date(now);
+  next.setDate(now.getDate() + (daysUntil === 0 ? 7 : daysUntil));
+  next.setHours(23,59,0,0);
+  return next;
+}
+
+</script>
+</body>
+</html>
