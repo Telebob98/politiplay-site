@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Sweep · Politiplay</title>
+<title>Preview Sweep · Politiplay</title>
 <meta name="description" content="Live scoring feed and leaderboard for the current Politiplay Sweep. Every point sourced and verified.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
@@ -564,17 +564,17 @@ body::before{
   <div class="nav-links">
     <a href="/" class="nav-link">Home</a>
     <a href="draft.html" class="nav-link">Draft</a>
-    <a href="sweep.html" class="nav-link active">Live Sweep</a>
+    <a href="sweep.html" class="nav-link active">Preview Sweep</a>
     <a href="how-to-play.html" class="nav-link">How To Play</a>
     <a href="rules.html" class="nav-link">Rules</a>
     <a href="index.html#signup" class="nav-cta">Sign Up →</a>
   </div>
-  <div class="nav-live"><div class="live-dot"></div><span>Beta Open</span></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;color:#e8a020;text-transform:uppercase;flex-shrink:0">Season 1 Coming Soon</div>
 </nav>
 
 <!-- SWEEP HEADER -->
 <div class="sweep-header">
-  <div class="sh-meta" id="sweep-meta">Week 1 · Sweep Active</div>
+  <div class="sh-meta" id="sweep-meta">Week 1 · Preview · Illustrative Scoring</div>
   <div class="sh-title">Live <em>Sweep</em></div>
   <div class="sh-stats">
     <div class="sh-stat"><strong id="player-count">—</strong> players active</div>
@@ -686,7 +686,7 @@ body::before{
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="draft.html">Draft</a>
-    <a href="sweep.html">Live Sweep</a>
+    <a href="sweep.html">Preview Sweep</a>
     <a href="how-to-play.html">How To Play</a>
     <a href="rules.html">Rules</a>
     <a href="mailto:hello@politiplay.net">Contact</a>
@@ -786,7 +786,7 @@ function renderStatus(data) {
   document.getElementById('player-count').textContent = sweep.player_count;
   document.getElementById('top-score').textContent = sweep.top_score;
   document.getElementById('sweep-meta').textContent =
-    sweep.title + ' · ' + (sweep.status === 'active' ? 'Sweep Active' : 'Sweep Closed');
+    sweep.title + ' · ' + (sweep.status === 'active' ? 'Preview · Illustrative Scoring' : 'Sweep Closed');
 }
 
 function renderMySquad(events) {
@@ -869,7 +869,7 @@ const PP_TICKER = [
   { cls:'clr-white', speed:'normal',
     text:'&nbsp;&nbsp;&nbsp;&nbsp;MODI BILATERAL TRADE DEAL SIGNED &nbsp;·&nbsp; HoS +11 PTS &nbsp;&nbsp;|&nbsp;&nbsp; AOC FLOOR SPEECH GOES VIRAL &nbsp;·&nbsp; LEG +8 PTS &nbsp;&nbsp;|&nbsp;&nbsp; GHISLAINE MAXWELL NAMES NAMES IN COURT FILING &nbsp;·&nbsp; WLD +18 PTS &nbsp;&nbsp;|&nbsp;&nbsp; MILEI PESO DEVALUATION &nbsp;·&nbsp; HoS +14 PTS &nbsp;&nbsp;|&nbsp;&nbsp; NATO EMERGENCY SUMMIT &nbsp;·&nbsp; WBR +13 PTS &nbsp;&nbsp;' },
   { cls:'clr-gold', speed:'slow',
-    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE VII · One swap per Sweep. Closes Friday midnight. After that your roster is locked until Sunday. The biggest news usually breaks when you can no longer do anything about it. &nbsp;&nbsp;&nbsp;&nbsp;· RULE X · The score is the truth. Learn to read the room better than the nine people at your table. &nbsp;&nbsp;' },
+    text:'&nbsp;&nbsp;&nbsp;&nbsp;· RULE VII · One swap per Sweep. Closes Friday midnight. After that your roster is locked until Sunday. The biggest news usually breaks when you can no longer do anything about it. &nbsp;&nbsp;&nbsp;&nbsp;· RULE X · The score reflects the published rules and live adjudication. Learn to read the room better than the nine people at your table. &nbsp;&nbsp;' },
 ];
 let _ppIdx=0,_ppTimer=null;
 function ppRunTicker(idx){
