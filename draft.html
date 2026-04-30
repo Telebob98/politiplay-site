@@ -4,14 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Draft Your Squad · Politiplay</title>
-<meta name="description" content="Draft ten real political figures into your Politiplay squad. Two per position — HoS, LEG, OPP, WBR, WLD.">
+<meta name="description" content="Draft ten real political figures into your Politiplay squad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   POLITIPLAY SHARED DESIGN SYSTEM
-============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 :root{
@@ -21,18 +18,13 @@ html{scroll-behavior:smooth}
   --gray1:#6e6a60;--gray2:#9e9a8e;--gray3:#b8b4a8;--gray4:#ccc8bc;
   --surface:rgba(237,232,220,0.06);--surface-hover:rgba(237,232,220,0.09);
   --border:rgba(237,232,220,0.1);--border-strong:rgba(237,232,220,0.18);
-  --navy:#1a2744;--amber-dark:#7a5200;
 }
 body{background:var(--ink);color:var(--ivory);font-family:'Source Serif 4',serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.05) 3px,rgba(0,0,0,0.05) 4px);pointer-events:none;z-index:200}
-
-/* TICKER */
 .ticker-wrap{display:block;width:100%;position:relative;z-index:50;overflow:hidden}
 .ticker{display:block;width:100%;padding:7px 0;overflow:hidden;white-space:nowrap;background:#b8242a;min-height:30px}
-.ticker-inner{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;color:#fff;animation:pp-tick 50s linear infinite}
+.ticker-inner{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;color:#fff;animation:pp-tick 60s linear infinite}
 @keyframes pp-tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* NAV */
 .site-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid var(--border);position:relative;z-index:40;background:var(--ink)}
 .nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--ivory);text-decoration:none;flex-shrink:0}
 .nav-logo em{font-style:italic;color:var(--red)}
@@ -42,60 +34,28 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .nav-link.active{color:var(--red)}
 .nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:var(--red);color:#fff;padding:9px 18px;text-decoration:none;transition:background 0.15s;white-space:nowrap}
 .nav-cta:hover{background:#9e1e23}
-.nav-live{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--red);text-transform:uppercase;flex-shrink:0}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pp-blink 1.4s ease-in-out infinite;flex-shrink:0}
-@keyframes pp-blink{0%,100%{opacity:1}50%{opacity:0.2}}
-
-/* POSITION BADGES */
-.pos-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;padding:2px 7px;color:#fff;flex-shrink:0;vertical-align:middle}
-.pos-badge.HoS{background:rgba(184,36,42,0.85)}
-.pos-badge.LEG{background:rgba(26,82,150,0.85)}
-.pos-badge.OPP{background:rgba(60,130,60,0.85)}
-.pos-badge.WBR{background:rgba(110,70,150,0.85)}
-.pos-badge.WLD{background:rgba(200,120,20,0.85)}
-
-/* BUTTONS */
-.btn-primary{display:inline-block;background:var(--red);color:#fff;border:none;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:13px 24px;cursor:pointer;text-decoration:none;transition:background 0.15s}
-.btn-primary:hover{background:#9e1e23}
-.btn-primary:disabled{background:var(--red-dim);color:var(--gray2);cursor:default}
-.btn-ghost{display:inline-block;background:transparent;color:var(--gray3);border:1px solid var(--border-strong);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer;text-decoration:none;transition:all 0.15s}
-.btn-ghost:hover{color:var(--ivory);border-color:rgba(237,232,220,0.35)}
-
-/* FOOTER */
 .site-footer{border-top:2px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;flex-wrap:wrap;gap:10px}
 .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--gray2)}
 .footer-links{display:flex;gap:16px;flex-wrap:wrap}
 .footer-links a{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--gray2);text-decoration:none}
 .footer-links a:hover{color:var(--gray4)}
-
-/* DRAFT PAGE LAYOUT */
 .draft-page{display:grid;grid-template-columns:1fr 320px;min-height:calc(100vh - 88px);position:relative;z-index:2}
-
-/* CATALOG (LEFT) */
 .catalog{border-right:1px solid var(--border);display:flex;flex-direction:column}
 .catalog-head{padding:16px 22px 12px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--ink);z-index:20}
 .catalog-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .catalog-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--red)}
 .fig-count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray2);letter-spacing:0.06em}
-
-/* SEARCH */
 .search-wrap{position:relative;margin-bottom:10px}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--gray2);font-size:15px;pointer-events:none}
 .search-input{width:100%;background:rgba(237,232,220,0.07);border:1px solid var(--border);color:var(--ivory);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:10px 12px 10px 34px;outline:none;letter-spacing:0.03em;transition:border-color 0.15s}
 .search-input::placeholder{color:var(--gray2)}
 .search-input:focus{border-color:var(--red-border)}
-
-/* FILTERS */
 .filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
 .filter-btn{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--border);background:transparent;color:var(--gray2);cursor:pointer;transition:all 0.15s}
 .filter-btn:hover{border-color:var(--border-strong);color:var(--ivory)}
 .filter-btn.active{background:var(--red);border-color:var(--red);color:#fff}
-
-/* BUCKET SELECT */
 .bucket-select{width:100%;background:rgba(237,232,220,0.07);border:1px solid var(--border);color:var(--gray3);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:8px 10px;outline:none;cursor:pointer;margin-bottom:8px}
 .bucket-select option{background:#1a1d24;color:var(--ivory)}
-
-/* TIER LEGEND */
 .tier-legend{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 .tier-pip{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:2px 7px;border:1px solid;cursor:pointer;transition:all 0.15s}
 .tier-pip.active{background:rgba(237,232,220,0.1)}
@@ -104,20 +64,17 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .tier-pip.t3{color:var(--gray3);border-color:var(--border)}
 .tier-pip.t4{color:var(--gray2);border-color:rgba(237,232,220,0.08)}
 .tier-pip.t5{color:var(--gray1);border-color:rgba(237,232,220,0.06)}
-
-/* FIGURE LIST */
 .figure-list{flex:1;overflow-y:auto;max-height:calc(100vh - 280px)}
 .figure-list::-webkit-scrollbar{width:3px}
 .figure-list::-webkit-scrollbar-thumb{background:var(--red-border);border-radius:2px}
 .wld-header{padding:12px 22px 8px;background:rgba(232,160,32,0.06);border-bottom:1px solid rgba(232,160,32,0.15)}
 .wld-header-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
-.wld-header-sub{font-size:12px;color:var(--gray2);margin-top:3px;font-style:italic;font-family:'Source Serif 4',serif}
+.wld-header-sub{font-size:12px;color:var(--gray2);margin-top:3px;font-style:italic}
 .fig-item{display:flex;align-items:center;gap:10px;padding:10px 22px;border-bottom:1px solid rgba(237,232,220,0.05);cursor:pointer;transition:background 0.1s}
 .fig-item:hover{background:var(--surface-hover)}
-.fig-item.in-squad{opacity:0.85;cursor:pointer;border-left:2px solid var(--red-border)}
+.fig-item.in-squad{border-left:2px solid var(--red-border)}
 .fig-item.in-squad:hover{background:rgba(184,36,42,0.1)}
 .fig-item.wld-fig{border-left:2px solid rgba(232,160,32,0.2)}
-.fig-item.wld-fig:hover{background:rgba(232,160,32,0.04)}
 .fig-item.wld-fig.in-squad{border-left-color:rgba(232,160,32,0.5)}
 .fig-pos-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.1em;color:#fff;padding:2px 6px;flex-shrink:0}
 .fig-pos-badge.HoS{background:rgba(184,36,42,0.8)}
@@ -134,31 +91,24 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .fig-tier.T3{color:var(--gray3)}
 .fig-tier.T4{color:var(--gray2)}
 .fig-tier.T5{color:var(--gray1)}
-.fig-action{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:3px 8px;border:1px solid var(--border);color:var(--gray2);flex-shrink:0;white-space:nowrap;transition:all 0.15s}
-.loading-state{padding:40px 22px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gray2);letter-spacing:0.1em}
-.loading-dot{display:inline-block;animation:pp-blink 1s ease-in-out infinite}
-
-/* SQUAD PANEL (RIGHT) */
-.squad-panel{padding:20px;display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--ink)}
-.squad-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.fig-pts{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);flex-shrink:0}
+.fig-action{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:3px 8px;border:1px solid var(--border);color:var(--gray2);flex-shrink:0;white-space:nowrap}
+.squad-panel{padding:20px;display:flex;flex-direction:column;gap:14px;position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--ink)}
+.squad-head{display:flex;align-items:baseline;justify-content:space-between}
 .squad-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--red)}
-.squad-week{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray2)}
-
-/* SWEEP TIMER */
-.sweep-timer{background:rgba(237,232,220,0.04);border:1px solid var(--border);padding:10px 14px;margin-bottom:4px}
+.sweep-timer{background:rgba(237,232,220,0.04);border:1px solid var(--border);padding:10px 14px}
 .timer-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray2);margin-bottom:4px}
 .timer-value{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;color:var(--ivory);letter-spacing:0.08em}
 .timer-value.urgent{color:var(--red);animation:pp-blink 1s ease-in-out infinite}
 .timer-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);margin-top:3px}
+@keyframes pp-blink{0%,100%{opacity:1}50%{opacity:0.2}}
 .swap-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;padding:3px 8px;background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.3);color:var(--gold)}
 .swap-badge.used{background:rgba(237,232,220,0.04);border-color:var(--border);color:var(--gray2)}
-
-/* SQUAD POSITIONS */
 .squad-section{margin-bottom:4px}
 .squad-pos-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid var(--border);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
 .pos-label-name{color:var(--gray3)}
 .pos-label-pts{font-size:10px;color:var(--gray2)}
-.slot{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);margin-bottom:5px;min-height:44px;transition:border-color 0.15s;cursor:pointer;background:rgba(237,232,220,0.02)}
+.slot{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);margin-bottom:5px;min-height:44px;cursor:pointer;background:rgba(237,232,220,0.02);transition:all 0.15s}
 .slot:hover{border-color:var(--border-strong);background:var(--surface)}
 .slot.filled{border-color:rgba(184,36,42,0.3);background:rgba(184,36,42,0.04)}
 .slot.filled:hover{background:rgba(184,36,42,0.08);border-color:var(--red)}
@@ -172,63 +122,31 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .slot-pos.WLD{background:rgba(200,120,20,0.7)}
 .slot-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ivory)}
 .slot-empty-text{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:0.06em;font-style:italic;flex:1}
-.slot-pts{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--gray2);flex-shrink:0}
-.slot-pts.scoring{color:var(--gold)}
-
-/* CAPTAIN BADGE */
-.captain-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.08em;padding:1px 5px;background:rgba(232,160,32,0.2);border:1px solid rgba(232,160,32,0.4);color:var(--gold);flex-shrink:0}
-
-/* SQUAD TOTAL */
+.slot-pts{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);flex-shrink:0}
 .squad-total{border-top:2px solid var(--border);padding-top:12px;display:flex;align-items:center;justify-content:space-between}
 .total-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray2)}
 .total-pts{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--ivory)}
-.total-pts span{font-size:13px;color:var(--gray2);margin-left:2px}
-
-/* LOCK BUTTON */
 .lock-btn{width:100%;text-align:center;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;background:var(--red);color:#fff;border:none;cursor:pointer;transition:background 0.15s}
 .lock-btn:hover:not(:disabled){background:#9e1e23}
 .lock-btn:disabled{background:rgba(184,36,42,0.2);color:var(--gray2);cursor:default}
 .lock-btn.locked{background:rgba(237,232,220,0.06);color:var(--gray2);cursor:default;border:1px solid var(--border)}
 .squad-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:0.06em;text-align:center}
 .squad-note a{color:var(--gray2);text-decoration:none}
-.squad-note a:hover{color:var(--ivory)}
-
-/* FLASH SWEEP BANNER */
-.flash-banner{background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.3);padding:10px 14px;display:none}
-.flash-banner.active{display:block}
-.flash-title{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
-.flash-desc{font-size:12px;color:var(--gray3)}
-
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink-mid);border:1px solid var(--border-strong);padding:10px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:var(--ivory);z-index:300;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.error{border-color:var(--red-border);color:var(--red)}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .draft-page{grid-template-columns:1fr}
-  .squad-panel{position:static;height:auto;border-top:1px solid var(--border)}
-  .figure-list{max-height:50vh}
-}
-@media(max-width:700px){
-  .site-nav{padding:10px 16px}
-  .nav-links .nav-link{padding:6px 8px;font-size:10px}
-  .site-footer{padding:12px 16px;flex-direction:column;text-align:center}
-}
+@media(max-width:900px){.draft-page{grid-template-columns:1fr}.squad-panel{position:static;height:auto;border-top:1px solid var(--border)}.figure-list{max-height:50vh}}
+@media(max-width:700px){.site-nav{padding:10px 16px}.nav-links .nav-link{padding:6px 8px;font-size:10px}.site-footer{padding:12px 16px;flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span class="ticker-inner" id="ticker-text">
-      POLITIPLAY · 72-HOUR SWEEP ACTIVE · DRAFT YOUR SQUAD NOW · LOCK CLOSES FRIDAY MIDNIGHT · 1,020 FIGURES IN CATALOG · 513 KIBITZERS &amp; CRIERS · EVERY POINT SOURCED AND VERIFIED · POLITIPLAY · 72-HOUR SWEEP ACTIVE · DRAFT YOUR SQUAD NOW · LOCK CLOSES FRIDAY MIDNIGHT · 1,020 FIGURES IN CATALOG · 513 KIBITZERS &amp; CRIERS · EVERY POINT SOURCED AND VERIFIED ·&nbsp;
-    </span>
+    <span class="ticker-inner">DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  POLITIPLAY · 72-HOUR SWEEP · 874 FIGURES DRAFTABLE · EVERY POINT SOURCED AND VERIFIED · DRAFT CLOSES FRIDAY MIDNIGHT · DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  POLITIPLAY · 72-HOUR SWEEP · 874 FIGURES DRAFTABLE · EVERY POINT SOURCED AND VERIFIED · DRAFT CLOSES FRIDAY MIDNIGHT ·&nbsp;</span>
   </div>
 </div>
 
-<!-- NAV -->
 <nav class="site-nav">
   <a href="index.html" class="nav-logo">Politi<em>Play</em></a>
   <div class="nav-links">
@@ -241,583 +159,1199 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   </div>
 </nav>
 
-<!-- MAIN DRAFT LAYOUT -->
 <div class="draft-page">
-
-  <!-- LEFT: CATALOG -->
   <div class="catalog">
     <div class="catalog-head">
       <div class="catalog-top">
         <div class="catalog-title">Figure Catalog</div>
-        <div class="fig-count" id="fig-count">Loading...</div>
+        <div class="fig-count" id="fig-count">874 figures · 246 kibitzers</div>
       </div>
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
         <input type="text" class="search-input" id="search-input" placeholder="Search figures...">
       </div>
       <div class="filter-row" id="pos-filters">
-        <button class="filter-btn active" data-pos="ALL">All Positions</button>
+        <button class="filter-btn active" data-pos="ALL">All</button>
         <button class="filter-btn" data-pos="HoS">HoS</button>
         <button class="filter-btn" data-pos="LEG">LEG</button>
         <button class="filter-btn" data-pos="OPP">OPP</button>
         <button class="filter-btn" data-pos="WBR">WBR</button>
-        <button class="filter-btn" data-pos="WLD">WLD · Kibitzers</button>
+        <button class="filter-btn" data-pos="WLD">WLD</button>
       </div>
       <select class="bucket-select" id="bucket-select">
         <option value="">All Buckets</option>
+        <option>Activist / Advocate</option>
+        <option>Americas</option>
+        <option>Business / Donor</option>
+        <option>EU Institutions</option>
+        <option>Independent Media</option>
+        <option>Indo-Pacific</option>
+        <option>Legacy Media</option>
+        <option>Legal / Operative</option>
+        <option>Middle East</option>
+        <option>Military / Security</option>
+        <option>NATO / G7</option>
+        <option>Political Commentator</option>
+        <option>Think Tank / Expert</option>
+        <option>Third Party / Outsider</option>
+        <option>UK Politics</option>
+        <option>UN / Multilateral</option>
+        <option>US Agencies</option>
+        <option>US Campaign</option>
+        <option>US Executive</option>
+        <option>US Governor</option>
+        <option>US Judiciary</option>
+        <option>US Legislature</option>
+        <option>US Municipal</option>
+        <option>Wildcard Editorial</option>
       </select>
-      <div class="tier-legend" id="tier-filters">
-        <span class="tier-pip t1 active" data-tier="T1">T1 · V.High</span>
-        <span class="tier-pip t2 active" data-tier="T2">T2 · High</span>
-        <span class="tier-pip t3 active" data-tier="T3">T3 · Med</span>
-        <span class="tier-pip t4 active" data-tier="T4">T4 · Low</span>
-        <span class="tier-pip t5 active" data-tier="T5">T5 · V.Low</span>
+      <div class="tier-legend">
+        <span class="tier-pip t1 active" data-tier="T1">T1</span>
+        <span class="tier-pip t2 active" data-tier="T2">T2</span>
+        <span class="tier-pip t3 active" data-tier="T3">T3</span>
+        <span class="tier-pip t4 active" data-tier="T4">T4</span>
+        <span class="tier-pip t5 active" data-tier="T5">T5</span>
       </div>
     </div>
-    <div class="figure-list" id="figure-list">
-      <div class="loading-state">Loading figures<span class="loading-dot">...</span></div>
-    </div>
+    <div class="figure-list" id="figure-list"></div>
   </div>
 
-  <!-- RIGHT: SQUAD PANEL -->
   <div class="squad-panel">
-    <div>
-      <div class="squad-head">
-        <div class="squad-title">Your Squad · Week 1</div>
-        <div class="squad-week" id="squad-week-label">72hr Sweep</div>
-      </div>
-
-      <!-- SWEEP TIMER -->
-      <div class="sweep-timer">
-        <div class="timer-label">Sweep closes in</div>
-        <div class="timer-value" id="sweep-timer">—</div>
-        <div class="timer-sub" id="timer-sub">Squad locks Friday midnight</div>
-      </div>
-
-      <!-- SWAP STATUS -->
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <span class="swap-badge" id="swap-badge">1 swap available</span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray2)">
-          Squad total: <strong id="squad-total-pts">0</strong> pts
-        </span>
-      </div>
-
-      <!-- FLASH SWEEP BANNER -->
-      <div class="flash-banner" id="flash-banner">
-        <div class="flash-title">⚡ Flash Sweep Active</div>
-        <div class="flash-desc" id="flash-desc">Major breaking news — Flash Sweep open for 24 hours.</div>
-      </div>
+    <div class="squad-head">
+      <div class="squad-title">Your Squad · Week 1</div>
+    </div>
+    <div class="sweep-timer">
+      <div class="timer-label">Sweep closes in</div>
+      <div class="timer-value" id="sweep-timer">—</div>
+      <div class="timer-sub">Squad locks Friday midnight</div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span class="swap-badge" id="swap-badge">1 swap available</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray2)">Total: <strong id="squad-total-pts">0</strong> pts</span>
     </div>
 
-    <!-- SQUAD SLOTS BY POSITION -->
-    <div id="squad-slots">
-      <!-- HoS x2 -->
-      <div class="squad-section">
-        <div class="squad-pos-label">
-          <span class="pos-label-name">HoS · Head of State ×2</span>
-          <span class="pos-label-pts">12–16 pts</span>
-        </div>
-        <div class="slot" data-pos="HoS" data-idx="0" onclick="handleSlotClick(this)">
-          <span class="slot-pos HoS">HoS</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-        <div class="slot" data-pos="HoS" data-idx="1" onclick="handleSlotClick(this)">
-          <span class="slot-pos HoS">HoS</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-      </div>
-
-      <!-- LEG x2 -->
-      <div class="squad-section">
-        <div class="squad-pos-label">
-          <span class="pos-label-name">LEG · Legislator ×2</span>
-          <span class="pos-label-pts">8–12 pts</span>
-        </div>
-        <div class="slot" data-pos="LEG" data-idx="0" onclick="handleSlotClick(this)">
-          <span class="slot-pos LEG">LEG</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-        <div class="slot" data-pos="LEG" data-idx="1" onclick="handleSlotClick(this)">
-          <span class="slot-pos LEG">LEG</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-      </div>
-
-      <!-- OPP x2 -->
-      <div class="squad-section">
-        <div class="squad-pos-label">
-          <span class="pos-label-name">OPP · Opposition ×2</span>
-          <span class="pos-label-pts">8–12 pts</span>
-        </div>
-        <div class="slot" data-pos="OPP" data-idx="0" onclick="handleSlotClick(this)">
-          <span class="slot-pos OPP">OPP</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-        <div class="slot" data-pos="OPP" data-idx="1" onclick="handleSlotClick(this)">
-          <span class="slot-pos OPP">OPP</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-      </div>
-
-      <!-- WBR x2 -->
-      <div class="squad-section">
-        <div class="squad-pos-label">
-          <span class="pos-label-name">WBR · World Body ×2</span>
-          <span class="pos-label-pts">14–22 pts</span>
-        </div>
-        <div class="slot" data-pos="WBR" data-idx="0" onclick="handleSlotClick(this)">
-          <span class="slot-pos WBR">WBR</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-        <div class="slot" data-pos="WBR" data-idx="1" onclick="handleSlotClick(this)">
-          <span class="slot-pos WBR">WBR</span>
-          <span class="slot-empty-text">Click to fill</span>
-        </div>
-      </div>
-
-      <!-- WLD x2 -->
-      <div class="squad-section">
-        <div class="squad-pos-label">
-          <span class="pos-label-name">WLD · Kibitzers & Criers ×2</span>
-          <span class="pos-label-pts">1.5× multiplier</span>
-        </div>
-        <div class="slot wld-slot" data-pos="WLD" data-idx="0" onclick="handleSlotClick(this)">
-          <span class="slot-pos WLD">WLD</span>
-          <span class="slot-empty-text">Click to fill · 1.5×</span>
-        </div>
-        <div class="slot wld-slot" data-pos="WLD" data-idx="1" onclick="handleSlotClick(this)">
-          <span class="slot-pos WLD">WLD</span>
-          <span class="slot-empty-text">Click to fill · 1.5×</span>
-        </div>
-      </div>
+    <div class="squad-section">
+      <div class="squad-pos-label"><span class="pos-label-name">HoS · Head of State ×2</span><span class="pos-label-pts">12–16 pts</span></div>
+      <div class="slot" data-pos="HoS" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos HoS">HoS</span><span class="slot-empty-text">Click to fill</span></div>
+      <div class="slot" data-pos="HoS" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos HoS">HoS</span><span class="slot-empty-text">Click to fill</span></div>
+    </div>
+    <div class="squad-section">
+      <div class="squad-pos-label"><span class="pos-label-name">LEG · Legislator ×2</span><span class="pos-label-pts">8–12 pts</span></div>
+      <div class="slot" data-pos="LEG" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos LEG">LEG</span><span class="slot-empty-text">Click to fill</span></div>
+      <div class="slot" data-pos="LEG" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos LEG">LEG</span><span class="slot-empty-text">Click to fill</span></div>
+    </div>
+    <div class="squad-section">
+      <div class="squad-pos-label"><span class="pos-label-name">OPP · Opposition ×2</span><span class="pos-label-pts">8–12 pts</span></div>
+      <div class="slot" data-pos="OPP" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos OPP">OPP</span><span class="slot-empty-text">Click to fill</span></div>
+      <div class="slot" data-pos="OPP" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos OPP">OPP</span><span class="slot-empty-text">Click to fill</span></div>
+    </div>
+    <div class="squad-section">
+      <div class="squad-pos-label"><span class="pos-label-name">WBR · World Body ×2</span><span class="pos-label-pts">14–22 pts</span></div>
+      <div class="slot" data-pos="WBR" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos WBR">WBR</span><span class="slot-empty-text">Click to fill</span></div>
+      <div class="slot" data-pos="WBR" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos WBR">WBR</span><span class="slot-empty-text">Click to fill</span></div>
+    </div>
+    <div class="squad-section">
+      <div class="squad-pos-label"><span class="pos-label-name">WLD · Kibitzers ×2</span><span class="pos-label-pts">1.5× multiplier</span></div>
+      <div class="slot wld-slot" data-pos="WLD" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos WLD">WLD</span><span class="slot-empty-text">Click to fill · 1.5×</span></div>
+      <div class="slot wld-slot" data-pos="WLD" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos WLD">WLD</span><span class="slot-empty-text">Click to fill · 1.5×</span></div>
     </div>
 
-    <!-- SQUAD TOTAL -->
     <div class="squad-total">
       <span class="total-label">Squad Total</span>
-      <span class="total-pts"><span id="total-pts-display">0</span><span>pts</span></span>
+      <span class="total-pts"><span id="total-pts-display">0</span> pts</span>
     </div>
-
-    <!-- LOCK BUTTON -->
     <button class="lock-btn" id="lock-btn" onclick="lockSquad()">Lock Your Squad →</button>
-    <div class="squad-note">
-      Squad locks Friday midnight · <a href="sweep.html">Watch live Sweep</a>
-    </div>
+    <div class="squad-note">Squad locks Friday midnight · <a href="sweep.html">Watch live Sweep</a></div>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-copy">© 2026 Politiplay LLC · Fantasy league on real political figures · politiplay.net</div>
   <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="draft.html">Draft</a>
-    <a href="sweep.html">Live Sweep</a>
-    <a href="how-to-play.html">How To Play</a>
-    <a href="rules.html">Rules</a>
-    <a href="mailto:hello@politiplay.net">Contact</a>
+    <a href="index.html">Home</a><a href="draft.html">Draft</a><a href="sweep.html">Live Sweep</a><a href="how-to-play.html">How To Play</a><a href="rules.html">Rules</a><a href="mailto:hello@politiplay.net">Contact</a>
   </div>
 </footer>
 
 <script>
-// ============================================================
-// POLITIPLAY DRAFT — v2.0
-// Features: figures.json fetch, localStorage persistence,
-//           72-hour sweep timer, squad lock/swap mechanics
-// ============================================================
-
 const STORAGE_KEY = 'politiplay_squad_v2';
-const SWEEP_CLOSE = new Date('2026-05-01T23:59:00Z'); // Friday midnight UTC
-const LOCK_TIME = new Date('2026-05-02T04:59:00Z');   // Friday midnight ET = Sat 04:59 UTC
+const SWEEP_CLOSE = new Date('2026-05-02T03:59:00Z');
 
-let allFigures = [];
-let squad = { HoS:[null,null], LEG:[null,null], OPP:[null,null], WBR:[null,null], WLD:[null,null] };
+const FIGURES = [
+  {name:'Alexandre de Moraes',pos:'HoS',bucket:'Americas',tier:'T2',vol:'V.High',sub:'Americas'},
+  {name:'Alicia Barcena',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Alix Didier Fils-Aime',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Arthur Lira',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Bernardo Arevalo',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Bruno Rodriguez Parrilla',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Claudia Sheinbaum',pos:'HoS',bucket:'Americas',tier:'T1',vol:'High',sub:'Americas'},
+  {name:'Daniel Noboa',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Daniel Ortega',pos:'HoS',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Dina Boluarte',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Diosdado Cabello',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Felipe Calderon',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Fernando Haddad',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Francia Marquez',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Gabriel Boric',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Gustavo Petro',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Javier Milei',pos:'HoS',bucket:'Americas',tier:'T1',vol:'V.High',sub:'Americas'},
+  {name:'Jorge Rodriguez',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Jose Raul Mulino',pos:'HoS',bucket:'Americas',tier:'T2',vol:'High',sub:'Americas'},
+  {name:'Luis Arce',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Luiz Inacio Lula da Silva',pos:'HoS',bucket:'Americas',tier:'T1',vol:'High',sub:'Americas'},
+  {name:'Marcelo Ebrard',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Mark Carney',pos:'HoS',bucket:'Americas',tier:'T1',vol:'High',sub:'Americas'},
+  {name:'Mia Mottley',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Miguel Diaz-Canel',pos:'HoS',bucket:'Americas',tier:'T2',vol:'High',sub:'Americas'},
+  {name:'Nayib Bukele',pos:'HoS',bucket:'Americas',tier:'T2',vol:'High',sub:'Americas'},
+  {name:'Nicolas Maduro',pos:'HoS',bucket:'Americas',tier:'T2',vol:'V.High',sub:'Americas'},
+  {name:'Patricia Bullrich',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Rosario Murillo',pos:'HoS',bucket:'Americas',tier:'T1',vol:'V.High',sub:'Americas'},
+  {name:'Santiago Pena',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Veronica Abad',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Victoria Villarruel',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Xiomara Castro',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Yamandu Orsi',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Aleksandar Vucic',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Alexander De Croo',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Alexander Schallenberg',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Alexander Stubb',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Alexander Van der Bellen',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Anne Hidalgo',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Antonio Tajani',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Dick Schoof',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Donald Tusk',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'High',sub:'EU Institutions'},
+  {name:'Emmanuel Macron',pos:'HoS',bucket:'EU Institutions',tier:'T1',vol:'High',sub:'EU Institutions'},
+  {name:'Francois Bayrou',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Friedrich Merz',pos:'HoS',bucket:'EU Institutions',tier:'T1',vol:'High',sub:'EU Institutions'},
+  {name:'Giorgia Meloni',pos:'HoS',bucket:'EU Institutions',tier:'T1',vol:'V.High',sub:'EU Institutions'},
+  {name:'Helen McEntee',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Javier Milei',pos:'HoS',bucket:'EU Institutions',tier:'T1',vol:'V.High',sub:'EU Institutions'},
+  {name:'Kaja Kallas',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'High',sub:'EU Institutions'},
+  {name:'Karl Nehammer',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Kyriakos Mitsotakis',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Maia Sandu',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Mette Frederiksen',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Micheal Martin',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Nicusor Dan',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'High',sub:'EU Institutions'},
+  {name:'Pedro Sanchez',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Petr Fiala',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Petteri Orpo',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Radoslaw Sikorski',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Robert Fico',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Ulf Kristersson',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Ursula von der Leyen',pos:'HoS',bucket:'EU Institutions',tier:'T1',vol:'Med',sub:'EU Institutions'},
+  {name:'Viktor Orban',pos:'HoS',bucket:'EU Institutions',tier:'T2',vol:'V.High',sub:'EU Institutions'},
+  {name:'Anthony Albanese',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Anwar Ibrahim',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Christopher Luxon',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Hsiao Bi-khim',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Joseph Wu',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Kim Jong-un',pos:'HoS',bucket:'Indo-Pacific',tier:'T1',vol:'V.High',sub:'Indo-Pacific'},
+  {name:'Kim Yo-jong',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'High',sub:'Indo-Pacific'},
+  {name:'Lai Ching-te',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'High',sub:'Indo-Pacific'},
+  {name:'Li Qiang',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Lin Chia-lung',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Narendra Modi',pos:'HoS',bucket:'Indo-Pacific',tier:'T1',vol:'High',sub:'Indo-Pacific'},
+  {name:'Paetongtarn Shinawatra',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Penny Wong',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Prabowo Subianto',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Shehbaz Sharif',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Shigeru Ishiba',pos:'HoS',bucket:'Indo-Pacific',tier:'T1',vol:'High',sub:'Indo-Pacific'},
+  {name:'To Lam',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Wang Yi',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Xi Jinping',pos:'HoS',bucket:'Indo-Pacific',tier:'T1',vol:'V.High',sub:'Indo-Pacific'},
+  {name:'Yoon Suk-yeol',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'High',sub:'Indo-Pacific'},
+  {name:'Zhao Leji',pos:'HoS',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Pam Bondi',pos:'HoS',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Abdel Fattah al-Burhan',pos:'HoS',bucket:'Middle East',tier:'T3',vol:'Med',sub:'Middle East'},
+  {name:'Abdel Fattah el-Sisi',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Ahmed al-Sharaa',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'V.High',sub:'Middle East'},
+  {name:'Ali Khamenei',pos:'HoS',bucket:'Middle East',tier:'T1',vol:'V.High',sub:'Middle East'},
+  {name:'Benjamin Netanyahu',pos:'HoS',bucket:'Middle East',tier:'T1',vol:'V.High',sub:'Middle East'},
+  {name:'Gideon Sa\'ar',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Ibrahim Traoré',pos:'HoS',bucket:'Middle East',tier:'T3',vol:'Med',sub:'Middle East'},
+  {name:'Kais Saied',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Khalil al-Hayya',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'King Abdullah II',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Low',sub:'Middle East'},
+  {name:'King Salman',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Low',sub:'Middle East'},
+  {name:'Mahmoud Abbas',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Masoud Pezeshkian',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'High',sub:'Middle East'},
+  {name:'Mohamed bin Zayed',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Mohammed Al-Sudani',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Low',sub:'Middle East'},
+  {name:'Mohammed Sinwar',pos:'HoS',bucket:'Middle East',tier:'T3',vol:'Med',sub:'Middle East'},
+  {name:'Mohammed bin Salman',pos:'HoS',bucket:'Middle East',tier:'T1',vol:'V.High',sub:'Middle East'},
+  {name:'Nabih Berri',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Low',sub:'Middle East'},
+  {name:'Naim Qassem',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Sheikh Tamim bin Hamad',pos:'HoS',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Emmanuel Macron',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'High',sub:'NATO / G7'},
+  {name:'Friedrich Merz',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'High',sub:'NATO / G7'},
+  {name:'Giorgia Meloni',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'V.High',sub:'NATO / G7'},
+  {name:'Jonas Gahr Store',pos:'HoS',bucket:'NATO / G7',tier:'T2',vol:'Med',sub:'NATO / G7'},
+  {name:'Keir Starmer',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'High',sub:'NATO / G7'},
+  {name:'Mark Carney',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'High',sub:'NATO / G7'},
+  {name:'Mikhail Mishustin',pos:'HoS',bucket:'NATO / G7',tier:'T2',vol:'Low',sub:'NATO / G7'},
+  {name:'Petr Pavel',pos:'HoS',bucket:'NATO / G7',tier:'T2',vol:'Med',sub:'NATO / G7'},
+  {name:'Recep Tayyip Erdogan',pos:'HoS',bucket:'NATO / G7',tier:'T2',vol:'High',sub:'NATO / G7'},
+  {name:'Sergei Lavrov',pos:'HoS',bucket:'NATO / G7',tier:'T2',vol:'Med',sub:'NATO / G7'},
+  {name:'Shigeru Ishiba',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'High',sub:'NATO / G7'},
+  {name:'Vladimir Putin',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'V.High',sub:'NATO / G7'},
+  {name:'Volodymyr Zelensky',pos:'HoS',bucket:'NATO / G7',tier:'T1',vol:'V.High',sub:'NATO / G7'},
+  {name:'Vyacheslav Volodin',pos:'HoS',bucket:'NATO / G7',tier:'T2',vol:'Low',sub:'NATO / G7'},
+  {name:'David Lammy',pos:'HoS',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'John Swinney',pos:'HoS',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Keir Starmer',pos:'HoS',bucket:'UK Politics',tier:'T1',vol:'High',sub:'UK Politics'},
+  {name:'Rachel Reeves',pos:'HoS',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Sadiq Khan',pos:'HoS',bucket:'UK Politics',tier:'T3',vol:'Med',sub:'UK Politics'},
+  {name:'Wes Streeting',pos:'HoS',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Yvette Cooper',pos:'HoS',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Abiy Ahmed',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Bola Tinubu',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Cyril Ramaphosa',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Dmitry Medvedev',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Felix Tshisekedi',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Nikolai Patrushev',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Paul Kagame',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Samia Suluhu Hassan',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Vladimir Putin',pos:'HoS',bucket:'UN / Multilateral',tier:'T1',vol:'V.High',sub:'UN / Multilateral'},
+  {name:'Volodymyr Zelensky',pos:'HoS',bucket:'UN / Multilateral',tier:'T1',vol:'V.High',sub:'UN / Multilateral'},
+  {name:'William Ruto',pos:'HoS',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Andrew Ferguson',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Brendan Carr',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Brooke Rollins',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Low',sub:'US Agencies'},
+  {name:'Chris Wright',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Low',sub:'US Agencies'},
+  {name:'Dave Weldon',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Doug Burgum',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Low',sub:'US Agencies'},
+  {name:'Doug Collins',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Low',sub:'US Agencies'},
+  {name:'Harmeet Dhillon',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Howard Lutnick',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Jerome Powell',pos:'HoS',bucket:'US Agencies',tier:'T1',vol:'High',sub:'US Agencies'},
+  {name:'Kash Patel',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'High',sub:'US Agencies'},
+  {name:'Lee Zeldin',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'High',sub:'US Agencies'},
+  {name:'Linda McMahon',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Low',sub:'US Agencies'},
+  {name:'Lori Chavez-DeRemer',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Low',sub:'US Agencies'},
+  {name:'Martin Makary',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Paul Atkins',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Russell Vought',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'High',sub:'US Agencies'},
+  {name:'Scott Bessent',pos:'HoS',bucket:'US Agencies',tier:'T1',vol:'High',sub:'US Agencies'},
+  {name:'Todd Blanche',pos:'HoS',bucket:'US Agencies',tier:'T1',vol:'High',sub:'US Agencies'},
+  {name:'Tom Homan',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'High',sub:'US Agencies'},
+  {name:'Tulsi Gabbard',pos:'HoS',bucket:'US Agencies',tier:'T2',vol:'High',sub:'US Agencies'},
+  {name:'Barack Obama',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Med',sub:'US Executive'},
+  {name:'Donald Trump',pos:'HoS',bucket:'US Executive',tier:'T1',vol:'V.High',sub:'US Executive'},
+  {name:'George W. Bush',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Low',sub:'US Executive'},
+  {name:'Hillary Clinton',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Med',sub:'US Executive'},
+  {name:'JD Vance',pos:'HoS',bucket:'US Executive',tier:'T1',vol:'High',sub:'US Executive'},
+  {name:'Joe Biden',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Low',sub:'US Executive'},
+  {name:'John Ratcliffe',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Med',sub:'US Executive'},
+  {name:'Kamala Harris',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'High',sub:'US Executive'},
+  {name:'Karoline Leavitt',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'High',sub:'US Executive'},
+  {name:'Marco Rubio',pos:'HoS',bucket:'US Executive',tier:'T1',vol:'High',sub:'US Executive'},
+  {name:'Mike Huckabee',pos:'HoS',bucket:'US Executive',tier:'T3',vol:'Med',sub:'US Executive'},
+  {name:'Mike Pence',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Med',sub:'US Executive'},
+  {name:'Mike Waltz',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Med',sub:'US Executive'},
+  {name:'Nikki Haley',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Med',sub:'US Executive'},
+  {name:'Pete Hegseth',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'High',sub:'US Executive'},
+  {name:'Russell Vought',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'High',sub:'US Executive'},
+  {name:'Susie Wiles',pos:'HoS',bucket:'US Executive',tier:'T1',vol:'Med',sub:'US Executive'},
+  {name:'Tim Scott',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'Low',sub:'US Executive'},
+  {name:'Tom Homan',pos:'HoS',bucket:'US Executive',tier:'T2',vol:'High',sub:'US Executive'},
+  {name:'Vivek Ramaswamy',pos:'HoS',bucket:'US Executive',tier:'T3',vol:'High',sub:'US Executive'},
+  {name:'Abigail Spanberger',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Andy Beshear',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Bob Ferguson',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Brian Kemp',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Gavin Newsom',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'High',sub:'US Governor'},
+  {name:'Glenn Youngkin',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Greg Abbott',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Greg Gianforte',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Gretchen Whitmer',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'JB Pritzker',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Janet Mills',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Jared Polis',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Jeff Landry',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Josh Green',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Josh Shapiro',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Kathy Hochul',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Kim Reynolds',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Leslie Rutledge',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Maura Healey',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Michelle Lujan Grisham',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Mike Braun',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Mike DeWine',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Ned Lamont',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Phil Scott',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Ron DeSantis',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'High',sub:'US Governor'},
+  {name:'Sarah Huckabee Sanders',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Tim Walz',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'High',sub:'US Governor'},
+  {name:'Tina Kotek',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Tony Evers',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Wes Moore',pos:'HoS',bucket:'US Governor',tier:'T2',vol:'Med',sub:'US Governor'},
+  {name:'Brandon Johnson',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'Med',sub:'US Municipal'},
+  {name:'Daniel Lurie',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'Med',sub:'US Municipal'},
+  {name:'Eric Adams',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'V.High',sub:'US Municipal'},
+  {name:'Justin Bibb',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'Low',sub:'US Municipal'},
+  {name:'Karen Bass',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'High',sub:'US Municipal'},
+  {name:'Mike Johnston',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'Med',sub:'US Municipal'},
+  {name:'Muriel Bowser',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'Med',sub:'US Municipal'},
+  {name:'Ras Baraka',pos:'HoS',bucket:'US Municipal',tier:'T3',vol:'Med',sub:'US Municipal'},
+  {name:'Zohran Mamdani',pos:'HoS',bucket:'US Municipal',tier:'T2',vol:'V.High',sub:'US Municipal'},
+  {name:'Bernie Moreno',pos:'LEG',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Dave McCormick',pos:'LEG',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Elissa Slotkin',pos:'LEG',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Jon Ossoff',pos:'LEG',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Mark Kelly',pos:'LEG',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Raphael Warnock',pos:'LEG',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Adam Schiff',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Adam Smith',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Adriano Espaillat',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Al Green',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Alex Padilla',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Alexandria Ocasio-Cortez',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'V.High',sub:'US Legislature'},
+  {name:'Amy Klobuchar',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Andy Biggs',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Angela Alsobrooks',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Anna Paulina Luna',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'High',sub:'US Legislature'},
+  {name:'Ashley Moody',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Ayanna Pressley',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Barbara Lee',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Ben Ray Lujan',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Bernie Sanders',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Bill Hagerty',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Bob Good',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Brian Schatz',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Byron Donalds',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Carlos Gimenez',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Chip Roy',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'High',sub:'US Legislature'},
+  {name:'Chris Coons',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Chris Murphy',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Chris Van Hollen',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Chuck Schumer',pos:'LEG',bucket:'US Legislature',tier:'T1',vol:'High',sub:'US Legislature'},
+  {name:'Cory Booker',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Cynthia Lummis',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Dan Crenshaw',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Dave McCormick',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Deb Fischer',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Debbie Dingell',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Debbie Wasserman Schultz',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Don Bacon',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Elizabeth Warren',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Eric Schmitt',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'French Hill',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Grace Meng',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Greg Casar',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Gregory Meeks',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Hakeem Jeffries',pos:'LEG',bucket:'US Legislature',tier:'T1',vol:'Med',sub:'US Legislature'},
+  {name:'Harriet Hageman',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Henry Cuellar',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Ilhan Omar',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Jack Reed',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'James Clyburn',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'James Lankford',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Jamie Raskin',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'High',sub:'US Legislature'},
+  {name:'Jared Golden',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Jared Moskowitz',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Jasmine Crockett',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'High',sub:'US Legislature'},
+  {name:'Jeff Merkley',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Jennifer McClellan',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Jerry Nadler',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Jim Banks',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Jim Jordan',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'John Barrasso',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'John Boozman',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'John Curtis',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'John Fetterman',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'John Thune',pos:'LEG',bucket:'US Legislature',tier:'T1',vol:'High',sub:'US Legislature'},
+  {name:'Jon Ossoff',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Joni Ernst',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Josh Hawley',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Katherine Clark',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Katie Britt',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Lauren Boebert',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'High',sub:'US Legislature'},
+  {name:'Lindsey Graham',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'V.High',sub:'US Legislature'},
+  {name:'Lisa Murkowski',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Lloyd Doggett',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Low',sub:'US Legislature'},
+  {name:'Marcy Kaptur',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Maria Cantwell',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Maria Elvira Salazar',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Mario Diaz-Balart',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Marjorie Taylor Greene',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'V.High',sub:'US Legislature'},
+  {name:'Mark Kelly',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Mark Warner',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Markwayne Mullin',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Martin Heinrich',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Matt Gaetz',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'V.High',sub:'US Legislature'},
+  {name:'Matt Rosendale',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Maxine Waters',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Maxwell Frost',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Mazie Hirono',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Michael Bennet',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Michael McCaul',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Mike Johnson',pos:'LEG',bucket:'US Legislature',tier:'T1',vol:'High',sub:'US Legislature'},
+  {name:'Mike Lee',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Mike Rounds',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Mike Turner',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Mitch McConnell',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Mondaire Jones',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Nancy Pelosi',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Patty Murray',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Paul Gosar',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Pete Aguilar',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Pete Sessions',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Pramila Jayapal',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Rand Paul',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Raphael Warnock',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Rashida Tlaib',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Rick Scott',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Ritchie Torres',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Ro Khanna',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Robert Garcia',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Ron Wyden',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Rosa DeLauro',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Ruben Gallego',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Sam Graves',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Seth Moulton',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Sheldon Whitehouse',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Steve Daines',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Steve Scalise',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Summer Lee',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Susan Collins',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Ted Cruz',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'High',sub:'US Legislature'},
+  {name:'Thomas Massie',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Tim Kaine',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Tom Cole',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Tom Cotton',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Tom Emmer',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Tom Suozzi',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Tommy Tuberville',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Med',sub:'US Legislature'},
+  {name:'Tony Gonzales',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Troy Nehls',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Veronica Escobar',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Vicente Gonzalez',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Wesley Hunt',pos:'LEG',bucket:'US Legislature',tier:'T3',vol:'Med',sub:'US Legislature'},
+  {name:'Zach Wahls',pos:'LEG',bucket:'US Legislature',tier:'T2',vol:'Low',sub:'US Legislature'},
+  {name:'Yulia Navalnaya',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'High',sub:'Activist / Advocate'},
+  {name:'Andres Arauz',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Chrystia Freeland',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Claudia Lopez',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Claudia Ortiz',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Cristina Fernandez de Kirchner',pos:'OPP',bucket:'Americas',tier:'T2',vol:'High',sub:'Americas'},
+  {name:'Edmundo Gonzalez',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Evo Morales',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Federico Gutierrez',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Jagmeet Singh',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Jair Bolsonaro',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Keiko Fujimori',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Luisa Gonzalez',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Maria Corina Machado',pos:'OPP',bucket:'Americas',tier:'T4',vol:'V.High',sub:'Americas'},
+  {name:'Mauricio Macri',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Patrick Brown',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Pedro Castillo',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Pierre Poilievre',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Rafael Correa',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Sergio Fajardo',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Tarcisio de Freitas',pos:'OPP',bucket:'Americas',tier:'T3',vol:'High',sub:'Americas'},
+  {name:'Xochitl Galvez',pos:'OPP',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
+  {name:'Yunior Garcia Aguilera',pos:'OPP',bucket:'Americas',tier:'T3',vol:'Med',sub:'Americas'},
+  {name:'Alberto Nunez Feijoo',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Alexis Tsipras',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Alice Weidel',pos:'OPP',bucket:'EU Institutions',tier:'T4',vol:'V.High',sub:'EU Institutions'},
+  {name:'Andrej Babis',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Annalena Baerbock',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Christian Lindner',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Edouard Philippe',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Elly Schlein',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Erna Solberg',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Frans Timmermans',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Gabriel Attal',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Geert Wilders',pos:'OPP',bucket:'EU Institutions',tier:'T4',vol:'High',sub:'EU Institutions'},
+  {name:'George Simion',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'High',sub:'EU Institutions'},
+  {name:'Georges-Louis Bouchez',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Hanna Gronkiewicz-Waltz',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Herbert Kickl',pos:'OPP',bucket:'EU Institutions',tier:'T4',vol:'High',sub:'EU Institutions'},
+  {name:'Jaroslaw Kaczynski',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Jean-Luc Melenchon',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Jimmie Akesson',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Jordan Bardella',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Karol Nawrocki',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Leo Varadkar',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Magdalena Andersson',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Marine Le Pen',pos:'OPP',bucket:'EU Institutions',tier:'T4',vol:'V.High',sub:'EU Institutions'},
+  {name:'Markus Soder',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Mary Lou McDonald',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Matteo Salvini',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Peter Magyar',pos:'OPP',bucket:'EU Institutions',tier:'T4',vol:'High',sub:'EU Institutions'},
+  {name:'Rafal Trzaskowski',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Raphael Glucksmann',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Riikka Purra',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Robert Habeck',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Sahra Wagenknecht',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'High',sub:'EU Institutions'},
+  {name:'Sanna Marin',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Sigrid Kaag',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Tino Chrupalla',pos:'OPP',bucket:'EU Institutions',tier:'T3',vol:'Med',sub:'EU Institutions'},
+  {name:'Yolanda Diaz',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Zuzana Caputova',pos:'OPP',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Arvind Kejriwal',pos:'OPP',bucket:'Indo-Pacific',tier:'T3',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Aung San Suu Kyi',pos:'OPP',bucket:'Indo-Pacific',tier:'T3',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Bilawal Bhutto Zardari',pos:'OPP',bucket:'Indo-Pacific',tier:'T3',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Cho Kuk',pos:'OPP',bucket:'Indo-Pacific',tier:'T3',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Eric Chu',pos:'OPP',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Imran Khan',pos:'OPP',bucket:'Indo-Pacific',tier:'T4',vol:'High',sub:'Indo-Pacific'},
+  {name:'Ko Wen-je',pos:'OPP',bucket:'Indo-Pacific',tier:'T3',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Lee Jae-myung',pos:'OPP',bucket:'Indo-Pacific',tier:'T2',vol:'High',sub:'Indo-Pacific'},
+  {name:'Peter Dutton',pos:'OPP',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'Rahul Gandhi',pos:'OPP',bucket:'Indo-Pacific',tier:'T2',vol:'Med',sub:'Indo-Pacific'},
+  {name:'Benny Gantz',pos:'OPP',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Bezalel Smotrich',pos:'OPP',bucket:'Middle East',tier:'T4',vol:'High',sub:'Middle East'},
+  {name:'Itamar Ben Gvir',pos:'OPP',bucket:'Middle East',tier:'T4',vol:'High',sub:'Middle East'},
+  {name:'Marwan Barghouti',pos:'OPP',bucket:'Middle East',tier:'T3',vol:'Med',sub:'Middle East'},
+  {name:'Naftali Bennett',pos:'OPP',bucket:'Middle East',tier:'T3',vol:'Med',sub:'Middle East'},
+  {name:'Yair Lapid',pos:'OPP',bucket:'Middle East',tier:'T2',vol:'Med',sub:'Middle East'},
+  {name:'Andrew Yang',pos:'OPP',bucket:'Third Party / Outsider',tier:'T3',vol:'Med',sub:'Third Party / Outsider'},
+  {name:'Claudia De la Cruz',pos:'OPP',bucket:'Third Party / Outsider',tier:'T2',vol:'Low',sub:'Third Party / Outsider'},
+  {name:'Cornel West',pos:'OPP',bucket:'Third Party / Outsider',tier:'T3',vol:'High',sub:'Third Party / Outsider'},
+  {name:'Dan Osborn',pos:'OPP',bucket:'Third Party / Outsider',tier:'T3',vol:'High',sub:'Third Party / Outsider'},
+  {name:'Glenn Youngkin',pos:'OPP',bucket:'Third Party / Outsider',tier:'T2',vol:'Low',sub:'Third Party / Outsider'},
+  {name:'Howard Schultz',pos:'OPP',bucket:'Third Party / Outsider',tier:'T2',vol:'Low',sub:'Third Party / Outsider'},
+  {name:'Jill Stein',pos:'OPP',bucket:'Third Party / Outsider',tier:'T3',vol:'Med',sub:'Third Party / Outsider'},
+  {name:'Joe Manchin',pos:'OPP',bucket:'Third Party / Outsider',tier:'T2',vol:'Low',sub:'Third Party / Outsider'},
+  {name:'Larry Hogan',pos:'OPP',bucket:'Third Party / Outsider',tier:'T2',vol:'Low',sub:'Third Party / Outsider'},
+  {name:'Boris Johnson',pos:'OPP',bucket:'UK Politics',tier:'T3',vol:'Med',sub:'UK Politics'},
+  {name:'David Cameron',pos:'OPP',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Ed Davey',pos:'OPP',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Kemi Badenoch',pos:'OPP',bucket:'UK Politics',tier:'T3',vol:'Med',sub:'UK Politics'},
+  {name:'Lee Anderson',pos:'OPP',bucket:'UK Politics',tier:'T3',vol:'Med',sub:'UK Politics'},
+  {name:'Richard Tice',pos:'OPP',bucket:'UK Politics',tier:'T3',vol:'Med',sub:'UK Politics'},
+  {name:'Rishi Sunak',pos:'OPP',bucket:'UK Politics',tier:'T2',vol:'Low',sub:'UK Politics'},
+  {name:'Alexander Vindman',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'High',sub:'US Campaign'},
+  {name:'Angie Craig',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Angie Nixon',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Low',sub:'US Campaign'},
+  {name:'Antonio Villaraigosa',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Buddy Carter',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Chad Bianco',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'High',sub:'US Campaign'},
+  {name:'Chris Pappas',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Christi Craddick',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Colin Allred',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Dean Phillips',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Derek Dooley',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Don Huffines',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Eric Swalwell',pos:'OPP',bucket:'US Campaign',tier:'T4',vol:'V.High',sub:'US Campaign'},
+  {name:'Gina Hinojosa',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Graham Platner',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'V.High',sub:'US Campaign'},
+  {name:'James Talarico',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'V.High',sub:'US Campaign'},
+  {name:'Jeff Jackson',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Jon Husted',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Med',sub:'US Campaign'},
+  {name:'Katie Porter',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'High',sub:'US Campaign'},
+  {name:'Kelly Ayotte',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Lanon Baccam',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Marianne Williamson',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Mary Peltola',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Matt Mahan',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Low',sub:'US Campaign'},
+  {name:'Michele Tafoya',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Mike Collins',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Mike Duggan',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Mike Rogers',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Med',sub:'US Campaign'},
+  {name:'Mikie Sherrill',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Peggy Flanagan',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Pete Ricketts',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Ro Khanna',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Rob Bonta',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Roy Cooper',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Royce White',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Sarah Eckhardt',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Sherrod Brown',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Med',sub:'US Campaign'},
+  {name:'Steve Hilton',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'High',sub:'US Campaign'},
+  {name:'Tim Walz',pos:'OPP',bucket:'US Campaign',tier:'T2',vol:'Med',sub:'US Campaign'},
+  {name:'Tom Steyer',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Xavier Becerra',pos:'OPP',bucket:'US Campaign',tier:'T3',vol:'High',sub:'US Campaign'},
+  {name:'Ras Baraka',pos:'OPP',bucket:'US Governor',tier:'T3',vol:'Med',sub:'US Governor'},
+  {name:'Roy Cooper',pos:'OPP',bucket:'US Governor',tier:'T2',vol:'Low',sub:'US Governor'},
+  {name:'Brad Lander',pos:'OPP',bucket:'US Municipal',tier:'T3',vol:'Med',sub:'US Municipal'},
+  {name:'Antonio Costa',pos:'WBR',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Charles Michel',pos:'WBR',bucket:'EU Institutions',tier:'T2',vol:'Low',sub:'EU Institutions'},
+  {name:'Roberta Metsola',pos:'WBR',bucket:'EU Institutions',tier:'T2',vol:'Med',sub:'EU Institutions'},
+  {name:'Mark Rutte',pos:'WBR',bucket:'NATO / G7',tier:'T2',vol:'Med',sub:'NATO / G7'},
+  {name:'Ajay Banga',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Antonio Guterres',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'High',sub:'UN / Multilateral'},
+  {name:'David Miliband',pos:'WBR',bucket:'UN / Multilateral',tier:'T3',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Elise Stefanik',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Filippo Grandi',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Kristalina Georgieva',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Mark Malloch-Brown',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Michelle Bachelet',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Miroslav Jencha',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Ngozi Okonjo-Iweala',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Pope Leo XIV',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Tedros Adhanom Ghebreyesus',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Med',sub:'UN / Multilateral'},
+  {name:'Volker Turk',pos:'WBR',bucket:'UN / Multilateral',tier:'T2',vol:'Low',sub:'UN / Multilateral'},
+  {name:'Ai Weiwei',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'High',sub:'Activist / Advocate'},
+  {name:'Al Sharpton',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'High',sub:'Activist / Advocate'},
+  {name:'Alicia Garza',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Angela Davis',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Ben Jealous',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Ben Wikler',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Bree Newsome',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Christiana Figueres',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Low',sub:'Activist / Advocate'},
+  {name:'David Hogg',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'DeRay Mckesson',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Dolores Huerta',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Low',sub:'Activist / Advocate'},
+  {name:'Ezra Levin',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Low',sub:'Activist / Advocate'},
+  {name:'Greta Thunberg',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Joshua Wong',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'High',sub:'Activist / Advocate'},
+  {name:'Leah Greenberg',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Linda Sarsour',pos:'OPP',bucket:'Activist / Advocate',tier:'T4',vol:'High',sub:'Activist / Advocate'},
+  {name:'Medea Benjamin',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Michael Render (Killer Mike)',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Nathan Law',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'High',sub:'Activist / Advocate'},
+  {name:'Nina Turner',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Low',sub:'Activist / Advocate'},
+  {name:'Patrisse Cullors',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Sister Simone Campbell',pos:'OPP',bucket:'Activist / Advocate',tier:'T2',vol:'Low',sub:'Activist / Advocate'},
+  {name:'Stacey Abrams',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'High',sub:'Activist / Advocate'},
+  {name:'Tommy Robinson',pos:'OPP',bucket:'Activist / Advocate',tier:'T4',vol:'High',sub:'Activist / Advocate'},
+  {name:'Van Jones',pos:'OPP',bucket:'Activist / Advocate',tier:'T3',vol:'Med',sub:'Activist / Advocate'},
+  {name:'Esteban Moctezuma Barragan',pos:'WLD',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Jorge Mas Santos',pos:'WLD',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Mario Delgado',pos:'WLD',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Raul Castro',pos:'WLD',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Roberto Morales Ojeda',pos:'WLD',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Ron Johnson (Ambassador)',pos:'WLD',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
+  {name:'Alex Karp',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Ari Emanuel',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Balaji Srinivasan',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Ben Horowitz',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Bill Ackman',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Bill Gates',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Bob Iger',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Bryan Johnson',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Carl Icahn',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Charles Koch',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Chris Ripley',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Dario Amodei',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'David Solomon',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'David Zaslav',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Elon Musk',pos:'WBR',bucket:'Business / Donor',tier:'T1',vol:'V.High',sub:'Business / Donor'},
+  {name:'Elvira Nabiullina',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'George Soros',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Glenn Dubin',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Harlan Crow',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Jack Ma',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Jamie Dimon',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Jane Fraser',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Jeff Bezos',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Julian Assange',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Ken Griffin',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Kirill Dmitriev',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Lachlan Murdoch',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Larry Ellison',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Larry Fink',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Laurene Powell Jobs',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Leon Black',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Leonard Leo',pos:'WBR',bucket:'Business / Donor',tier:'T4',vol:'High',sub:'Business / Donor'},
+  {name:'Les Wexner',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Li Ka-shing',pos:'WBR',bucket:'Business / Donor',tier:'T2',vol:'Med',sub:'Business / Donor'},
+  {name:'Marc Andreessen',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Marc Benioff',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Mark Cuban',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Mark Zuckerberg',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Miriam Adelson',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Patrick Collison',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Peter Thiel',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Ray Dalio',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Reid Hoffman',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Rupert Murdoch',pos:'WBR',bucket:'Business / Donor',tier:'T2',vol:'Low',sub:'Business / Donor'},
+  {name:'Sam Altman',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'High',sub:'Business / Donor'},
+  {name:'Shari Redstone',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Stephen Schwarzman',pos:'WLD',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Ted Sarandos',pos:'WBR',bucket:'Business / Donor',tier:'T3',vol:'Med',sub:'Business / Donor'},
+  {name:'Abby Martin',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Low',sub:'Independent Media'},
+  {name:'Andrew Sullivan',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Bari Weiss',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Ben Meiselas',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Bill Kristol',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Cenk Uygur',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Chamath Palihapitiya',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Curtis Yarvin',pos:'WLD',bucket:'Independent Media',tier:'T4',vol:'High',sub:'Independent Media'},
+  {name:'Dan Pfeiffer',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'David Axelrod',pos:'WLD',bucket:'Independent Media',tier:'T2',vol:'Low',sub:'Independent Media'},
+  {name:'David Cay Johnston',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'David Frum',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'David Sacks',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Ezra Klein',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Glenn Greenwald',pos:'WLD',bucket:'Independent Media',tier:'T4',vol:'High',sub:'Independent Media'},
+  {name:'Hasan Piker',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Low',sub:'Independent Media'},
+  {name:'Heather Cox Richardson',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Jason Calacanis',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Jim VandeHei',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Jimmy Dore',pos:'WLD',bucket:'Independent Media',tier:'T4',vol:'High',sub:'Independent Media'},
+  {name:'Joe Rogan',pos:'WLD',bucket:'Independent Media',tier:'T5',vol:'V.High',sub:'Independent Media'},
+  {name:'Jon Favreau',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Jon Lovett',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Josh Marshall',pos:'WLD',bucket:'Independent Media',tier:'T2',vol:'Low',sub:'Independent Media'},
+  {name:'Kara Swisher',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Lex Fridman',pos:'WLD',bucket:'Independent Media',tier:'T2',vol:'Low',sub:'Independent Media'},
+  {name:'Mark Leibovich',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Low',sub:'Independent Media'},
+  {name:'Matt Taibbi',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Mehdi Hasan',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Michael Shellenberger',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Mike Allen',pos:'WLD',bucket:'Independent Media',tier:'T2',vol:'Low',sub:'Independent Media'},
+  {name:'Molly Jong-Fast',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Olivia Nuzzi',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Peter Zeihan',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Robert Reich',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Scott Galloway',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Tara Palmeri',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Tim Miller',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Tim Pool',pos:'WLD',bucket:'Independent Media',tier:'T4',vol:'High',sub:'Independent Media'},
+  {name:'Tommy Vietor',pos:'WLD',bucket:'Independent Media',tier:'T3',vol:'Med',sub:'Independent Media'},
+  {name:'Alexander Yui',pos:'WLD',bucket:'Indo-Pacific',tier:'T2',vol:'Low',sub:'Indo-Pacific'},
+  {name:'A.G. Sulzberger',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Ana Kasparian',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Bill Maher',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Bret Baier',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Chris Cuomo',pos:'WLD',bucket:'Legacy Media',tier:'T2',vol:'Low',sub:'Legacy Media'},
+  {name:'Chris Wallace',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Christiane Amanpour',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Erin Burnett',pos:'WLD',bucket:'Legacy Media',tier:'T2',vol:'Low',sub:'Legacy Media'},
+  {name:'Fareed Zakaria',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Greg Gutfeld',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Jake Tapper',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Jeffrey Goldberg',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'High',sub:'Legacy Media'},
+  {name:'Jesse Watters',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Joe Scarborough',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'John Oliver',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Jon Stewart',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Judge Jeanine Pirro',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Kaitlan Collins',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Katharine Maher',pos:'WLD',bucket:'Legacy Media',tier:'T4',vol:'High',sub:'Legacy Media'},
+  {name:'Laura Ingraham',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Margaret Brennan',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Maria Bartiromo',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Nicolle Wallace',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Paul Krugman',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Peter Doocy',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Rachel Maddow',pos:'WLD',bucket:'Legacy Media',tier:'T4',vol:'High',sub:'Legacy Media'},
+  {name:'Robert Costa',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Sean Hannity',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'High',sub:'Legacy Media'},
+  {name:'Stephen Colbert',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Thomas Friedman',pos:'WLD',bucket:'Legacy Media',tier:'T3',vol:'Med',sub:'Legacy Media'},
+  {name:'Alan Dershowitz',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Alvin Bragg',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Anita Dunn',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Boris Epshteyn',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Brad Raffensperger',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Brian Ballard',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Chris LaCivita',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Corey Lewandowski',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Dana Nessel',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Donna Brazile',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Eric Holder',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Frank Luntz',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'George Conway',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'High',sub:'Legal / Operative'},
+  {name:'Ivanka Trump',pos:'WLD',bucket:'Legal / Operative',tier:'T2',vol:'Low',sub:'Legal / Operative'},
+  {name:'Jared Kushner',pos:'WLD',bucket:'Legal / Operative',tier:'T2',vol:'Low',sub:'Legal / Operative'},
+  {name:'Jason Miller',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Jay Clayton',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Jena Griswold',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Jocelyn Benson',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'John Podesta',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Jonathan Skrmetti',pos:'OPP',bucket:'Legal / Operative',tier:'T2',vol:'Med',sub:'Legal / Operative'},
+  {name:'Keith Ellison',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Kellyanne Conway',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Ken Paxton',pos:'OPP',bucket:'Legal / Operative',tier:'T2',vol:'Med',sub:'Legal / Operative'},
+  {name:'Kim Foxx',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Kimberly Guilfoyle',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Kris Kobach',pos:'OPP',bucket:'Legal / Operative',tier:'T2',vol:'Med',sub:'Legal / Operative'},
+  {name:'Kris Mayes',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'High',sub:'Legal / Operative'},
+  {name:'Kristi Noem',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Letitia James',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Loretta Lynch',pos:'OPP',bucket:'Legal / Operative',tier:'T2',vol:'Low',sub:'Legal / Operative'},
+  {name:'Michael Cohen',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Preet Bharara',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Rick Wilson',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Robert Lighthizer',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Roger Stone',pos:'OPP',bucket:'Legal / Operative',tier:'T4',vol:'V.High',sub:'Legal / Operative'},
+  {name:'Shenna Bellows',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Stephen Miller',pos:'OPP',bucket:'Legal / Operative',tier:'T5',vol:'V.High',sub:'Legal / Operative'},
+  {name:'Steve Bannon',pos:'OPP',bucket:'Legal / Operative',tier:'T4',vol:'V.High',sub:'Legal / Operative'},
+  {name:'Steve Marshall',pos:'OPP',bucket:'Legal / Operative',tier:'T2',vol:'Med',sub:'Legal / Operative'},
+  {name:'Steven Witkoff',pos:'OPP',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Todd Blanche',pos:'OPP',bucket:'Legal / Operative',tier:'T1',vol:'High',sub:'Legal / Operative'},
+  {name:'Tony Podesta',pos:'WLD',bucket:'Legal / Operative',tier:'T3',vol:'Med',sub:'Legal / Operative'},
+  {name:'Mohammed Rashid',pos:'WLD',bucket:'Middle East',tier:'T2',vol:'Low',sub:'Middle East'},
+  {name:'Andrew McCabe',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Andriy Yermak',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Brad Cooper',pos:'HoS',bucket:'Military / Security',tier:'T1',vol:'V.High',sub:'Military / Security'},
+  {name:'CQ Brown',pos:'HoS',bucket:'Military / Security',tier:'T2',vol:'Low',sub:'Military / Security'},
+  {name:'Christopher Wray',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Dan Caine',pos:'HoS',bucket:'Military / Security',tier:'T1',vol:'High',sub:'Military / Security'},
+  {name:'David Petraeus',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Esmail Qaani',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Eyal Zamir',pos:'HoS',bucket:'Military / Security',tier:'T2',vol:'High',sub:'Military / Security'},
+  {name:'Hossein Salami',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'James Clapper',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'James Mattis',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'John Brennan',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Mark Milley',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Min Aung Hlaing',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Mohammad Bagheri',pos:'HoS',bucket:'Military / Security',tier:'T2',vol:'Med',sub:'Military / Security'},
+  {name:'Mohammad Ghalibaf',pos:'HoS',bucket:'Military / Security',tier:'T2',vol:'Med',sub:'Military / Security'},
+  {name:'Oleksandr Syrskyi',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Pete Hegseth',pos:'HoS',bucket:'Military / Security',tier:'T2',vol:'High',sub:'Military / Security'},
+  {name:'Robert Hur',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Rustem Umerov',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Sergei Naryshkin',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Low',sub:'Military / Security'},
+  {name:'Sergei Shoigu',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Timothy Haugh',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Valery Gerasimov',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Valery Zaluzhny',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Wellington Koo',pos:'HoS',bucket:'Military / Security',tier:'T3',vol:'Med',sub:'Military / Security'},
+  {name:'Alex Jones',pos:'WLD',bucket:'Political Commentator',tier:'T5',vol:'V.High',sub:'Political Commentator'},
+  {name:'Alyssa Farah Griffin',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Ana Navarro',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Andrew Yang',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Anthony Scaramucci',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Ben Shapiro',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Bill Kristol',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Candace Owens',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Charlamagne tha God',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Charles III',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Dan Bongino',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'David French',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Don Lemon',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Don Trump Jr.',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Edward Snowden',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Eric Trump',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Erick Erickson',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Erika Kirk',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Fareed Zakaria',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Gary Kasparov',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Grover Norquist',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Hasan Minhaj',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Jack Posobiec',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'James Carville',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'James Comey',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Jen Psaki',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Joe Rogan',pos:'WLD',bucket:'Political Commentator',tier:'T5',vol:'V.High',sub:'Political Commentator'},
+  {name:'Jonah Goldberg',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Jordan Peterson',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Joy Behar',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Julius Malema',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Kari Lake',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Kristen Welker',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Laura Loomer',pos:'WLD',bucket:'Political Commentator',tier:'T5',vol:'V.High',sub:'Political Commentator'},
+  {name:'Marianne Williamson',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'High',sub:'Political Commentator'},
+  {name:'Matt Walsh',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Meghan Markle',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Megyn Kelly',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Michael Moore',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Michelle Obama',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Mikhail Khodorkovsky',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'High',sub:'Political Commentator'},
+  {name:'Milo Yiannopoulos',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Nate Silver',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Newt Gingrich',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Nick Fuentes',pos:'WLD',bucket:'Political Commentator',tier:'T5',vol:'V.High',sub:'Political Commentator'},
+  {name:'Peng Shuai',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Piers Morgan',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Prince Harry',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Prince William',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Roland Martin',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Sunny Hostin',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Ta-Nehisi Coates',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Tom Nichols',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Tomi Lahren',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Tony Perkins',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Tucker Carlson',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Viktor Bout',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'Whoopi Goldberg',pos:'WLD',bucket:'Political Commentator',tier:'T3',vol:'Med',sub:'Political Commentator'},
+  {name:'Yanis Varoufakis',pos:'WLD',bucket:'Political Commentator',tier:'T4',vol:'High',sub:'Political Commentator'},
+  {name:'American Enterprise Institute',pos:'WBR',bucket:'Think Tank / Expert',tier:'T2',vol:'Low',sub:'Think Tank / Expert'},
+  {name:'Anne Applebaum',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Bernard-Henri Levy',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Brookings Institution',pos:'WBR',bucket:'Think Tank / Expert',tier:'T2',vol:'Low',sub:'Think Tank / Expert'},
+  {name:'CATO Institute',pos:'WBR',bucket:'Think Tank / Expert',tier:'T2',vol:'Low',sub:'Think Tank / Expert'},
+  {name:'Daron Acemoglu',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Fiona Hill',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Heritage Foundation',pos:'WBR',bucket:'Think Tank / Expert',tier:'T2',vol:'High',sub:'Think Tank / Expert'},
+  {name:'Ian Bremmer',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Jeffrey Sachs',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'John Mearsheimer',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Kevin Roberts',pos:'WLD',bucket:'Think Tank / Expert',tier:'T4',vol:'High',sub:'Think Tank / Expert'},
+  {name:'Larry Summers',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Lawrence Tribe',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Michael McFaul',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Niall Ferguson',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Peter Navarro',pos:'WLD',bucket:'Think Tank / Expert',tier:'T4',vol:'High',sub:'Think Tank / Expert'},
+  {name:'Richard Haass',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Robert Kagan',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Samantha Power',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Stephanie Kelton',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Stephen Miran',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Thomas Sowell',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Timothy Snyder',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Victor Davis Hanson',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Yuval Noah Harari',pos:'WLD',bucket:'Think Tank / Expert',tier:'T3',vol:'Med',sub:'Think Tank / Expert'},
+  {name:'Nigel Farage',pos:'WLD',bucket:'UK Politics',tier:'T4',vol:'V.High',sub:'UK Politics'},
+  {name:'Tony Blair',pos:'WLD',bucket:'UK Politics',tier:'T3',vol:'Med',sub:'UK Politics'},
+  {name:'David Sacks',pos:'WLD',bucket:'US Agencies',tier:'T2',vol:'Med',sub:'US Agencies'},
+  {name:'Elon Musk',pos:'WLD',bucket:'US Agencies',tier:'T1',vol:'V.High',sub:'US Agencies'},
+  {name:'David Plouffe',pos:'WLD',bucket:'US Campaign',tier:'T3',vol:'Low',sub:'US Campaign'},
+  {name:'James Carville',pos:'WLD',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Kellyanne Conway',pos:'WLD',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Ken Martin',pos:'WLD',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'Lara Trump',pos:'WLD',bucket:'US Campaign',tier:'T3',vol:'Med',sub:'US Campaign'},
+  {name:'Michael Whatley',pos:'WLD',bucket:'US Campaign',tier:'T2',vol:'Low',sub:'US Campaign'},
+  {name:'RFK Jr.',pos:'WLD',bucket:'US Executive',tier:'T2',vol:'High',sub:'US Executive'},
+  {name:'Stephen Miller',pos:'WLD',bucket:'US Executive',tier:'T2',vol:'V.High',sub:'US Executive'},
+  {name:'Amy Coney Barrett',pos:'WBR',bucket:'US Judiciary',tier:'T2',vol:'Low',sub:'US Judiciary'},
+  {name:'Brett Kavanaugh',pos:'WBR',bucket:'US Judiciary',tier:'T2',vol:'Low',sub:'US Judiciary'},
+  {name:'Bryan Stevenson',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'Clarence Thomas',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'Elena Kagan',pos:'WBR',bucket:'US Judiciary',tier:'T2',vol:'Low',sub:'US Judiciary'},
+  {name:'Jack Smith',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'James Boasberg',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'High',sub:'US Judiciary'},
+  {name:'Jeff Jackson',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'John Roberts',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'Ketanji Brown Jackson',pos:'WBR',bucket:'US Judiciary',tier:'T2',vol:'Low',sub:'US Judiciary'},
+  {name:'Michael Luttig',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'Neal Katyal',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'Neil Gorsuch',pos:'WBR',bucket:'US Judiciary',tier:'T2',vol:'Low',sub:'US Judiciary'},
+  {name:'Samuel Alito',pos:'WBR',bucket:'US Judiciary',tier:'T3',vol:'Med',sub:'US Judiciary'},
+  {name:'Sonia Sotomayor',pos:'WBR',bucket:'US Judiciary',tier:'T2',vol:'Low',sub:'US Judiciary'},
+  {name:'George Santos',pos:'WLD',bucket:'US Legislature',tier:'T4',vol:'High',sub:'US Legislature'},
+  {name:'Alex Jones',pos:'WLD',bucket:'Wildcard Editorial',tier:'T5',vol:'V.High',sub:'Wildcard Editorial'},
+  {name:'Andrew Tate',pos:'WLD',bucket:'Wildcard Editorial',tier:'T5',vol:'V.High',sub:'Wildcard Editorial'},
+  {name:'Calin Georgescu',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'V.High',sub:'Wildcard Editorial'},
+  {name:'David Pecker',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Low',sub:'Wildcard Editorial'},
+  {name:'Don Huffines',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Don Jr.',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Douglas Macgregor',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'El Mayo Zambada',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'El Mencho',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Gavin McInnes',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Ghislaine Maxwell',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Graham Platner',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'V.High',sub:'Wildcard Editorial'},
+  {name:'Jimmy Cherizier (Barbecue)',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Joaquin Guzman Lopez',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Jordan Peterson',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Juan Jose Zuniga',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Justin Jones',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Justin Pearson',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Kanye West',pos:'WLD',bucket:'Wildcard Editorial',tier:'T5',vol:'V.High',sub:'Wildcard Editorial'},
+  {name:'Lara Trump',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Laura Loomer',pos:'WLD',bucket:'Wildcard Editorial',tier:'T5',vol:'V.High',sub:'Wildcard Editorial'},
+  {name:'Matt Drudge',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Matt Walsh',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Melania Trump',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Michael Flynn',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Nick Fuentes',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Nigel Farage',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Peter Navarro',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Ricardo Martinelli',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Rod Blagojevich',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Russell Brand',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Sebastian Gorka',pos:'WLD',bucket:'Wildcard Editorial',tier:'T3',vol:'Med',sub:'Wildcard Editorial'},
+  {name:'Tulsi Gabbard',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
+  {name:'Zooey Zephyr',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'}
+];
+
+let squad = {HoS:[null,null],LEG:[null,null],OPP:[null,null],WBR:[null,null],WLD:[null,null]};
 let swapUsed = false;
 let squadLocked = false;
-let activeFilters = { pos: 'ALL', bucket: '', tiers: new Set(['T1','T2','T3','T4','T5']) };
-let searchQuery = '';
+let activePos = 'ALL';
+let activeBucket = '';
+let activeTiers = new Set(['T1','T2','T3','T4','T5']);
+let searchQ = '';
 let figureScores = {};
 
-// ── INIT ──────────────────────────────────────────────────────
 async function init() {
   loadSquadFromStorage();
-  await loadFigures();
   await loadScores();
-  renderAll();
-  startTimer();
-  checkLockState();
-}
-
-// ── LOAD FIGURES ──────────────────────────────────────────────
-async function loadFigures() {
-  try {
-    const res = await fetch('figures.json');
-    const data = await res.json();
-    allFigures = data.figures;
-    document.getElementById('fig-count').textContent =
-      `${allFigures.length} figures · ${allFigures.filter(f=>f.position==='WLD').length} kibitzers`;
-    populateBucketSelect();
-  } catch(e) {
-    document.getElementById('figure-list').innerHTML =
-      '<div class="loading-state">Error loading figures. Check figures.json exists.</div>';
-  }
-}
-
-// ── LOAD SCORES ───────────────────────────────────────────────
-async function loadScores() {
-  try {
-    const res = await fetch('scores.json');
-    const data = await res.json();
-    // Build lookup: figure name → total points this sweep
-    figureScores = {};
-    for (const evt of data.events || []) {
-      const n = evt.figure;
-      figureScores[n] = (figureScores[n] || 0) + (evt.total_points || evt.points || 0);
-    }
-    // Flash sweep
-    if (data.flash_sweep && data.flash_sweep.active) {
-      const banner = document.getElementById('flash-banner');
-      banner.classList.add('active');
-      document.getElementById('flash-desc').textContent =
-        `⚡ ${data.flash_sweep.title} — closes ${new Date(data.flash_sweep.closes).toLocaleString()}`;
-    }
-  } catch(e) { /* scores optional */ }
-}
-
-// ── POPULATE BUCKET SELECT ────────────────────────────────────
-function populateBucketSelect() {
-  const buckets = [...new Set(allFigures.map(f=>f.bucket))].sort();
-  const sel = document.getElementById('bucket-select');
-  buckets.forEach(b => {
-    const opt = document.createElement('option');
-    opt.value = b; opt.textContent = b;
-    sel.appendChild(opt);
-  });
-}
-
-// ── FILTER & RENDER CATALOG ───────────────────────────────────
-function renderAll() {
   renderCatalog();
   renderSquad();
-  updateSquadTotal();
+  startTimer();
+}
+
+async function loadScores() {
+  try {
+    const res = await fetch('scores.json?_='+Date.now());
+    const data = await res.json();
+    figureScores = {};
+    (data.events||[]).forEach(e => {
+      figureScores[e.figure] = (figureScores[e.figure]||0) + (e.total_points||e.points||0);
+    });
+  } catch(e) {}
 }
 
 function renderCatalog() {
-  const list = document.getElementById('figure-list');
-  if (!allFigures.length) return;
-
-  const q = searchQuery.toLowerCase();
+  const q = searchQ.toLowerCase();
   const squadNames = getSquadNames();
+  const nonWLD = [];
+  const wld = [];
 
-  let filtered = allFigures.filter(f => {
-    if (activeFilters.pos !== 'ALL' && f.position !== activeFilters.pos) return false;
-    if (activeFilters.bucket && f.bucket !== activeFilters.bucket) return false;
-    if (!activeFilters.tiers.has(f.tier)) return false;
-    if (q && !f.name.toLowerCase().includes(q) && !f.bucket.toLowerCase().includes(q)) return false;
-    return true;
+  FIGURES.forEach(f => {
+    if (activePos !== 'ALL' && f.pos !== activePos) return;
+    if (activeBucket && f.bucket !== activeBucket) return;
+    if (!activeTiers.has(f.tier)) return;
+    if (q && !f.name.toLowerCase().includes(q) && !f.bucket.toLowerCase().includes(q)) return;
+    if (f.pos === 'WLD') wld.push(f);
+    else nonWLD.push(f);
   });
 
-  if (!filtered.length) {
-    list.innerHTML = '<div class="loading-state">No figures match your filters.</div>';
-    return;
-  }
-
-  // Group WLD separately
-  const nonWLD = filtered.filter(f => f.position !== 'WLD');
-  const wld = filtered.filter(f => f.position === 'WLD');
-
   let html = '';
-
-  if (nonWLD.length) {
-    nonWLD.forEach(f => { html += renderFigureItem(f, squadNames); });
-  }
-
+  nonWLD.forEach(f => { html += renderFigItem(f, squadNames); });
   if (wld.length) {
-    html += `
-      <div class="wld-header">
-        <div class="wld-header-title">WLD · Kibitzers &amp; Criers · 1.5×</div>
-        <div class="wld-header-sub">Sidelined, volatile, dangerous · your highest-risk pick</div>
-      </div>`;
-    wld.forEach(f => { html += renderFigureItem(f, squadNames); });
+    html += \`<div class="wld-header"><div class="wld-header-title">WLD · Kibitzers &amp; Criers · 1.5×</div><div class="wld-header-sub">Sidelined, volatile, dangerous · your highest-risk pick</div></div>\`;
+    wld.forEach(f => { html += renderFigItem(f, squadNames); });
   }
 
-  list.innerHTML = html;
+  const total = nonWLD.length + wld.length;
+  document.getElementById('fig-count').textContent = total + ' figures · ' + wld.length + ' kibitzers';
+  document.getElementById('figure-list').innerHTML = html || '<div style="padding:32px 22px;font-family:\'IBM Plex Mono\',monospace;font-size:12px;color:var(--gray2)">No figures match filters.</div>';
 }
 
-function renderFigureItem(f, squadNames) {
+function renderFigItem(f, squadNames) {
   const inSquad = squadNames.has(f.name);
-  const pts = figureScores[f.name] ? `+${figureScores[f.name]}` : '';
-  const isWLD = f.position === 'WLD';
-  const action = inSquad ? '− Remove' : '+ Draft';
-  return `
-    <div class="fig-item ${inSquad ? 'in-squad' : ''} ${isWLD ? 'wld-fig' : ''}"
-         onclick="handleFigureClick('${escStr(f.name)}','${f.position}')">
-      <span class="fig-pos-badge ${f.position}">${f.position}</span>
-      <div class="fig-info">
-        <div class="fig-name">${f.name}</div>
-        <div class="fig-sub">${f.bucket}</div>
-      </div>
-      <span class="fig-tier ${f.tier}">${f.tier}</span>
-      ${pts ? `<span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold)">${pts}pts</span>` : ''}
-      <span class="fig-action">${action}</span>
-    </div>`;
+  const pts = figureScores[f.name] ? '+'+figureScores[f.name] : '';
+  const isWLD = f.pos === 'WLD';
+  const nm = f.name.replace(/'/g,"\'").replace(/"/g,\'&quot;\');
+  return \`<div class="fig-item\${inSquad?' in-squad':''}\${isWLD?' wld-fig':''}" onclick="handleFigureClick('\${nm}','\${f.pos}')">
+    <span class="fig-pos-badge \${f.pos}">\${f.pos}</span>
+    <div class="fig-info"><div class="fig-name">\${f.name}</div><div class="fig-sub">\${f.bucket}</div></div>
+    <span class="fig-tier \${f.tier}">\${f.tier}</span>
+    \${pts?'<span class="fig-pts">'+pts+'</span>':''}
+    <span class="fig-action">\${inSquad?'− Remove':'+ Draft'}</span>
+  </div>\`;
 }
 
-function escStr(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
-
-// ── SQUAD MANAGEMENT ──────────────────────────────────────────
 function getSquadNames() {
-  const names = new Set();
-  for (const pos in squad) {
-    squad[pos].forEach(n => { if(n) names.add(n); });
-  }
-  return names;
+  const s = new Set();
+  Object.values(squad).forEach(slots => slots.forEach(n => { if(n) s.add(n); }));
+  return s;
 }
 
-function handleFigureClick(name, position) {
-  if (squadLocked) { showToast('Squad is locked for this Sweep', 'error'); return; }
-  const squadNames = getSquadNames();
-  if (squadNames.has(name)) {
-    removeFigure(name, position);
-  } else {
-    addFigure(name, position);
-  }
+function handleFigureClick(name, pos) {
+  if (squadLocked) { showToast('Squad is locked','error'); return; }
+  if (getSquadNames().has(name)) removeFigure(name, pos);
+  else addFigure(name, pos);
 }
 
-function addFigure(name, position) {
-  if (squadLocked) return;
-  const slots = squad[position];
-  const emptyIdx = slots.findIndex(s => s === null);
-  if (emptyIdx === -1) {
-    showToast(`Both ${position} slots are filled. Remove one first.`, 'error');
-    return;
-  }
-  const squadNames = getSquadNames();
-  if (squadNames.size >= 10) {
-    showToast('Squad is full — 10 figures maximum.', 'error');
-    return;
-  }
-  slots[emptyIdx] = name;
-  saveSquadToStorage();
-  renderAll();
-  showToast(`${name} added to ${position}`);
+function addFigure(name, pos) {
+  const slots = squad[pos];
+  const idx = slots.findIndex(s => s === null);
+  if (idx === -1) { showToast('Both '+pos+' slots filled — remove one first','error'); return; }
+  if (getSquadNames().size >= 10) { showToast('Squad is full — 10 figures maximum','error'); return; }
+  slots[idx] = name;
+  saveSquad();
+  renderCatalog();
+  renderSquad();
+  showToast(name+' added to '+pos);
 }
 
-function removeFigure(name, position) {
-  if (squadLocked) return;
-  const slots = squad[position];
+function removeFigure(name, pos) {
+  const slots = squad[pos];
   const idx = slots.indexOf(name);
-  if (idx !== -1) {
-    slots[idx] = null;
-    saveSquadToStorage();
-    renderAll();
-    showToast(`${name} removed from squad`);
-  }
+  if (idx !== -1) { slots[idx] = null; saveSquad(); renderCatalog(); renderSquad(); showToast(name+' removed'); }
 }
 
 function handleSlotClick(el) {
   const pos = el.dataset.pos;
   const idx = parseInt(el.dataset.idx);
   const name = squad[pos][idx];
-  if (name && !squadLocked) {
-    squad[pos][idx] = null;
-    saveSquadToStorage();
-    renderAll();
-    showToast(`${name} removed`);
-  }
+  if (name && !squadLocked) { squad[pos][idx]=null; saveSquad(); renderCatalog(); renderSquad(); showToast(name+' removed'); }
 }
 
 function renderSquad() {
-  const positions = ['HoS','LEG','OPP','WBR','WLD'];
-  positions.forEach(pos => {
+  ['HoS','LEG','OPP','WBR','WLD'].forEach(pos => {
     [0,1].forEach(idx => {
-      const slot = document.querySelector(`.slot[data-pos="${pos}"][data-idx="${idx}"]`);
+      const slot = document.querySelector(\`.slot[data-pos="\${pos}"][data-idx="\${idx}"]\`);
       if (!slot) return;
       const name = squad[pos][idx];
-      const pts = name && figureScores[name] ? figureScores[name] : 0;
+      const mult = pos==='WLD'?1.5:1;
+      const pts = name&&figureScores[name]?Math.round(figureScores[name]*mult):0;
       if (name) {
-        const multiplier = pos === 'WLD' ? 1.5 : 1;
-        const effectivePts = Math.round(pts * multiplier);
         slot.classList.add('filled');
-        slot.innerHTML = `
-          <span class="slot-pos ${pos}">${pos}</span>
-          <span class="slot-name">${name}</span>
-          ${effectivePts > 0 ? `<span class="slot-pts scoring">+${effectivePts}</span>` : ''}
-          ${squadLocked ? '' : '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gray2)">×</span>'}
-        `;
+        slot.innerHTML = \`<span class="slot-pos \${pos}">\${pos}</span><span class="slot-name">\${name}</span>\${pts?'<span class="slot-pts">+'+pts+'</span>':''}${squadLocked?'':'<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gray2)">×</span>'}\`;
       } else {
         slot.classList.remove('filled');
-        const extra = pos === 'WLD' ? ' · 1.5×' : '';
-        slot.innerHTML = `
-          <span class="slot-pos ${pos}">${pos}</span>
-          <span class="slot-empty-text">Click to fill${extra}</span>
-        `;
+        slot.innerHTML = \`<span class="slot-pos \${pos}">\${pos}</span><span class="slot-empty-text">Click to fill\${pos==='WLD'?' · 1.5×':''}</span>\`;
       }
     });
   });
-
-  // Update swap badge
-  const swapBadge = document.getElementById('swap-badge');
-  if (swapUsed) {
-    swapBadge.textContent = 'Swap used';
-    swapBadge.classList.add('used');
-  } else {
-    swapBadge.textContent = '1 swap available';
-    swapBadge.classList.remove('used');
-  }
-
-  // Update lock button
-  const lockBtn = document.getElementById('lock-btn');
-  const squadNames = getSquadNames();
-  if (squadLocked) {
-    lockBtn.textContent = '✓ Squad Locked';
-    lockBtn.classList.add('locked');
-    lockBtn.disabled = true;
-  } else if (squadNames.size < 10) {
-    lockBtn.textContent = `Lock Your Squad (${squadNames.size}/10) →`;
-    lockBtn.disabled = true;
-  } else {
-    lockBtn.textContent = 'Lock Your Squad →';
-    lockBtn.disabled = false;
-  }
-}
-
-function updateSquadTotal() {
+  const names = getSquadNames();
   let total = 0;
-  for (const pos in squad) {
-    const multiplier = pos === 'WLD' ? 1.5 : 1;
-    squad[pos].forEach(name => {
-      if (name && figureScores[name]) {
-        total += Math.round(figureScores[name] * multiplier);
-      }
-    });
-  }
+  Object.entries(squad).forEach(([pos,slots]) => {
+    const m = pos==='WLD'?1.5:1;
+    slots.forEach(n => { if(n&&figureScores[n]) total+=Math.round(figureScores[n]*m); });
+  });
   document.getElementById('squad-total-pts').textContent = total;
   document.getElementById('total-pts-display').textContent = total;
+  const swapBadge = document.getElementById('swap-badge');
+  swapBadge.textContent = swapUsed?'Swap used':'1 swap available';
+  swapBadge.className = 'swap-badge'+(swapUsed?' used':'');
+  const lockBtn = document.getElementById('lock-btn');
+  if (squadLocked) { lockBtn.textContent='✓ Squad Locked';lockBtn.className='lock-btn locked';lockBtn.disabled=true; }
+  else if (names.size<10) { lockBtn.textContent='Lock Your Squad ('+names.size+'/10) →';lockBtn.disabled=true; }
+  else { lockBtn.textContent='Lock Your Squad →';lockBtn.disabled=false; }
 }
 
-// ── LOCK SQUAD ────────────────────────────────────────────────
 function lockSquad() {
-  const squadNames = getSquadNames();
-  if (squadNames.size < 10) return;
-  if (squadLocked) return;
-  squadLocked = true;
-  saveSquadToStorage();
-  renderSquad();
-  showToast('Squad locked! Watch your Sweep →');
+  if (getSquadNames().size<10||squadLocked) return;
+  squadLocked=true; saveSquad(); renderSquad(); showToast('Squad locked! Watch your Sweep →');
 }
 
-// ── TIMER ─────────────────────────────────────────────────────
 function startTimer() {
+  setInterval(updateTimer,1000);
   updateTimer();
-  setInterval(updateTimer, 1000);
 }
 
 function updateTimer() {
-  const now = new Date();
-  const diff = SWEEP_CLOSE - now;
-  const timerEl = document.getElementById('sweep-timer');
-
-  if (diff <= 0) {
-    timerEl.textContent = 'Sweep Closed';
-    timerEl.classList.add('urgent');
-    document.getElementById('timer-sub').textContent = 'Resolve pending · new Sweep opens Monday';
-    return;
-  }
-
-  const h = Math.floor(diff / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-
-  if (h < 6) timerEl.classList.add('urgent');
-  else timerEl.classList.remove('urgent');
-
-  timerEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const diff = SWEEP_CLOSE - new Date();
+  const el = document.getElementById('sweep-timer');
+  if (diff<=0) { el.textContent='Closed';el.className='timer-value urgent'; return; }
+  const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  el.textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  el.className='timer-value'+(h<6?' urgent':'');
 }
 
-// ── LOCK STATE CHECK ──────────────────────────────────────────
-function checkLockState() {
-  const now = new Date();
-  if (now >= LOCK_TIME) {
-    squadLocked = true;
-    renderSquad();
-  }
-}
-
-// ── LOCALSTORAGE ──────────────────────────────────────────────
-function saveSquadToStorage() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    squad, swapUsed, squadLocked,
-    sweep: 'sweep-001',
-    saved: new Date().toISOString()
-  }));
+function saveSquad() {
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({squad,swapUsed,squadLocked,sweep:'sweep-001',saved:new Date().toISOString()}));
 }
 
 function loadSquadFromStorage() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    if (data.sweep !== 'sweep-001') {
-      // New sweep — clear old squad
-      localStorage.removeItem(STORAGE_KEY);
-      return;
-    }
-    squad = data.squad || squad;
-    swapUsed = data.swapUsed || false;
-    squadLocked = data.squadLocked || false;
-  } catch(e) { localStorage.removeItem(STORAGE_KEY); }
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const d=JSON.parse(raw);
+    if(d.sweep!=='sweep-001'){localStorage.removeItem(STORAGE_KEY);return;}
+    squad=d.squad||squad;swapUsed=d.swapUsed||false;squadLocked=d.squadLocked||false;
+  } catch(e){localStorage.removeItem(STORAGE_KEY);}
 }
 
-// ── TOAST ─────────────────────────────────────────────────────
 let toastTimeout;
-function showToast(msg, type = '') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast show ${type}`;
+function showToast(msg,type='') {
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show '+type;
   clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => { t.className = 'toast'; }, 2500);
+  toastTimeout=setTimeout(()=>{t.className='toast';},2500);
 }
 
-// ── EVENT LISTENERS ───────────────────────────────────────────
-document.getElementById('search-input').addEventListener('input', e => {
-  searchQuery = e.target.value;
-  renderCatalog();
+document.getElementById('search-input').addEventListener('input',e=>{searchQ=e.target.value;renderCatalog();});
+document.getElementById('pos-filters').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-pos]');if(!btn)return;
+  document.querySelectorAll('#pos-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');activePos=btn.dataset.pos;renderCatalog();
+});
+document.getElementById('bucket-select').addEventListener('change',e=>{activeBucket=e.target.value;renderCatalog();});
+document.querySelectorAll('.tier-pip').forEach(pip=>{
+  pip.addEventListener('click',()=>{
+    const t=pip.dataset.tier;
+    if(activeTiers.has(t)){if(activeTiers.size===1)return;activeTiers.delete(t);pip.classList.remove('active');}
+    else{activeTiers.add(t);pip.classList.add('active');}
+    renderCatalog();
+  });
 });
 
-document.getElementById('pos-filters').addEventListener('click', e => {
-  const btn = e.target.closest('[data-pos]');
-  if (!btn) return;
-  document.querySelectorAll('#pos-filters .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  activeFilters.pos = btn.dataset.pos;
-  renderCatalog();
-});
-
-document.getElementById('bucket-select').addEventListener('change', e => {
-  activeFilters.bucket = e.target.value;
-  renderCatalog();
-});
-
-document.getElementById('tier-filters').addEventListener('click', e => {
-  const pip = e.target.closest('[data-tier]');
-  if (!pip) return;
-  const tier = pip.dataset.tier;
-  if (activeFilters.tiers.has(tier)) {
-    if (activeFilters.tiers.size === 1) return; // keep at least one
-    activeFilters.tiers.delete(tier);
-    pip.classList.remove('active');
-  } else {
-    activeFilters.tiers.add(tier);
-    pip.classList.add('active');
-  }
-  renderCatalog();
-});
-
-// ── START ─────────────────────────────────────────────────────
 init();
 </script>
 </body>
