@@ -1,13 +1,34 @@
 {
+  "config": {
+    "sweep_duration_hours": 72,
+    "lock_day": "friday",
+    "lock_time": "23:59",
+    "resolve_day": "monday",
+    "flash_sweeps_enabled": true,
+    "swap_per_sweep": 1,
+    "squad_size": 10,
+    "players_per_table": 10
+  },
   "sweep": {
     "id": "sweep-001",
     "week": 1,
-    "title": "Week 1 Sweep",
+    "title": "Week 1 · 72-Hour Sweep",
     "opens": "2026-04-28T00:00:00Z",
-    "closes": "2026-05-04T23:59:00Z",
+    "closes": "2026-04-30T23:59:00Z",
+    "lock": "2026-05-01T23:59:00Z",
     "status": "active",
-    "player_count": 847,
-    "top_score": 214
+    "type": "standard",
+    "player_count": 0,
+    "top_score": 0
+  },
+  "flash_sweep": {
+    "id": null,
+    "active": false,
+    "title": null,
+    "trigger": null,
+    "opens": null,
+    "closes": null,
+    "status": "inactive"
   },
   "events": [
     {
@@ -18,11 +39,11 @@
       "bucket": "US Executive",
       "points": 14,
       "multiplier": 1,
+      "total_points": 14,
       "description": "Signs executive order on trade policy targeting China and EU imports",
       "source": "Reuters",
       "headline": "Trump signs sweeping trade executive order, targets China and EU",
       "url": "https://reuters.com",
-      "gdelt_volume": 2847,
       "verified": true
     },
     {
@@ -33,11 +54,11 @@
       "bucket": "US Legislature",
       "points": 9,
       "multiplier": 1,
+      "total_points": 9,
       "description": "House floor address on trade order dominates cable news afternoon cycle",
       "source": "C-SPAN / Associated Press",
       "headline": "Jeffries calls trade order 'economic recklessness' in floor address",
       "url": "https://apnews.com",
-      "gdelt_volume": 1203,
       "verified": true
     },
     {
@@ -48,11 +69,11 @@
       "bucket": "UN / Multilateral",
       "points": 11,
       "multiplier": 1,
+      "total_points": 11,
       "description": "Emergency session called on regional conflict in Eastern Europe",
       "source": "UN News / BBC",
       "headline": "UN Security Council convenes emergency session on escalating conflict",
       "url": "https://news.un.org",
-      "gdelt_volume": 1876,
       "verified": true
     },
     {
@@ -63,54 +84,43 @@
       "bucket": "UK Politics",
       "points": 12,
       "multiplier": 1,
+      "total_points": 12,
       "description": "Files no-confidence motion; Parliament recalled for emergency debate",
       "source": "The Guardian / BBC",
       "headline": "Starmer files no-confidence motion as Parliament recalled",
       "url": "https://theguardian.com",
-      "gdelt_volume": 1654,
       "verified": true
     },
     {
       "id": "evt-005",
-      "timestamp": "2026-04-27T16:00:00Z",
+      "timestamp": "2026-04-28T16:00:00Z",
       "figure": "Claudia Sheinbaum",
       "position": "HoS",
       "bucket": "Americas",
       "points": 8,
       "multiplier": 1,
+      "total_points": 8,
       "description": "Announces counter-tariff measures in response to US trade order",
       "source": "Reuters / El Universal",
       "headline": "Sheinbaum announces Mexico counter-tariff package",
       "url": "https://reuters.com",
-      "gdelt_volume": 987,
       "verified": true
     },
     {
       "id": "evt-006",
-      "timestamp": "2026-04-27T18:30:00Z",
+      "timestamp": "2026-04-28T18:30:00Z",
       "figure": "Jerome Powell",
       "position": "WLD",
-      "bucket": "UN / Multilateral",
+      "bucket": "US Agencies",
       "points": 10,
       "multiplier": 1.5,
+      "total_points": 15,
       "description": "Fed chair warns trade tariffs could reignite inflation, signals rate hold",
       "source": "CNBC / Wall Street Journal",
       "headline": "Powell: tariffs pose 'significant upside risk' to inflation",
       "url": "https://wsj.com",
-      "gdelt_volume": 2341,
       "verified": true
     }
   ],
-  "leaderboard": [
-    {"rank": 1, "player": "K. Morrow", "total": 214, "squad": ["Donald Trump", "Hakeem Jeffries", "Keir Starmer", "UN Security Council", "Jerome Powell"]},
-    {"rank": 2, "player": "J. Okafor", "total": 198, "squad": ["Donald Trump", "Chuck Schumer", "Marine Le Pen", "Antonio Guterres", "Elon Musk"]},
-    {"rank": 3, "player": "P. Reyes", "total": 187, "squad": ["Claudia Sheinbaum", "Ted Cruz", "Keir Starmer", "Mark Rutte", "Jerome Powell"]},
-    {"rank": 4, "player": "T. Svensson", "total": 174, "squad": ["Donald Trump", "AOC", "Pierre Poilievre", "UN Security Council", "Tucker Carlson"]},
-    {"rank": 5, "player": "A. Ferretti", "total": 161, "squad": ["Javier Milei", "Hakeem Jeffries", "Yulia Navalnaya", "NATO", "Ray Dalio"]},
-    {"rank": 6, "player": "M. Chen", "total": 155, "squad": ["Donald Trump", "Mike Johnson", "Viktor Orban", "UN Security Council", "Elon Musk"]},
-    {"rank": 7, "player": "R. Baptiste", "total": 148, "squad": ["Xi Jinping", "Chuck Schumer", "Keir Starmer", "WTO", "Jerome Powell"]},
-    {"rank": 8, "player": "S. Ndlovu", "total": 142, "squad": ["Donald Trump", "Bernie Sanders", "Marine Le Pen", "UN Security Council", "George Soros"]},
-    {"rank": 9, "player": "L. Kowalski", "total": 138, "squad": ["Claudia Sheinbaum", "Hakeem Jeffries", "Jair Bolsonaro", "NATO", "Ray Dalio"]},
-    {"rank": 10, "player": "F. Okonkwo", "total": 131, "squad": ["Vladimir Putin", "Ted Cruz", "Keir Starmer", "UN Security Council", "Tucker Carlson"]}
-  ]
+  "leaderboard": []
 }

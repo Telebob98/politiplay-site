@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Your Squad · Politiplay</title>
+<meta name="description" content="Draft ten real political figures into your Politiplay squad. Two per position — HoS, LEG, OPP, WBR, WLD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POLITIPLAY SHARED DESIGN SYSTEM
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --red:#b8242a;--red-dim:rgba(184,36,42,0.12);--red-border:rgba(184,36,42,0.3);
+  --gold:#e8a020;--gold-dim:rgba(232,160,32,0.1);
+  --ink:#111318;--ink-mid:#1a1d24;--ivory:#ede8dc;
+  --gray1:#6e6a60;--gray2:#9e9a8e;--gray3:#b8b4a8;--gray4:#ccc8bc;
+  --surface:rgba(237,232,220,0.06);--surface-hover:rgba(237,232,220,0.09);
+  --border:rgba(237,232,220,0.1);--border-strong:rgba(237,232,220,0.18);
+  --navy:#1a2744;--amber-dark:#7a5200;
+}
+body{background:var(--ink);color:var(--ivory);font-family:'Source Serif 4',serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.05) 3px,rgba(0,0,0,0.05) 4px);pointer-events:none;z-index:200}
+
+/* TICKER */
+.ticker-wrap{display:block;width:100%;position:relative;z-index:50;overflow:hidden}
+.ticker{display:block;width:100%;padding:7px 0;overflow:hidden;white-space:nowrap;background:#b8242a;min-height:30px}
+.ticker-inner{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;color:#fff;animation:pp-tick 50s linear infinite}
+@keyframes pp-tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* NAV */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid var(--border);position:relative;z-index:40;background:var(--ink)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--ivory);text-decoration:none;flex-shrink:0}
+.nav-logo em{font-style:italic;color:var(--red)}
+.nav-links{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray3);text-decoration:none;padding:7px 12px;transition:color 0.15s;white-space:nowrap}
+.nav-link:hover{color:var(--ivory)}
+.nav-link.active{color:var(--red)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:var(--red);color:#fff;padding:9px 18px;text-decoration:none;transition:background 0.15s;white-space:nowrap}
+.nav-cta:hover{background:#9e1e23}
+.nav-live{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--red);text-transform:uppercase;flex-shrink:0}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pp-blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes pp-blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* POSITION BADGES */
+.pos-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;padding:2px 7px;color:#fff;flex-shrink:0;vertical-align:middle}
+.pos-badge.HoS{background:rgba(184,36,42,0.85)}
+.pos-badge.LEG{background:rgba(26,82,150,0.85)}
+.pos-badge.OPP{background:rgba(60,130,60,0.85)}
+.pos-badge.WBR{background:rgba(110,70,150,0.85)}
+.pos-badge.WLD{background:rgba(200,120,20,0.85)}
+
+/* BUTTONS */
+.btn-primary{display:inline-block;background:var(--red);color:#fff;border:none;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:13px 24px;cursor:pointer;text-decoration:none;transition:background 0.15s}
+.btn-primary:hover{background:#9e1e23}
+.btn-primary:disabled{background:var(--red-dim);color:var(--gray2);cursor:default}
+.btn-ghost{display:inline-block;background:transparent;color:var(--gray3);border:1px solid var(--border-strong);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer;text-decoration:none;transition:all 0.15s}
+.btn-ghost:hover{color:var(--ivory);border-color:rgba(237,232,220,0.35)}
+
+/* FOOTER */
+.site-footer{border-top:2px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;flex-wrap:wrap;gap:10px}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--gray2)}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--gray2);text-decoration:none}
+.footer-links a:hover{color:var(--gray4)}
+
+/* DRAFT PAGE LAYOUT */
+.draft-page{display:grid;grid-template-columns:1fr 320px;min-height:calc(100vh - 88px);position:relative;z-index:2}
+
+/* CATALOG (LEFT) */
+.catalog{border-right:1px solid var(--border);display:flex;flex-direction:column}
+.catalog-head{padding:16px 22px 12px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--ink);z-index:20}
+.catalog-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.catalog-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--red)}
+.fig-count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray2);letter-spacing:0.06em}
+
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:10px}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--gray2);font-size:15px;pointer-events:none}
+.search-input{width:100%;background:rgba(237,232,220,0.07);border:1px solid var(--border);color:var(--ivory);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:10px 12px 10px 34px;outline:none;letter-spacing:0.03em;transition:border-color 0.15s}
+.search-input::placeholder{color:var(--gray2)}
+.search-input:focus{border-color:var(--red-border)}
+
+/* FILTERS */
+.filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.filter-btn{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--border);background:transparent;color:var(--gray2);cursor:pointer;transition:all 0.15s}
+.filter-btn:hover{border-color:var(--border-strong);color:var(--ivory)}
+.filter-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+
+/* BUCKET SELECT */
+.bucket-select{width:100%;background:rgba(237,232,220,0.07);border:1px solid var(--border);color:var(--gray3);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:8px 10px;outline:none;cursor:pointer;margin-bottom:8px}
+.bucket-select option{background:#1a1d24;color:var(--ivory)}
+
+/* TIER LEGEND */
+.tier-legend{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tier-pip{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:2px 7px;border:1px solid;cursor:pointer;transition:all 0.15s}
+.tier-pip.active{background:rgba(237,232,220,0.1)}
+.tier-pip.t1{color:var(--gold);border-color:rgba(232,160,32,0.35)}
+.tier-pip.t2{color:var(--red);border-color:var(--red-border)}
+.tier-pip.t3{color:var(--gray3);border-color:var(--border)}
+.tier-pip.t4{color:var(--gray2);border-color:rgba(237,232,220,0.08)}
+.tier-pip.t5{color:var(--gray1);border-color:rgba(237,232,220,0.06)}
+
+/* FIGURE LIST */
+.figure-list{flex:1;overflow-y:auto;max-height:calc(100vh - 280px)}
+.figure-list::-webkit-scrollbar{width:3px}
+.figure-list::-webkit-scrollbar-thumb{background:var(--red-border);border-radius:2px}
+.wld-header{padding:12px 22px 8px;background:rgba(232,160,32,0.06);border-bottom:1px solid rgba(232,160,32,0.15)}
+.wld-header-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.wld-header-sub{font-size:12px;color:var(--gray2);margin-top:3px;font-style:italic;font-family:'Source Serif 4',serif}
+.fig-item{display:flex;align-items:center;gap:10px;padding:10px 22px;border-bottom:1px solid rgba(237,232,220,0.05);cursor:pointer;transition:background 0.1s}
+.fig-item:hover{background:var(--surface-hover)}
+.fig-item.in-squad{opacity:0.85;cursor:pointer;border-left:2px solid var(--red-border)}
+.fig-item.in-squad:hover{background:rgba(184,36,42,0.1)}
+.fig-item.wld-fig{border-left:2px solid rgba(232,160,32,0.2)}
+.fig-item.wld-fig:hover{background:rgba(232,160,32,0.04)}
+.fig-item.wld-fig.in-squad{border-left-color:rgba(232,160,32,0.5)}
+.fig-pos-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.1em;color:#fff;padding:2px 6px;flex-shrink:0}
+.fig-pos-badge.HoS{background:rgba(184,36,42,0.8)}
+.fig-pos-badge.LEG{background:rgba(26,82,150,0.8)}
+.fig-pos-badge.OPP{background:rgba(60,130,60,0.8)}
+.fig-pos-badge.WBR{background:rgba(110,70,150,0.8)}
+.fig-pos-badge.WLD{background:rgba(200,120,20,0.8)}
+.fig-info{flex:1;min-width:0}
+.fig-name{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fig-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray2);letter-spacing:0.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fig-tier{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;flex-shrink:0}
+.fig-tier.T1{color:var(--gold)}
+.fig-tier.T2{color:var(--red)}
+.fig-tier.T3{color:var(--gray3)}
+.fig-tier.T4{color:var(--gray2)}
+.fig-tier.T5{color:var(--gray1)}
+.fig-action{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:3px 8px;border:1px solid var(--border);color:var(--gray2);flex-shrink:0;white-space:nowrap;transition:all 0.15s}
+.loading-state{padding:40px 22px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gray2);letter-spacing:0.1em}
+.loading-dot{display:inline-block;animation:pp-blink 1s ease-in-out infinite}
+
+/* SQUAD PANEL (RIGHT) */
+.squad-panel{padding:20px;display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--ink)}
+.squad-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.squad-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--red)}
+.squad-week{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray2)}
+
+/* SWEEP TIMER */
+.sweep-timer{background:rgba(237,232,220,0.04);border:1px solid var(--border);padding:10px 14px;margin-bottom:4px}
+.timer-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray2);margin-bottom:4px}
+.timer-value{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;color:var(--ivory);letter-spacing:0.08em}
+.timer-value.urgent{color:var(--red);animation:pp-blink 1s ease-in-out infinite}
+.timer-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);margin-top:3px}
+.swap-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;padding:3px 8px;background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.3);color:var(--gold)}
+.swap-badge.used{background:rgba(237,232,220,0.04);border-color:var(--border);color:var(--gray2)}
+
+/* SQUAD POSITIONS */
+.squad-section{margin-bottom:4px}
+.squad-pos-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid var(--border);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.pos-label-name{color:var(--gray3)}
+.pos-label-pts{font-size:10px;color:var(--gray2)}
+.slot{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);margin-bottom:5px;min-height:44px;transition:border-color 0.15s;cursor:pointer;background:rgba(237,232,220,0.02)}
+.slot:hover{border-color:var(--border-strong);background:var(--surface)}
+.slot.filled{border-color:rgba(184,36,42,0.3);background:rgba(184,36,42,0.04)}
+.slot.filled:hover{background:rgba(184,36,42,0.08);border-color:var(--red)}
+.slot.wld-slot.filled{border-color:rgba(232,160,32,0.3);background:rgba(232,160,32,0.04)}
+.slot.wld-slot.filled:hover{background:rgba(232,160,32,0.08);border-color:var(--gold)}
+.slot-pos{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:2px 5px;color:#fff;flex-shrink:0}
+.slot-pos.HoS{background:rgba(184,36,42,0.7)}
+.slot-pos.LEG{background:rgba(26,82,150,0.7)}
+.slot-pos.OPP{background:rgba(60,130,60,0.7)}
+.slot-pos.WBR{background:rgba(110,70,150,0.7)}
+.slot-pos.WLD{background:rgba(200,120,20,0.7)}
+.slot-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ivory)}
+.slot-empty-text{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:0.06em;font-style:italic;flex:1}
+.slot-pts{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--gray2);flex-shrink:0}
+.slot-pts.scoring{color:var(--gold)}
+
+/* CAPTAIN BADGE */
+.captain-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.08em;padding:1px 5px;background:rgba(232,160,32,0.2);border:1px solid rgba(232,160,32,0.4);color:var(--gold);flex-shrink:0}
+
+/* SQUAD TOTAL */
+.squad-total{border-top:2px solid var(--border);padding-top:12px;display:flex;align-items:center;justify-content:space-between}
+.total-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray2)}
+.total-pts{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--ivory)}
+.total-pts span{font-size:13px;color:var(--gray2);margin-left:2px}
+
+/* LOCK BUTTON */
+.lock-btn{width:100%;text-align:center;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;background:var(--red);color:#fff;border:none;cursor:pointer;transition:background 0.15s}
+.lock-btn:hover:not(:disabled){background:#9e1e23}
+.lock-btn:disabled{background:rgba(184,36,42,0.2);color:var(--gray2);cursor:default}
+.lock-btn.locked{background:rgba(237,232,220,0.06);color:var(--gray2);cursor:default;border:1px solid var(--border)}
+.squad-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:0.06em;text-align:center}
+.squad-note a{color:var(--gray2);text-decoration:none}
+.squad-note a:hover{color:var(--ivory)}
+
+/* FLASH SWEEP BANNER */
+.flash-banner{background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.3);padding:10px 14px;display:none}
+.flash-banner.active{display:block}
+.flash-title{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.flash-desc{font-size:12px;color:var(--gray3)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink-mid);border:1px solid var(--border-strong);padding:10px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:var(--ivory);z-index:300;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.error{border-color:var(--red-border);color:var(--red)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .draft-page{grid-template-columns:1fr}
+  .squad-panel{position:static;height:auto;border-top:1px solid var(--border)}
+  .figure-list{max-height:50vh}
+}
+@media(max-width:700px){
+  .site-nav{padding:10px 16px}
+  .nav-links .nav-link{padding:6px 8px;font-size:10px}
+  .site-footer{padding:12px 16px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-inner" id="ticker-text">
+      POLITIPLAY · 72-HOUR SWEEP ACTIVE · DRAFT YOUR SQUAD NOW · LOCK CLOSES FRIDAY MIDNIGHT · 1,020 FIGURES IN CATALOG · 513 KIBITZERS &amp; CRIERS · EVERY POINT SOURCED AND VERIFIED · POLITIPLAY · 72-HOUR SWEEP ACTIVE · DRAFT YOUR SQUAD NOW · LOCK CLOSES FRIDAY MIDNIGHT · 1,020 FIGURES IN CATALOG · 513 KIBITZERS &amp; CRIERS · EVERY POINT SOURCED AND VERIFIED ·&nbsp;
+    </span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">Politi<em>Play</em></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="draft.html" class="nav-link active">Draft</a>
+    <a href="sweep.html" class="nav-link">Live Sweep</a>
+    <a href="how-to-play.html" class="nav-link">How To Play</a>
+    <a href="rules.html" class="nav-link">Rules</a>
+    <a href="index.html#signup" class="nav-cta">Sign Up →</a>
+  </div>
+</nav>
+
+<!-- MAIN DRAFT LAYOUT -->
+<div class="draft-page">
+
+  <!-- LEFT: CATALOG -->
+  <div class="catalog">
+    <div class="catalog-head">
+      <div class="catalog-top">
+        <div class="catalog-title">Figure Catalog</div>
+        <div class="fig-count" id="fig-count">Loading...</div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Search figures...">
+      </div>
+      <div class="filter-row" id="pos-filters">
+        <button class="filter-btn active" data-pos="ALL">All Positions</button>
+        <button class="filter-btn" data-pos="HoS">HoS</button>
+        <button class="filter-btn" data-pos="LEG">LEG</button>
+        <button class="filter-btn" data-pos="OPP">OPP</button>
+        <button class="filter-btn" data-pos="WBR">WBR</button>
+        <button class="filter-btn" data-pos="WLD">WLD · Kibitzers</button>
+      </div>
+      <select class="bucket-select" id="bucket-select">
+        <option value="">All Buckets</option>
+      </select>
+      <div class="tier-legend" id="tier-filters">
+        <span class="tier-pip t1 active" data-tier="T1">T1 · V.High</span>
+        <span class="tier-pip t2 active" data-tier="T2">T2 · High</span>
+        <span class="tier-pip t3 active" data-tier="T3">T3 · Med</span>
+        <span class="tier-pip t4 active" data-tier="T4">T4 · Low</span>
+        <span class="tier-pip t5 active" data-tier="T5">T5 · V.Low</span>
+      </div>
+    </div>
+    <div class="figure-list" id="figure-list">
+      <div class="loading-state">Loading figures<span class="loading-dot">...</span></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: SQUAD PANEL -->
+  <div class="squad-panel">
+    <div>
+      <div class="squad-head">
+        <div class="squad-title">Your Squad · Week 1</div>
+        <div class="squad-week" id="squad-week-label">72hr Sweep</div>
+      </div>
+
+      <!-- SWEEP TIMER -->
+      <div class="sweep-timer">
+        <div class="timer-label">Sweep closes in</div>
+        <div class="timer-value" id="sweep-timer">—</div>
+        <div class="timer-sub" id="timer-sub">Squad locks Friday midnight</div>
+      </div>
+
+      <!-- SWAP STATUS -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span class="swap-badge" id="swap-badge">1 swap available</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray2)">
+          Squad total: <strong id="squad-total-pts">0</strong> pts
+        </span>
+      </div>
+
+      <!-- FLASH SWEEP BANNER -->
+      <div class="flash-banner" id="flash-banner">
+        <div class="flash-title">⚡ Flash Sweep Active</div>
+        <div class="flash-desc" id="flash-desc">Major breaking news — Flash Sweep open for 24 hours.</div>
+      </div>
+    </div>
+
+    <!-- SQUAD SLOTS BY POSITION -->
+    <div id="squad-slots">
+      <!-- HoS x2 -->
+      <div class="squad-section">
+        <div class="squad-pos-label">
+          <span class="pos-label-name">HoS · Head of State ×2</span>
+          <span class="pos-label-pts">12–16 pts</span>
+        </div>
+        <div class="slot" data-pos="HoS" data-idx="0" onclick="handleSlotClick(this)">
+          <span class="slot-pos HoS">HoS</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+        <div class="slot" data-pos="HoS" data-idx="1" onclick="handleSlotClick(this)">
+          <span class="slot-pos HoS">HoS</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+      </div>
+
+      <!-- LEG x2 -->
+      <div class="squad-section">
+        <div class="squad-pos-label">
+          <span class="pos-label-name">LEG · Legislator ×2</span>
+          <span class="pos-label-pts">8–12 pts</span>
+        </div>
+        <div class="slot" data-pos="LEG" data-idx="0" onclick="handleSlotClick(this)">
+          <span class="slot-pos LEG">LEG</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+        <div class="slot" data-pos="LEG" data-idx="1" onclick="handleSlotClick(this)">
+          <span class="slot-pos LEG">LEG</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+      </div>
+
+      <!-- OPP x2 -->
+      <div class="squad-section">
+        <div class="squad-pos-label">
+          <span class="pos-label-name">OPP · Opposition ×2</span>
+          <span class="pos-label-pts">8–12 pts</span>
+        </div>
+        <div class="slot" data-pos="OPP" data-idx="0" onclick="handleSlotClick(this)">
+          <span class="slot-pos OPP">OPP</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+        <div class="slot" data-pos="OPP" data-idx="1" onclick="handleSlotClick(this)">
+          <span class="slot-pos OPP">OPP</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+      </div>
+
+      <!-- WBR x2 -->
+      <div class="squad-section">
+        <div class="squad-pos-label">
+          <span class="pos-label-name">WBR · World Body ×2</span>
+          <span class="pos-label-pts">14–22 pts</span>
+        </div>
+        <div class="slot" data-pos="WBR" data-idx="0" onclick="handleSlotClick(this)">
+          <span class="slot-pos WBR">WBR</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+        <div class="slot" data-pos="WBR" data-idx="1" onclick="handleSlotClick(this)">
+          <span class="slot-pos WBR">WBR</span>
+          <span class="slot-empty-text">Click to fill</span>
+        </div>
+      </div>
+
+      <!-- WLD x2 -->
+      <div class="squad-section">
+        <div class="squad-pos-label">
+          <span class="pos-label-name">WLD · Kibitzers & Criers ×2</span>
+          <span class="pos-label-pts">1.5× multiplier</span>
+        </div>
+        <div class="slot wld-slot" data-pos="WLD" data-idx="0" onclick="handleSlotClick(this)">
+          <span class="slot-pos WLD">WLD</span>
+          <span class="slot-empty-text">Click to fill · 1.5×</span>
+        </div>
+        <div class="slot wld-slot" data-pos="WLD" data-idx="1" onclick="handleSlotClick(this)">
+          <span class="slot-pos WLD">WLD</span>
+          <span class="slot-empty-text">Click to fill · 1.5×</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SQUAD TOTAL -->
+    <div class="squad-total">
+      <span class="total-label">Squad Total</span>
+      <span class="total-pts"><span id="total-pts-display">0</span><span>pts</span></span>
+    </div>
+
+    <!-- LOCK BUTTON -->
+    <button class="lock-btn" id="lock-btn" onclick="lockSquad()">Lock Your Squad →</button>
+    <div class="squad-note">
+      Squad locks Friday midnight · <a href="sweep.html">Watch live Sweep</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-copy">© 2026 Politiplay LLC · Fantasy league on real political figures · politiplay.net</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="draft.html">Draft</a>
+    <a href="sweep.html">Live Sweep</a>
+    <a href="how-to-play.html">How To Play</a>
+    <a href="rules.html">Rules</a>
+    <a href="mailto:hello@politiplay.net">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// POLITIPLAY DRAFT — v2.0
+// Features: figures.json fetch, localStorage persistence,
+//           72-hour sweep timer, squad lock/swap mechanics
+// ============================================================
+
+const STORAGE_KEY = 'politiplay_squad_v2';
+const SWEEP_CLOSE = new Date('2026-05-01T23:59:00Z'); // Friday midnight UTC
+const LOCK_TIME = new Date('2026-05-02T04:59:00Z');   // Friday midnight ET = Sat 04:59 UTC
+
+let allFigures = [];
+let squad = { HoS:[null,null], LEG:[null,null], OPP:[null,null], WBR:[null,null], WLD:[null,null] };
+let swapUsed = false;
+let squadLocked = false;
+let activeFilters = { pos: 'ALL', bucket: '', tiers: new Set(['T1','T2','T3','T4','T5']) };
+let searchQuery = '';
+let figureScores = {};
+
+// ── INIT ──────────────────────────────────────────────────────
+async function init() {
+  loadSquadFromStorage();
+  await loadFigures();
+  await loadScores();
+  renderAll();
+  startTimer();
+  checkLockState();
+}
+
+// ── LOAD FIGURES ──────────────────────────────────────────────
+async function loadFigures() {
+  try {
+    const res = await fetch('figures.json');
+    const data = await res.json();
+    allFigures = data.figures;
+    document.getElementById('fig-count').textContent =
+      `${allFigures.length} figures · ${allFigures.filter(f=>f.position==='WLD').length} kibitzers`;
+    populateBucketSelect();
+  } catch(e) {
+    document.getElementById('figure-list').innerHTML =
+      '<div class="loading-state">Error loading figures. Check figures.json exists.</div>';
+  }
+}
+
+// ── LOAD SCORES ───────────────────────────────────────────────
+async function loadScores() {
+  try {
+    const res = await fetch('scores.json');
+    const data = await res.json();
+    // Build lookup: figure name → total points this sweep
+    figureScores = {};
+    for (const evt of data.events || []) {
+      const n = evt.figure;
+      figureScores[n] = (figureScores[n] || 0) + (evt.total_points || evt.points || 0);
+    }
+    // Flash sweep
+    if (data.flash_sweep && data.flash_sweep.active) {
+      const banner = document.getElementById('flash-banner');
+      banner.classList.add('active');
+      document.getElementById('flash-desc').textContent =
+        `⚡ ${data.flash_sweep.title} — closes ${new Date(data.flash_sweep.closes).toLocaleString()}`;
+    }
+  } catch(e) { /* scores optional */ }
+}
+
+// ── POPULATE BUCKET SELECT ────────────────────────────────────
+function populateBucketSelect() {
+  const buckets = [...new Set(allFigures.map(f=>f.bucket))].sort();
+  const sel = document.getElementById('bucket-select');
+  buckets.forEach(b => {
+    const opt = document.createElement('option');
+    opt.value = b; opt.textContent = b;
+    sel.appendChild(opt);
+  });
+}
+
+// ── FILTER & RENDER CATALOG ───────────────────────────────────
+function renderAll() {
+  renderCatalog();
+  renderSquad();
+  updateSquadTotal();
+}
+
+function renderCatalog() {
+  const list = document.getElementById('figure-list');
+  if (!allFigures.length) return;
+
+  const q = searchQuery.toLowerCase();
+  const squadNames = getSquadNames();
+
+  let filtered = allFigures.filter(f => {
+    if (activeFilters.pos !== 'ALL' && f.position !== activeFilters.pos) return false;
+    if (activeFilters.bucket && f.bucket !== activeFilters.bucket) return false;
+    if (!activeFilters.tiers.has(f.tier)) return false;
+    if (q && !f.name.toLowerCase().includes(q) && !f.bucket.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="loading-state">No figures match your filters.</div>';
+    return;
+  }
+
+  // Group WLD separately
+  const nonWLD = filtered.filter(f => f.position !== 'WLD');
+  const wld = filtered.filter(f => f.position === 'WLD');
+
+  let html = '';
+
+  if (nonWLD.length) {
+    nonWLD.forEach(f => { html += renderFigureItem(f, squadNames); });
+  }
+
+  if (wld.length) {
+    html += `
+      <div class="wld-header">
+        <div class="wld-header-title">WLD · Kibitzers &amp; Criers · 1.5×</div>
+        <div class="wld-header-sub">Sidelined, volatile, dangerous · your highest-risk pick</div>
+      </div>`;
+    wld.forEach(f => { html += renderFigureItem(f, squadNames); });
+  }
+
+  list.innerHTML = html;
+}
+
+function renderFigureItem(f, squadNames) {
+  const inSquad = squadNames.has(f.name);
+  const pts = figureScores[f.name] ? `+${figureScores[f.name]}` : '';
+  const isWLD = f.position === 'WLD';
+  const action = inSquad ? '− Remove' : '+ Draft';
+  return `
+    <div class="fig-item ${inSquad ? 'in-squad' : ''} ${isWLD ? 'wld-fig' : ''}"
+         onclick="handleFigureClick('${escStr(f.name)}','${f.position}')">
+      <span class="fig-pos-badge ${f.position}">${f.position}</span>
+      <div class="fig-info">
+        <div class="fig-name">${f.name}</div>
+        <div class="fig-sub">${f.bucket}</div>
+      </div>
+      <span class="fig-tier ${f.tier}">${f.tier}</span>
+      ${pts ? `<span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold)">${pts}pts</span>` : ''}
+      <span class="fig-action">${action}</span>
+    </div>`;
+}
+
+function escStr(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+// ── SQUAD MANAGEMENT ──────────────────────────────────────────
+function getSquadNames() {
+  const names = new Set();
+  for (const pos in squad) {
+    squad[pos].forEach(n => { if(n) names.add(n); });
+  }
+  return names;
+}
+
+function handleFigureClick(name, position) {
+  if (squadLocked) { showToast('Squad is locked for this Sweep', 'error'); return; }
+  const squadNames = getSquadNames();
+  if (squadNames.has(name)) {
+    removeFigure(name, position);
+  } else {
+    addFigure(name, position);
+  }
+}
+
+function addFigure(name, position) {
+  if (squadLocked) return;
+  const slots = squad[position];
+  const emptyIdx = slots.findIndex(s => s === null);
+  if (emptyIdx === -1) {
+    showToast(`Both ${position} slots are filled. Remove one first.`, 'error');
+    return;
+  }
+  const squadNames = getSquadNames();
+  if (squadNames.size >= 10) {
+    showToast('Squad is full — 10 figures maximum.', 'error');
+    return;
+  }
+  slots[emptyIdx] = name;
+  saveSquadToStorage();
+  renderAll();
+  showToast(`${name} added to ${position}`);
+}
+
+function removeFigure(name, position) {
+  if (squadLocked) return;
+  const slots = squad[position];
+  const idx = slots.indexOf(name);
+  if (idx !== -1) {
+    slots[idx] = null;
+    saveSquadToStorage();
+    renderAll();
+    showToast(`${name} removed from squad`);
+  }
+}
+
+function handleSlotClick(el) {
+  const pos = el.dataset.pos;
+  const idx = parseInt(el.dataset.idx);
+  const name = squad[pos][idx];
+  if (name && !squadLocked) {
+    squad[pos][idx] = null;
+    saveSquadToStorage();
+    renderAll();
+    showToast(`${name} removed`);
+  }
+}
+
+function renderSquad() {
+  const positions = ['HoS','LEG','OPP','WBR','WLD'];
+  positions.forEach(pos => {
+    [0,1].forEach(idx => {
+      const slot = document.querySelector(`.slot[data-pos="${pos}"][data-idx="${idx}"]`);
+      if (!slot) return;
+      const name = squad[pos][idx];
+      const pts = name && figureScores[name] ? figureScores[name] : 0;
+      if (name) {
+        const multiplier = pos === 'WLD' ? 1.5 : 1;
+        const effectivePts = Math.round(pts * multiplier);
+        slot.classList.add('filled');
+        slot.innerHTML = `
+          <span class="slot-pos ${pos}">${pos}</span>
+          <span class="slot-name">${name}</span>
+          ${effectivePts > 0 ? `<span class="slot-pts scoring">+${effectivePts}</span>` : ''}
+          ${squadLocked ? '' : '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gray2)">×</span>'}
+        `;
+      } else {
+        slot.classList.remove('filled');
+        const extra = pos === 'WLD' ? ' · 1.5×' : '';
+        slot.innerHTML = `
+          <span class="slot-pos ${pos}">${pos}</span>
+          <span class="slot-empty-text">Click to fill${extra}</span>
+        `;
+      }
+    });
+  });
+
+  // Update swap badge
+  const swapBadge = document.getElementById('swap-badge');
+  if (swapUsed) {
+    swapBadge.textContent = 'Swap used';
+    swapBadge.classList.add('used');
+  } else {
+    swapBadge.textContent = '1 swap available';
+    swapBadge.classList.remove('used');
+  }
+
+  // Update lock button
+  const lockBtn = document.getElementById('lock-btn');
+  const squadNames = getSquadNames();
+  if (squadLocked) {
+    lockBtn.textContent = '✓ Squad Locked';
+    lockBtn.classList.add('locked');
+    lockBtn.disabled = true;
+  } else if (squadNames.size < 10) {
+    lockBtn.textContent = `Lock Your Squad (${squadNames.size}/10) →`;
+    lockBtn.disabled = true;
+  } else {
+    lockBtn.textContent = 'Lock Your Squad →';
+    lockBtn.disabled = false;
+  }
+}
+
+function updateSquadTotal() {
+  let total = 0;
+  for (const pos in squad) {
+    const multiplier = pos === 'WLD' ? 1.5 : 1;
+    squad[pos].forEach(name => {
+      if (name && figureScores[name]) {
+        total += Math.round(figureScores[name] * multiplier);
+      }
+    });
+  }
+  document.getElementById('squad-total-pts').textContent = total;
+  document.getElementById('total-pts-display').textContent = total;
+}
+
+// ── LOCK SQUAD ────────────────────────────────────────────────
+function lockSquad() {
+  const squadNames = getSquadNames();
+  if (squadNames.size < 10) return;
+  if (squadLocked) return;
+  squadLocked = true;
+  saveSquadToStorage();
+  renderSquad();
+  showToast('Squad locked! Watch your Sweep →');
+}
+
+// ── TIMER ─────────────────────────────────────────────────────
+function startTimer() {
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+  const now = new Date();
+  const diff = SWEEP_CLOSE - now;
+  const timerEl = document.getElementById('sweep-timer');
+
+  if (diff <= 0) {
+    timerEl.textContent = 'Sweep Closed';
+    timerEl.classList.add('urgent');
+    document.getElementById('timer-sub').textContent = 'Resolve pending · new Sweep opens Monday';
+    return;
+  }
+
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  if (h < 6) timerEl.classList.add('urgent');
+  else timerEl.classList.remove('urgent');
+
+  timerEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// ── LOCK STATE CHECK ──────────────────────────────────────────
+function checkLockState() {
+  const now = new Date();
+  if (now >= LOCK_TIME) {
+    squadLocked = true;
+    renderSquad();
+  }
+}
+
+// ── LOCALSTORAGE ──────────────────────────────────────────────
+function saveSquadToStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    squad, swapUsed, squadLocked,
+    sweep: 'sweep-001',
+    saved: new Date().toISOString()
+  }));
+}
+
+function loadSquadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.sweep !== 'sweep-001') {
+      // New sweep — clear old squad
+      localStorage.removeItem(STORAGE_KEY);
+      return;
+    }
+    squad = data.squad || squad;
+    swapUsed = data.swapUsed || false;
+    squadLocked = data.squadLocked || false;
+  } catch(e) { localStorage.removeItem(STORAGE_KEY); }
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+let toastTimeout;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast show ${type}`;
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => { t.className = 'toast'; }, 2500);
+}
+
+// ── EVENT LISTENERS ───────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderCatalog();
+});
+
+document.getElementById('pos-filters').addEventListener('click', e => {
+  const btn = e.target.closest('[data-pos]');
+  if (!btn) return;
+  document.querySelectorAll('#pos-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilters.pos = btn.dataset.pos;
+  renderCatalog();
+});
+
+document.getElementById('bucket-select').addEventListener('change', e => {
+  activeFilters.bucket = e.target.value;
+  renderCatalog();
+});
+
+document.getElementById('tier-filters').addEventListener('click', e => {
+  const pip = e.target.closest('[data-tier]');
+  if (!pip) return;
+  const tier = pip.dataset.tier;
+  if (activeFilters.tiers.has(tier)) {
+    if (activeFilters.tiers.size === 1) return; // keep at least one
+    activeFilters.tiers.delete(tier);
+    pip.classList.remove('active');
+  } else {
+    activeFilters.tiers.add(tier);
+    pip.classList.add('active');
+  }
+  renderCatalog();
+});
+
+// ── START ─────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
