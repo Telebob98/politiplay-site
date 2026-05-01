@@ -132,7 +132,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .lock-btn.locked{background:rgba(237,232,220,0.06);color:var(--gray2);cursor:default;border:1px solid var(--border)}
 .squad-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:0.06em;text-align:center}
 .squad-note a{color:var(--gray2);text-decoration:none}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink-mid);border:1px solid var(--border-strong);padding:10px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:var(--ivory);z-index:300;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a1d24;border:1px solid var(--border-strong);padding:10px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:var(--ivory);z-index:300;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.error{border-color:var(--red-border);color:var(--red)}
 @media(max-width:900px){.draft-page{grid-template-columns:1fr}.squad-panel{position:static;height:auto;border-top:1px solid var(--border)}.figure-list{max-height:50vh}}
@@ -140,13 +140,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 </style>
 </head>
 <body>
-
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span class="ticker-inner">DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  POLITIPLAY · 72-HOUR SWEEP · 874 FIGURES DRAFTABLE · EVERY POINT SOURCED AND VERIFIED · DRAFT CLOSES FRIDAY MIDNIGHT · DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  POLITIPLAY · 72-HOUR SWEEP · 874 FIGURES DRAFTABLE · EVERY POINT SOURCED AND VERIFIED · DRAFT CLOSES FRIDAY MIDNIGHT ·&nbsp;</span>
-  </div>
-</div>
-
+<div class="ticker-wrap"><div class="ticker"><span class="ticker-inner">DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  DONALD TRUMP · HoS +14PTS  ·  HAKEEM JEFFRIES · LEG +9PTS  ·  UN SECURITY COUNCIL · WBR +11PTS  ·  KEIR STARMER · OPP +12PTS  ·  CLAUDIA SHEINBAUM · HoS +8PTS  ·  JEROME POWELL · WLD +15PTS  ·  POLITIPLAY · 72-HOUR SWEEP · 874 FIGURES DRAFTABLE · EVERY POINT SOURCED AND VERIFIED · DRAFT CLOSES FRIDAY MIDNIGHT ·&nbsp;</span></div></div>
 <nav class="site-nav">
   <a href="index.html" class="nav-logo">Politi<em>Play</em></a>
   <div class="nav-links">
@@ -155,10 +149,9 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <a href="sweep.html" class="nav-link">Live Sweep</a>
     <a href="how-to-play.html" class="nav-link">How To Play</a>
     <a href="rules.html" class="nav-link">Rules</a>
-    <a href="index.html#signup" class="nav-cta">Sign Up →</a>
+    <a href="index.html#signup" class="nav-cta">Sign Up</a>
   </div>
 </nav>
-
 <div class="draft-page">
   <div class="catalog">
     <div class="catalog-head">
@@ -167,7 +160,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
         <div class="fig-count" id="fig-count">874 figures · 246 kibitzers</div>
       </div>
       <div class="search-wrap">
-        <span class="search-icon">⌕</span>
+        <span class="search-icon">&#8981;</span>
         <input type="text" class="search-input" id="search-input" placeholder="Search figures...">
       </div>
       <div class="filter-row" id="pos-filters">
@@ -180,30 +173,14 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       </div>
       <select class="bucket-select" id="bucket-select">
         <option value="">All Buckets</option>
-        <option>Activist / Advocate</option>
-        <option>Americas</option>
-        <option>Business / Donor</option>
-        <option>EU Institutions</option>
-        <option>Independent Media</option>
-        <option>Indo-Pacific</option>
-        <option>Legacy Media</option>
-        <option>Legal / Operative</option>
-        <option>Middle East</option>
-        <option>Military / Security</option>
-        <option>NATO / G7</option>
-        <option>Political Commentator</option>
-        <option>Think Tank / Expert</option>
-        <option>Third Party / Outsider</option>
-        <option>UK Politics</option>
-        <option>UN / Multilateral</option>
-        <option>US Agencies</option>
-        <option>US Campaign</option>
-        <option>US Executive</option>
-        <option>US Governor</option>
-        <option>US Judiciary</option>
-        <option>US Legislature</option>
-        <option>US Municipal</option>
-        <option>Wildcard Editorial</option>
+        <option>Activist / Advocate</option><option>Americas</option><option>Business / Donor</option>
+        <option>EU Institutions</option><option>Independent Media</option><option>Indo-Pacific</option>
+        <option>Legacy Media</option><option>Legal / Operative</option><option>Middle East</option>
+        <option>Military / Security</option><option>NATO / G7</option><option>Political Commentator</option>
+        <option>Think Tank / Expert</option><option>Third Party / Outsider</option><option>UK Politics</option>
+        <option>UN / Multilateral</option><option>US Agencies</option><option>US Campaign</option>
+        <option>US Executive</option><option>US Governor</option><option>US Judiciary</option>
+        <option>US Legislature</option><option>US Municipal</option><option>Wildcard Editorial</option>
       </select>
       <div class="tier-legend">
         <span class="tier-pip t1 active" data-tier="T1">T1</span>
@@ -215,70 +192,61 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     </div>
     <div class="figure-list" id="figure-list"></div>
   </div>
-
   <div class="squad-panel">
-    <div class="squad-head">
-      <div class="squad-title">Your Squad · Week 1</div>
-    </div>
+    <div class="squad-head"><div class="squad-title">Your Squad &middot; Week 1</div></div>
     <div class="sweep-timer">
       <div class="timer-label">Sweep closes in</div>
-      <div class="timer-value" id="sweep-timer">—</div>
+      <div class="timer-value" id="sweep-timer">--:--:--</div>
       <div class="timer-sub">Squad locks Friday midnight</div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between">
       <span class="swap-badge" id="swap-badge">1 swap available</span>
       <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray2)">Total: <strong id="squad-total-pts">0</strong> pts</span>
     </div>
-
     <div class="squad-section">
-      <div class="squad-pos-label"><span class="pos-label-name">HoS · Head of State ×2</span><span class="pos-label-pts">12–16 pts</span></div>
+      <div class="squad-pos-label"><span class="pos-label-name">HoS &times;2</span><span class="pos-label-pts">12-16 pts</span></div>
       <div class="slot" data-pos="HoS" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos HoS">HoS</span><span class="slot-empty-text">Click to fill</span></div>
       <div class="slot" data-pos="HoS" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos HoS">HoS</span><span class="slot-empty-text">Click to fill</span></div>
     </div>
     <div class="squad-section">
-      <div class="squad-pos-label"><span class="pos-label-name">LEG · Legislator ×2</span><span class="pos-label-pts">8–12 pts</span></div>
+      <div class="squad-pos-label"><span class="pos-label-name">LEG &times;2</span><span class="pos-label-pts">8-12 pts</span></div>
       <div class="slot" data-pos="LEG" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos LEG">LEG</span><span class="slot-empty-text">Click to fill</span></div>
       <div class="slot" data-pos="LEG" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos LEG">LEG</span><span class="slot-empty-text">Click to fill</span></div>
     </div>
     <div class="squad-section">
-      <div class="squad-pos-label"><span class="pos-label-name">OPP · Opposition ×2</span><span class="pos-label-pts">8–12 pts</span></div>
+      <div class="squad-pos-label"><span class="pos-label-name">OPP &times;2</span><span class="pos-label-pts">8-12 pts</span></div>
       <div class="slot" data-pos="OPP" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos OPP">OPP</span><span class="slot-empty-text">Click to fill</span></div>
       <div class="slot" data-pos="OPP" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos OPP">OPP</span><span class="slot-empty-text">Click to fill</span></div>
     </div>
     <div class="squad-section">
-      <div class="squad-pos-label"><span class="pos-label-name">WBR · World Body ×2</span><span class="pos-label-pts">14–22 pts</span></div>
+      <div class="squad-pos-label"><span class="pos-label-name">WBR &times;2</span><span class="pos-label-pts">14-22 pts</span></div>
       <div class="slot" data-pos="WBR" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos WBR">WBR</span><span class="slot-empty-text">Click to fill</span></div>
       <div class="slot" data-pos="WBR" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos WBR">WBR</span><span class="slot-empty-text">Click to fill</span></div>
     </div>
     <div class="squad-section">
-      <div class="squad-pos-label"><span class="pos-label-name">WLD · Kibitzers ×2</span><span class="pos-label-pts">1.5× multiplier</span></div>
-      <div class="slot wld-slot" data-pos="WLD" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos WLD">WLD</span><span class="slot-empty-text">Click to fill · 1.5×</span></div>
-      <div class="slot wld-slot" data-pos="WLD" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos WLD">WLD</span><span class="slot-empty-text">Click to fill · 1.5×</span></div>
+      <div class="squad-pos-label"><span class="pos-label-name">WLD &times;2</span><span class="pos-label-pts">1.5x</span></div>
+      <div class="slot wld-slot" data-pos="WLD" data-idx="0" onclick="handleSlotClick(this)"><span class="slot-pos WLD">WLD</span><span class="slot-empty-text">Click to fill 1.5x</span></div>
+      <div class="slot wld-slot" data-pos="WLD" data-idx="1" onclick="handleSlotClick(this)"><span class="slot-pos WLD">WLD</span><span class="slot-empty-text">Click to fill 1.5x</span></div>
     </div>
-
     <div class="squad-total">
       <span class="total-label">Squad Total</span>
       <span class="total-pts"><span id="total-pts-display">0</span> pts</span>
     </div>
-    <button class="lock-btn" id="lock-btn" onclick="lockSquad()">Lock Your Squad →</button>
-    <div class="squad-note">Squad locks Friday midnight · <a href="sweep.html">Watch live Sweep</a></div>
+    <button class="lock-btn" id="lock-btn" onclick="lockSquad()">Lock Your Squad</button>
+    <div class="squad-note">Locks Friday midnight &middot; <a href="sweep.html">Watch live Sweep</a></div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <footer class="site-footer">
-  <div class="footer-copy">© 2026 Politiplay LLC · Fantasy league on real political figures · politiplay.net</div>
+  <div class="footer-copy">&copy; 2026 Politiplay LLC &middot; Fantasy league on real political figures &middot; politiplay.net</div>
   <div class="footer-links">
     <a href="index.html">Home</a><a href="draft.html">Draft</a><a href="sweep.html">Live Sweep</a><a href="how-to-play.html">How To Play</a><a href="rules.html">Rules</a><a href="mailto:hello@politiplay.net">Contact</a>
   </div>
 </footer>
-
 <script>
-const STORAGE_KEY = 'politiplay_squad_v2';
-const SWEEP_CLOSE = new Date('2026-05-02T03:59:00Z');
-
-const FIGURES = [
+const STORAGE_KEY='politiplay_squad_v2';
+const SWEEP_CLOSE=new Date('2026-05-02T03:59:00Z');
+const FIGURES=[
   {name:'Alexandre de Moraes',pos:'HoS',bucket:'Americas',tier:'T2',vol:'V.High',sub:'Americas'},
   {name:'Alicia Barcena',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Low',sub:'Americas'},
   {name:'Alix Didier Fils-Aime',pos:'HoS',bucket:'Americas',tier:'T2',vol:'Med',sub:'Americas'},
@@ -1154,186 +1122,149 @@ const FIGURES = [
   {name:'Tulsi Gabbard',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'},
   {name:'Zooey Zephyr',pos:'WLD',bucket:'Wildcard Editorial',tier:'T4',vol:'High',sub:'Wildcard Editorial'}
 ];
+let squad={HoS:[null,null],LEG:[null,null],OPP:[null,null],WBR:[null,null],WLD:[null,null]};
+let swapUsed=false,squadLocked=false,activePos='ALL',activeBucket='',searchQ='';
+let activeTiers=new Set(['T1','T2','T3','T4','T5']);
+let figureScores={};
 
-let squad = {HoS:[null,null],LEG:[null,null],OPP:[null,null],WBR:[null,null],WLD:[null,null]};
-let swapUsed = false;
-let squadLocked = false;
-let activePos = 'ALL';
-let activeBucket = '';
-let activeTiers = new Set(['T1','T2','T3','T4','T5']);
-let searchQ = '';
-let figureScores = {};
-
-async function init() {
-  loadSquadFromStorage();
-  await loadScores();
+async function init(){
+  loadSquad();
+  try{
+    const r=await fetch('scores.json?_='+Date.now());
+    const d=await r.json();
+    (d.events||[]).forEach(e=>{figureScores[e.figure]=(figureScores[e.figure]||0)+(e.total_points||e.points||0);});
+  }catch(e){}
   renderCatalog();
   renderSquad();
   startTimer();
 }
 
-async function loadScores() {
-  try {
-    const res = await fetch('scores.json?_='+Date.now());
-    const data = await res.json();
-    figureScores = {};
-    (data.events||[]).forEach(e => {
-      figureScores[e.figure] = (figureScores[e.figure]||0) + (e.total_points||e.points||0);
-    });
-  } catch(e) {}
-}
-
-function renderCatalog() {
-  const q = searchQ.toLowerCase();
-  const squadNames = getSquadNames();
-  const nonWLD = [];
-  const wld = [];
-
-  FIGURES.forEach(f => {
-    if (activePos !== 'ALL' && f.pos !== activePos) return;
-    if (activeBucket && f.bucket !== activeBucket) return;
-    if (!activeTiers.has(f.tier)) return;
-    if (q && !f.name.toLowerCase().includes(q) && !f.bucket.toLowerCase().includes(q)) return;
-    if (f.pos === 'WLD') wld.push(f);
-    else nonWLD.push(f);
+function renderCatalog(){
+  const q=searchQ.toLowerCase();
+  const sq=getSquadNames();
+  const nonWLD=[],wld=[];
+  FIGURES.forEach(f=>{
+    if(activePos!=='ALL'&&f.pos!==activePos)return;
+    if(activeBucket&&f.bucket!==activeBucket)return;
+    if(!activeTiers.has(f.tier))return;
+    if(q&&!f.name.toLowerCase().includes(q)&&!f.bucket.toLowerCase().includes(q))return;
+    if(f.pos==='WLD')wld.push(f);else nonWLD.push(f);
   });
-
-  let html = '';
-  nonWLD.forEach(f => { html += renderFigItem(f, squadNames); });
-  if (wld.length) {
-    html += \`<div class="wld-header"><div class="wld-header-title">WLD · Kibitzers &amp; Criers · 1.5×</div><div class="wld-header-sub">Sidelined, volatile, dangerous · your highest-risk pick</div></div>\`;
-    wld.forEach(f => { html += renderFigItem(f, squadNames); });
+  let html='';
+  nonWLD.forEach(f=>{html+=figHTML(f,sq);});
+  if(wld.length){
+    html+='<div class="wld-header"><div class="wld-header-title">WLD &middot; Kibitzers &amp; Criers &middot; 1.5x</div><div class="wld-header-sub">Sidelined, volatile, dangerous</div></div>';
+    wld.forEach(f=>{html+=figHTML(f,sq);});
   }
-
-  const total = nonWLD.length + wld.length;
-  document.getElementById('fig-count').textContent = total + ' figures · ' + wld.length + ' kibitzers';
-  document.getElementById('figure-list').innerHTML = html || '<div style="padding:32px 22px;font-family:\'IBM Plex Mono\',monospace;font-size:12px;color:var(--gray2)">No figures match filters.</div>';
+  const tot=nonWLD.length+wld.length;
+  document.getElementById('fig-count').textContent=tot+' figures &middot; '+wld.length+' kibitzers';
+  document.getElementById('figure-list').innerHTML=html||'<div style="padding:32px 22px;font-family:IBM Plex Mono,monospace;font-size:12px;color:var(--gray2)">No figures match filters.</div>';
 }
 
-function renderFigItem(f, squadNames) {
-  const inSquad = squadNames.has(f.name);
-  const pts = figureScores[f.name] ? '+'+figureScores[f.name] : '';
-  const isWLD = f.pos === 'WLD';
-  const nm = f.name.replace(/'/g,"\'").replace(/"/g,\'&quot;\');
-  return \`<div class="fig-item\${inSquad?' in-squad':''}\${isWLD?' wld-fig':''}" onclick="handleFigureClick('\${nm}','\${f.pos}')">
-    <span class="fig-pos-badge \${f.pos}">\${f.pos}</span>
-    <div class="fig-info"><div class="fig-name">\${f.name}</div><div class="fig-sub">\${f.bucket}</div></div>
-    <span class="fig-tier \${f.tier}">\${f.tier}</span>
-    \${pts?'<span class="fig-pts">'+pts+'</span>':''}
-    <span class="fig-action">\${inSquad?'− Remove':'+ Draft'}</span>
-  </div>\`;
+function figHTML(f,sq){
+  const inSquad=sq.has(f.name);
+  const pts=figureScores[f.name]?'+'+figureScores[f.name]:'';
+  const isWLD=f.pos==='WLD';
+  const safeName=f.name.replace(/\/g,'\\').replace(/'/g,"\'");
+  return '<div class="fig-item'+(inSquad?' in-squad':'')+(isWLD?' wld-fig':'')+'" onclick="handleFigureClick(''+safeName+'',''+f.pos+'')">'
+    +'<span class="fig-pos-badge '+f.pos+'">'+f.pos+'</span>'
+    +'<div class="fig-info"><div class="fig-name">'+f.name+'</div><div class="fig-sub">'+f.bucket+'</div></div>'
+    +'<span class="fig-tier '+f.tier+'">'+f.tier+'</span>'
+    +(pts?'<span class="fig-pts">'+pts+'</span>':'')
+    +'<span class="fig-action">'+(inSquad?'- Remove':'+ Draft')+'</span>'
+    +'</div>';
 }
 
-function getSquadNames() {
-  const s = new Set();
-  Object.values(squad).forEach(slots => slots.forEach(n => { if(n) s.add(n); }));
-  return s;
+function getSquadNames(){const s=new Set();Object.values(squad).forEach(sl=>sl.forEach(n=>{if(n)s.add(n);}));return s;}
+
+function handleFigureClick(name,pos){
+  if(squadLocked){showToast('Squad is locked','error');return;}
+  if(getSquadNames().has(name))removeFigure(name,pos);
+  else addFigure(name,pos);
 }
 
-function handleFigureClick(name, pos) {
-  if (squadLocked) { showToast('Squad is locked','error'); return; }
-  if (getSquadNames().has(name)) removeFigure(name, pos);
-  else addFigure(name, pos);
+function addFigure(name,pos){
+  const slots=squad[pos];
+  const idx=slots.findIndex(s=>s===null);
+  if(idx===-1){showToast('Both '+pos+' slots filled','error');return;}
+  if(getSquadNames().size>=10){showToast('Squad full - 10 max','error');return;}
+  slots[idx]=name;saveSquad();renderCatalog();renderSquad();showToast(name+' added');
 }
 
-function addFigure(name, pos) {
-  const slots = squad[pos];
-  const idx = slots.findIndex(s => s === null);
-  if (idx === -1) { showToast('Both '+pos+' slots filled — remove one first','error'); return; }
-  if (getSquadNames().size >= 10) { showToast('Squad is full — 10 figures maximum','error'); return; }
-  slots[idx] = name;
-  saveSquad();
-  renderCatalog();
-  renderSquad();
-  showToast(name+' added to '+pos);
+function removeFigure(name,pos){
+  const slots=squad[pos];const idx=slots.indexOf(name);
+  if(idx!==-1){slots[idx]=null;saveSquad();renderCatalog();renderSquad();showToast(name+' removed');}
 }
 
-function removeFigure(name, pos) {
-  const slots = squad[pos];
-  const idx = slots.indexOf(name);
-  if (idx !== -1) { slots[idx] = null; saveSquad(); renderCatalog(); renderSquad(); showToast(name+' removed'); }
+function handleSlotClick(el){
+  const pos=el.dataset.pos;const idx=parseInt(el.dataset.idx);const name=squad[pos][idx];
+  if(name&&!squadLocked){squad[pos][idx]=null;saveSquad();renderCatalog();renderSquad();showToast(name+' removed');}
 }
 
-function handleSlotClick(el) {
-  const pos = el.dataset.pos;
-  const idx = parseInt(el.dataset.idx);
-  const name = squad[pos][idx];
-  if (name && !squadLocked) { squad[pos][idx]=null; saveSquad(); renderCatalog(); renderSquad(); showToast(name+' removed'); }
-}
-
-function renderSquad() {
-  ['HoS','LEG','OPP','WBR','WLD'].forEach(pos => {
-    [0,1].forEach(idx => {
-      const slot = document.querySelector(\`.slot[data-pos="\${pos}"][data-idx="\${idx}"]\`);
-      if (!slot) return;
-      const name = squad[pos][idx];
-      const mult = pos==='WLD'?1.5:1;
-      const pts = name&&figureScores[name]?Math.round(figureScores[name]*mult):0;
-      if (name) {
+function renderSquad(){
+  ['HoS','LEG','OPP','WBR','WLD'].forEach(pos=>{
+    [0,1].forEach(idx=>{
+      const slot=document.querySelector('.slot[data-pos="'+pos+'"][data-idx="'+idx+'"]');
+      if(!slot)return;
+      const name=squad[pos][idx];
+      const mult=pos==='WLD'?1.5:1;
+      const pts=name&&figureScores[name]?Math.round(figureScores[name]*mult):0;
+      if(name){
         slot.classList.add('filled');
-        slot.innerHTML = \`<span class="slot-pos \${pos}">\${pos}</span><span class="slot-name">\${name}</span>\${pts?'<span class="slot-pts">+'+pts+'</span>':''}${squadLocked?'':'<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:var(--gray2)">×</span>'}\`;
-      } else {
+        slot.innerHTML='<span class="slot-pos '+pos+'">'+pos+'</span><span class="slot-name">'+name+'</span>'+(pts?'<span class="slot-pts">+'+pts+'</span>':'')+'<span style="font-size:10px;color:var(--gray2);font-family:IBM Plex Mono,monospace">'+(squadLocked?'':'x')+'</span>';
+      }else{
         slot.classList.remove('filled');
-        slot.innerHTML = \`<span class="slot-pos \${pos}">\${pos}</span><span class="slot-empty-text">Click to fill\${pos==='WLD'?' · 1.5×':''}</span>\`;
+        slot.innerHTML='<span class="slot-pos '+pos+'">'+pos+'</span><span class="slot-empty-text">Click to fill'+(pos==='WLD'?' 1.5x':'')+'</span>';
       }
     });
   });
-  const names = getSquadNames();
-  let total = 0;
-  Object.entries(squad).forEach(([pos,slots]) => {
-    const m = pos==='WLD'?1.5:1;
-    slots.forEach(n => { if(n&&figureScores[n]) total+=Math.round(figureScores[n]*m); });
+  let total=0;
+  Object.entries(squad).forEach(([pos,slots])=>{
+    const m=pos==='WLD'?1.5:1;
+    slots.forEach(n=>{if(n&&figureScores[n])total+=Math.round(figureScores[n]*m);});
   });
-  document.getElementById('squad-total-pts').textContent = total;
-  document.getElementById('total-pts-display').textContent = total;
-  const swapBadge = document.getElementById('swap-badge');
-  swapBadge.textContent = swapUsed?'Swap used':'1 swap available';
-  swapBadge.className = 'swap-badge'+(swapUsed?' used':'');
-  const lockBtn = document.getElementById('lock-btn');
-  if (squadLocked) { lockBtn.textContent='✓ Squad Locked';lockBtn.className='lock-btn locked';lockBtn.disabled=true; }
-  else if (names.size<10) { lockBtn.textContent='Lock Your Squad ('+names.size+'/10) →';lockBtn.disabled=true; }
-  else { lockBtn.textContent='Lock Your Squad →';lockBtn.disabled=false; }
+  document.getElementById('squad-total-pts').textContent=total;
+  document.getElementById('total-pts-display').textContent=total;
+  const sb=document.getElementById('swap-badge');
+  sb.textContent=swapUsed?'Swap used':'1 swap available';
+  sb.className='swap-badge'+(swapUsed?' used':'');
+  const lb=document.getElementById('lock-btn');
+  const n=getSquadNames().size;
+  if(squadLocked){lb.textContent='Squad Locked';lb.className='lock-btn locked';lb.disabled=true;}
+  else if(n<10){lb.textContent='Lock Squad ('+n+'/10)';lb.disabled=true;}
+  else{lb.textContent='Lock Your Squad';lb.disabled=false;}
 }
 
-function lockSquad() {
-  if (getSquadNames().size<10||squadLocked) return;
-  squadLocked=true; saveSquad(); renderSquad(); showToast('Squad locked! Watch your Sweep →');
+function lockSquad(){
+  if(getSquadNames().size<10||squadLocked)return;
+  squadLocked=true;saveSquad();renderSquad();showToast('Squad locked!');
 }
 
-function startTimer() {
-  setInterval(updateTimer,1000);
-  updateTimer();
-}
-
-function updateTimer() {
-  const diff = SWEEP_CLOSE - new Date();
-  const el = document.getElementById('sweep-timer');
-  if (diff<=0) { el.textContent='Closed';el.className='timer-value urgent'; return; }
+function startTimer(){setInterval(updateTimer,1000);updateTimer();}
+function updateTimer(){
+  const diff=SWEEP_CLOSE-new Date();
+  const el=document.getElementById('sweep-timer');
+  if(diff<=0){el.textContent='Closed';el.className='timer-value urgent';return;}
   const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
   el.textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
   el.className='timer-value'+(h<6?' urgent':'');
 }
 
-function saveSquad() {
-  localStorage.setItem(STORAGE_KEY,JSON.stringify({squad,swapUsed,squadLocked,sweep:'sweep-001',saved:new Date().toISOString()}));
-}
-
-function loadSquadFromStorage() {
-  try {
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw) return;
+function saveSquad(){localStorage.setItem(STORAGE_KEY,JSON.stringify({squad,swapUsed,squadLocked,sweep:'sweep-001'}));}
+function loadSquad(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;
     const d=JSON.parse(raw);
     if(d.sweep!=='sweep-001'){localStorage.removeItem(STORAGE_KEY);return;}
     squad=d.squad||squad;swapUsed=d.swapUsed||false;squadLocked=d.squadLocked||false;
-  } catch(e){localStorage.removeItem(STORAGE_KEY);}
+  }catch(e){localStorage.removeItem(STORAGE_KEY);}
 }
 
-let toastTimeout;
-function showToast(msg,type='') {
+let tt;
+function showToast(msg,type){
   const t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast show '+type;
-  clearTimeout(toastTimeout);
-  toastTimeout=setTimeout(()=>{t.className='toast';},2500);
+  t.textContent=msg;t.className='toast show '+(type||'');
+  clearTimeout(tt);tt=setTimeout(()=>{t.className='toast';},2500);
 }
 
 document.getElementById('search-input').addEventListener('input',e=>{searchQ=e.target.value;renderCatalog();});
