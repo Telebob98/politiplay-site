@@ -1165,17 +1165,15 @@ function figHTML(f,sq){
   const inSquad=sq.has(f.name);
   const pts=figureScores[f.name]?'+'+figureScores[f.name]:'';
   const isWLD=f.pos==='WLD';
-  const div=document.createElement('div');
-  div.className='fig-item'+(inSquad?' in-squad':'')+(isWLD?' wld-fig':'');
-  div.setAttribute('data-name',f.name);
-  div.setAttribute('data-pos',f.pos);
-  div.onclick=function(){handleFigureClick(this.dataset.name,this.dataset.pos);};
-  div.innerHTML='<span class="fig-pos-badge '+f.pos+'">'+f.pos+'</span>'
+  const cls='fig-item'+(inSquad?' in-squad':'')+(isWLD?' wld-fig':'');
+  const nameEnc=f.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  return '<div class="'+cls+'" data-name="'+nameEnc+'" data-pos="'+f.pos+'">'
+    +'<span class="fig-pos-badge '+f.pos+'">'+f.pos+'</span>'
     +'<div class="fig-info"><div class="fig-name">'+f.name+'</div><div class="fig-sub">'+f.bucket+'</div></div>'
     +'<span class="fig-tier '+f.tier+'">'+f.tier+'</span>'
     +(pts?'<span class="fig-pts">'+pts+'</span>':'')
-    +'<span class="fig-action">'+(inSquad?'- Remove':'+ Draft')+'</span>';
-  return div.outerHTML;
+    +'<span class="fig-action">'+(inSquad?'&#8722; Remove':'+ Draft')+'</span>'
+    +'</div>';
 }
 
 function getSquadNames(){const s=new Set();Object.values(squad).forEach(sl=>sl.forEach(n=>{if(n)s.add(n);}));return s;}
@@ -1271,6 +1269,11 @@ function showToast(msg,type){
 }
 
 document.getElementById('search-input').addEventListener('input',e=>{searchQ=e.target.value;renderCatalog();});
+document.getElementById('figure-list').addEventListener('click',e=>{
+  const item=e.target.closest('.fig-item');
+  if(!item)return;
+  handleFigureClick(item.dataset.name,item.dataset.pos);
+});
 document.getElementById('pos-filters').addEventListener('click',e=>{
   const btn=e.target.closest('[data-pos]');if(!btn)return;
   document.querySelectorAll('#pos-filters .filter-btn').forEach(b=>b.classList.remove('active'));
