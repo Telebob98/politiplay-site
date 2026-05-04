@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Politiplay · Season 1</title>
+<meta name="description" content="Join your Politiplay table. Draft real political figures. Score when they make news. Beat your table of ten.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#b8242a;--red-dim:rgba(184,36,42,0.12);--red-border:rgba(184,36,42,0.3);
+  --gold:#e8a020;--gold-dim:rgba(232,160,32,0.1);
+  --ink:#111318;--ink-mid:#1a1d24;--ivory:#ede8dc;
+  --gray1:#6e6a60;--gray2:#9e9a8e;--gray3:#b8b4a8;
+  --border:rgba(237,232,220,0.1);--border-strong:rgba(237,232,220,0.18);
+  --green:#2a7a3b;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--ivory);font-family:'Source Serif 4',serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.05) 3px,rgba(0,0,0,0.05) 4px);pointer-events:none;z-index:0}
+
+/* NAV */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid var(--border);position:relative;z-index:40;background:var(--ink)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--ivory);text-decoration:none}
+.nav-logo em{font-style:italic;color:var(--red)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray3);text-decoration:none;padding:7px 12px;transition:color 0.15s}
+.nav-link:hover{color:var(--ivory)}
+
+/* MAIN */
+.join-page{position:relative;z-index:2;max-width:600px;margin:0 auto;padding:60px 32px}
+
+/* HEADER */
+.join-kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.join-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;line-height:1;color:var(--ivory);margin-bottom:16px}
+.join-title em{font-style:italic;color:var(--red)}
+.join-sub{font-size:18px;color:var(--gray3);line-height:1.6;margin-bottom:40px}
+
+/* WHAT YOU GET */
+.what-you-get{margin-bottom:40px}
+.wyg-title{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray2);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.wyg-item{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid rgba(237,232,220,0.06)}
+.wyg-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.wyg-text{flex:1}
+.wyg-label{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ivory);margin-bottom:3px}
+.wyg-desc{font-size:14px;color:var(--gray2);line-height:1.5}
+
+/* FORM */
+.join-form{background:rgba(237,232,220,0.04);border:1px solid var(--border);padding:28px;margin-bottom:32px}
+.form-title{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray2)}
+.field-input{background:rgba(237,232,220,0.07);border:1px solid var(--border);color:var(--ivory);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:11px 14px;outline:none;letter-spacing:0.03em;transition:border-color 0.15s;width:100%}
+.field-input:focus{border-color:var(--red-border)}
+.field-input::placeholder{color:var(--gray1)}
+.field-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:0.06em}
+.submit-btn{width:100%;background:var(--red);color:#fff;border:none;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;padding:14px;cursor:pointer;transition:background 0.15s;margin-top:8px}
+.submit-btn:hover{background:#9e1e23}
+
+/* SUCCESS STATE */
+.success-state{display:none;background:rgba(42,122,59,0.08);border:1px solid rgba(42,122,59,0.3);padding:28px;text-align:center}
+.success-icon{font-size:40px;margin-bottom:12px}
+.success-title{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--ivory);margin-bottom:8px}
+.success-sub{font-size:15px;color:var(--gray3);line-height:1.6;margin-bottom:20px}
+.success-next{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray2);letter-spacing:0.08em;line-height:1.8}
+
+/* TABLE STATUS */
+.table-status{background:rgba(237,232,220,0.03);border:1px solid var(--border);padding:20px;margin-bottom:32px}
+.ts-title{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray2);margin-bottom:12px}
+.ts-bar-wrap{background:rgba(237,232,220,0.06);height:8px;margin-bottom:8px}
+.ts-bar{background:var(--red);height:8px;width:10%;transition:width 0.5s}
+.ts-numbers{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gray2);letter-spacing:0.08em}
+.ts-numbers strong{color:var(--ivory)}
+
+/* HOW IT WORKS */
+.how-it-works{margin-bottom:40px}
+.hiw-title{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray2);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.step{display:flex;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px solid rgba(237,232,220,0.06)}
+.step-num{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);flex-shrink:0;width:24px}
+.step-text{flex:1}
+.step-label{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--ivory);margin-bottom:3px}
+.step-desc{font-size:14px;color:var(--gray2);line-height:1.5}
+
+/* CTA LINKS */
+.cta-links{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.cta-primary{display:inline-block;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:12px 24px;text-decoration:none;transition:background 0.15s}
+.cta-primary:hover{background:#9e1e23}
+.cta-ghost{display:inline-block;background:transparent;color:var(--gray3);border:1px solid var(--border-strong);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:12px 18px;text-decoration:none;transition:all 0.15s}
+.cta-ghost:hover{color:var(--ivory);border-color:rgba(237,232,220,0.35)}
+
+/* FOOTER */
+.site-footer{border-top:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;flex-wrap:wrap;gap:10px}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--gray2)}
+
+@media(max-width:600px){
+  .join-page{padding:40px 20px}
+  .join-title{font-size:38px}
+  .site-nav{padding:10px 20px}
+  .cta-links{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">Politi<em>Play</em></a>
+  <div class="nav-links">
+    <a href="draft.html" class="nav-link">Draft</a>
+    <a href="sweep.html" class="nav-link">Live Sweep</a>
+    <a href="how-to-play.html" class="nav-link">How To Play</a>
+  </div>
+</nav>
+
+<div class="join-page">
+
+  <div class="join-kicker">Season 1 · Beta · Free to Play</div>
+  <h1 class="join-title">Join Your <em>Table</em></h1>
+  <p class="join-sub">Draft ten real political figures. Score points when they make news. Beat your table of ten. Your political instincts — tested weekly.</p>
+
+  <!-- TABLE STATUS -->
+  <div class="table-status">
+    <div class="ts-title">Table 1 · Beta · Filling Now</div>
+    <div class="ts-bar-wrap"><div class="ts-bar" id="table-bar" style="width:10%"></div></div>
+    <div class="ts-numbers"><strong id="table-filled">1</strong> of <strong>10</strong> seats filled · <strong id="table-open">9</strong> open</div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="what-you-get">
+    <div class="wyg-title">What You Get</div>
+    <div class="wyg-item">
+      <div class="wyg-icon">🎯</div>
+      <div class="wyg-text">
+        <div class="wyg-label">A Draft of 10 Real Figures</div>
+        <div class="wyg-desc">Choose from 874 draftable politicians, media figures, operatives, and kibitzers. Two per position — HoS, LEG, OPP, WBR, WLD.</div>
+      </div>
+    </div>
+    <div class="wyg-item">
+      <div class="wyg-icon">⚡</div>
+      <div class="wyg-text">
+        <div class="wyg-label">72-Hour Sweeps</div>
+        <div class="wyg-desc">Score points when your figures make news. Every event editorially sourced and linked. Flash Sweeps triggered by major breaking news.</div>
+      </div>
+    </div>
+    <div class="wyg-item">
+      <div class="wyg-icon">🏆</div>
+      <div class="wyg-text">
+        <div class="wyg-label">Your Table of Ten</div>
+        <div class="wyg-desc">Compete against nine other players. Weekly standings. Season leaderboard. The player with the sharpest read on the news cycle wins.</div>
+      </div>
+    </div>
+    <div class="wyg-item">
+      <div class="wyg-icon">🆓</div>
+      <div class="wyg-text">
+        <div class="wyg-label">Free for Season 1</div>
+        <div class="wyg-desc">No cost, no credit card, no catch. Season 1 is about proving the game works. You're a founding player.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOIN FORM -->
+  <div class="join-form" id="join-form">
+    <div class="form-title">Reserve Your Seat</div>
+    <div class="field">
+      <label class="field-label" for="player-name">Your Name</label>
+      <input type="text" class="field-input" id="player-name" placeholder="How you'll appear on the leaderboard">
+    </div>
+    <div class="field">
+      <label class="field-label" for="player-email">Email</label>
+      <input type="email" class="field-input" id="player-email" placeholder="For sweep notifications">
+      <div class="field-note">No spam. Just sweep opens, closes, and results.</div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="player-note">How do you know Bob? (optional)</label>
+      <input type="text" class="field-input" id="player-note" placeholder="Friend, colleague, internet...">
+    </div>
+    <button class="submit-btn" onclick="handleJoin()">Reserve My Seat →</button>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="success-state" id="success-state">
+    <div class="success-icon">✓</div>
+    <div class="success-title">You're In</div>
+    <div class="success-sub">Bob will confirm your seat and send you draft instructions before the next Sweep opens.</div>
+    <div class="success-next">
+      While you wait — explore the catalog on the Draft page.<br>
+      The Sweep opens 72 hours before resolve.<br>
+      Your squad locks Friday midnight.
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works">
+    <div class="hiw-title">How It Works</div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-text">
+        <div class="step-label">Draft Your Squad</div>
+        <div class="step-desc">Pick ten figures from the catalog — two per position. Assign a Captain (2× scoring) and designate your Wildcard kibitzer (1.5× scoring).</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-text">
+        <div class="step-label">Lock Friday Midnight</div>
+        <div class="step-desc">Squads lock Friday at midnight. One swap allowed per sweep after lock and before Monday resolve.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-text">
+        <div class="step-label">Watch the Sweep</div>
+        <div class="step-desc">72 hours of live scoring. Every point sourced and linked. Your figures score when they make news — executive action, floor speeches, viral moments, crises.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-text">
+        <div class="step-label">Check the Leaderboard</div>
+        <div class="step-desc">Monday resolve. Results posted. Table standings updated. The player with the sharpest political read wins the week.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-text">
+        <div class="step-label">Flash Sweeps</div>
+        <div class="step-desc">When major breaking news hits — a ceasefire collapses, a cabinet member fired, a Supreme Court ruling — a 24-hour Flash Sweep opens. Optional, bonus points, rewards real-time attention.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA LINKS -->
+  <div class="cta-links">
+    <a href="draft.html" class="cta-primary">Explore the Draft →</a>
+    <a href="sweep.html" class="cta-ghost">Live Sweep</a>
+    <a href="how-to-play.html" class="cta-ghost">How To Play</a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-copy">© 2026 Politiplay LLC · Season 1 Beta · politiplay.net</div>
+</footer>
+
+<script>
+// Table fill animation
+const filled = 1; // Bob updates this manually as players join
+const total = 10;
+document.getElementById('table-bar').style.width = (filled/total*100) + '%';
+document.getElementById('table-filled').textContent = filled;
+document.getElementById('table-open').textContent = total - filled;
+
+// Simple form handler — stores to localStorage and shows success
+// Bob gets notified via email to hello@politiplay.net
+function handleJoin() {
+  const name = document.getElementById('player-name').value.trim();
+  const email = document.getElementById('player-email').value.trim();
+  const note = document.getElementById('player-note').value.trim();
+
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+
+  // Store locally
+  const player = { name, email, note, joined: new Date().toISOString() };
+  const existing = JSON.parse(localStorage.getItem('pp_player') || 'null');
+  if (!existing) {
+    localStorage.setItem('pp_player', JSON.stringify(player));
+  }
+
+  // Send to Netlify Forms (if active) or just show success
+  const formData = new FormData();
+  formData.append('form-name', 'politiplay-join');
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('note', note);
+
+  fetch('/', { method: 'POST', body: formData })
+    .catch(() => {}); // Silent fail — Netlify form may not be active
+
+  // Show success
+  document.getElementById('join-form').style.display = 'none';
+  document.getElementById('success-state').style.display = 'block';
+  window.scrollTo(0, document.getElementById('success-state').offsetTop - 40);
+}
+
+// Check if already joined
+const existing = JSON.parse(localStorage.getItem('pp_player') || 'null');
+if (existing) {
+  document.getElementById('player-name').value = existing.name;
+  document.getElementById('player-email').value = existing.email;
+}
+</script>
+
+<!-- Netlify Forms detection -->
+<form name="politiplay-join" netlify netlify-honeypot="bot-field" hidden>
+  <input name="name">
+  <input name="email">
+  <input name="note">
+</form>
+
+</body>
+</html>
